@@ -35,7 +35,7 @@ public class ClientProxy
 			try
 			{
 				Thread.sleep(100);
-				nachricht = in.readLine(); // Problem: blockiert, bis eine Zeile ankommt
+				nachricht = in.readLine(); // blockiert, bis eine Zeile ankommt
 				server.verarbeiteNachricht(nachricht, this);
 			}
 			catch (IOException e)
@@ -60,11 +60,8 @@ public class ClientProxy
 	{
 		try
 		{
-			listenThread.interrupt();
 			// TODO: Nachricht an Client schicken, dass Server beendet wird
-			in.close();
-			out.close();
-			socket.close();
+			socket.close(); // löst Blockade von in.readLine()
 		}
 		catch (IOException e)
 		{

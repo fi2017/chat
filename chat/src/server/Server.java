@@ -46,7 +46,6 @@ class Server implements Runnable
 			{
 				try
 				{
-					Thread.sleep(100);
 					Socket socket = serversocket.accept();
 
 					// Abbruch bei Sockettimeout
@@ -56,10 +55,6 @@ class Server implements Runnable
 				}
 				catch (SocketTimeoutException e)
 				{
-				}
-				catch (InterruptedException e)
-				{
-					thread.interrupt();
 				}
 			}
 
@@ -87,8 +82,8 @@ class Server implements Runnable
 
 		// Vorläufig: Als Satusnachricht an Control und an alle ClientProxies schicken
 		control.setStatus(absender + ": " + nachricht);
-		
-		for(ClientProxy c : clientliste)
+
+		for (ClientProxy c : clientliste)
 		{
 			c.sende(absender + ": " + nachricht);
 		}
