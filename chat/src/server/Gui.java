@@ -124,7 +124,7 @@ public class Gui extends JFrame
 	{
 		getLblStatus().setText(status);
 		listModelLogMessages.addElement(status);
-		getListLogMessages().ensureIndexIsVisible(listModelLogMessages.getSize() - 1); //Scrolle zum neusten Eintrag
+		// TODO: Scrolle zum neusten Eintrag
 	}
 
 	public int getPortnummer()
