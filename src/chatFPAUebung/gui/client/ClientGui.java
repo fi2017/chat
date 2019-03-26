@@ -65,6 +65,7 @@ public class ClientGui extends JFrame
 		contentPane.add(getBtnSenden());
 		contentPane.add(getTextFieldNachricht());
 		contentPane.add(getLblFehlermeldung());
+		this.setTitle("Client");
 	}
 
 	public JList<Nachricht> getList()
@@ -80,7 +81,7 @@ public class ClientGui extends JFrame
 	{
 		if (btnSenden == null)
 		{
-			btnSenden = new JButton("Start");
+			btnSenden = new JButton("Senden");
 			btnSenden.setBounds(253, 208, 89, 23);
 		}
 		return btnSenden;

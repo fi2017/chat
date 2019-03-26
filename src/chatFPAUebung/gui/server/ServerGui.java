@@ -62,6 +62,7 @@ public class ServerGui extends JFrame
 		contentPane.add(getTxtPortnr());
 		contentPane.add(getLblPortnummer());
 		contentPane.add(getLblFehlermeldung());
+		this.setTitle("Server");
 	}
 
 	public JButton getBtnStart()
