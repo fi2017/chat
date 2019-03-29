@@ -22,7 +22,7 @@ public class Nachricht implements Serializable
 	// Methoden
 	public String toString()
 	{
-		return "(" + getSendezeitpunkt().format(DateTimeFormatter.ofPattern("hh.MM.ss")) + ") " + getNachricht();
+		return "(" + getSendezeitpunkt().format(DateTimeFormatter.ofPattern("HH.mm.ss")) + ") " + getNachricht();
 	}
 
 	// Getter
