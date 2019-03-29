@@ -17,7 +17,6 @@ public class ClientProxy
 	private ObjectInputStream inFromClient;
 
 	private ServerReadingThread serverReadingThread;
-
 	private Security clientSecurity;
 
 	public ClientProxy(ServerControl control, Socket clientSocket)

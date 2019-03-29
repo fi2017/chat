@@ -1,7 +1,6 @@
 package chatFPAUebung.gui.server;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import chatFPAUebung.klassen.Ban;
@@ -30,7 +29,8 @@ public class ServerControl
 		this.gui = new ServerGui();
 
 		this.nachrichten = new ArrayList<Nachricht>();
-		this.bans = new ArrayList<Ban>();
+		this.bans = new ArrayList<Ban>(); // TODO: Needs to be saved in a file later (Not right now as we ban ourselves
+											// for test purposes
 
 		setzeListener();
 		getGui().setVisible(true);
@@ -101,7 +101,7 @@ public class ServerControl
 		{
 			if (neuerClient.getClientSocket().getInetAddress().equals(getBans().get(i).getInternetAdress()))
 			{
-				if (LocalDateTime.now().isAfter(getBans().get(i).getUnbanTime()))
+				if (!getBans().get(i).checkIfStillBanned())
 				{
 					getBans().remove(i);
 					i--;
@@ -125,6 +125,7 @@ public class ServerControl
 		if (!isBanned)
 		{
 			getClients().add(neuerClient);
+			System.err.println("Neuen User zur Liste hinzugefügt!");
 		}
 	}
 
@@ -132,11 +133,12 @@ public class ServerControl
 	{
 		if (uebertragungObjekt instanceof Uebertragung)
 		{
-			Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
+			Uebertragung uebertragung = new Uebertragung((Uebertragung) uebertragungObjekt);
 			Ban newBan = client.getClientSecurity().addNewPing(uebertragung.getUebertragungszeitpunkt());
 
 			if (newBan == null)
 			{
+				System.out.println("Habe Nachricht vom User erhalten!");
 				switch (((Uebertragung) uebertragungObjekt).getZweck())
 				{
 				case 1:
@@ -162,6 +164,7 @@ public class ServerControl
 				}
 			} else
 			{
+				System.out.println("Habe User gebannt!");
 				getBans().add(newBan);
 				removeUser(client);
 

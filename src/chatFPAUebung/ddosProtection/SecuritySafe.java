@@ -28,18 +28,18 @@ public class SecuritySafe
 
 		getPings().add(messageSendingTime);
 
-		if (checkTooManyPings())
+		if (!checkTooManyPings())
 		{
-			if (checkEvenlyPings())
-			{
-				return false;
-			} else
+			if (!checkEvenlyPings())
 			{
 				return true;
+			} else
+			{
+				return false;
 			}
 		} else
 		{
-			return true;
+			return false;
 		}
 	}
 
