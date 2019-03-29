@@ -1,6 +1,7 @@
 package chatFPAUebung.threads;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import chatFPAUebung.gui.client.ClientControl;
 import chatFPAUebung.klassen.Uebertragung;
@@ -9,15 +10,15 @@ public class ClientWritingThread extends Thread
 {
 	// Attribute
 	private Uebertragung uebertragung;
-	private ClientControl control;
+	private ObjectOutputStream out;
 
 	// Konstruktor
-	public ClientWritingThread(Uebertragung uebertragung, ClientControl control)
+	public ClientWritingThread(Uebertragung uebertragung,ObjectOutputStream o)
 	{
 		this.uebertragung = uebertragung;
-		this.control = control;
+		this.out = o;
 
-		this.setName("ClientWritingThread");
+		this.setName("ClientSitedWritingThread");
 	}
 
 	// Run
@@ -25,9 +26,9 @@ public class ClientWritingThread extends Thread
 	{
 		try
 		{
-			getControl().getOutToServer().writeObject(getUebertragung());
-			getControl().getOutToServer().flush();
-			getControl().getOutToServer().reset();
+			out.writeObject(getUebertragung());
+			out.flush();
+			out.reset();
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -40,8 +41,4 @@ public class ClientWritingThread extends Thread
 		return uebertragung;
 	}
 
-	public ClientControl getControl()
-	{
-		return control;
-	}
 }
