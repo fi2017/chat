@@ -124,6 +124,7 @@ public class ServerControl
 		if (!isBanned)
 		{
 			getClients().add(neuerClient);
+			System.err.println("Neuen User zur Liste hinzugefügt!");
 		}
 	}
 
@@ -136,6 +137,7 @@ public class ServerControl
 
 			if (newBan == null)
 			{
+				System.out.println("Habe Nachricht vom User erhalten!");
 				switch (((Uebertragung) uebertragungObjekt).getZweck())
 				{
 				case 1:
@@ -161,6 +163,7 @@ public class ServerControl
 				}
 			} else
 			{
+				System.out.println("Habe User gebannt!");
 				getBans().add(newBan);
 				removeUser(client);
 
