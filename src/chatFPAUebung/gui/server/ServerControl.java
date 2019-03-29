@@ -1,8 +1,10 @@
 package chatFPAUebung.gui.server;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import chatFPAUebung.klassen.Ban;
 import chatFPAUebung.klassen.ClientProxy;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
@@ -19,6 +21,8 @@ public class ServerControl
 
 	private ArrayList<Nachricht> nachrichten;
 
+	private ArrayList<Ban> bans;
+
 	// Konstruktor
 	public ServerControl()
 	{
@@ -26,6 +30,7 @@ public class ServerControl
 		this.gui = new ServerGui();
 
 		this.nachrichten = new ArrayList<Nachricht>();
+		this.bans = new ArrayList<Ban>();
 
 		setzeListener();
 		getGui().setVisible(true);
@@ -90,38 +95,95 @@ public class ServerControl
 
 	public void empfangeClient(ClientProxy neuerClient)
 	{
-		getClients().add(neuerClient);
+		boolean isBanned = false;
+
+		for (int i = 0; i < getBans().size() && !isBanned; i++)
+		{
+			if (neuerClient.getClientSocket().getInetAddress().equals(getBans().get(i).getInternetAdress()))
+			{
+				if (LocalDateTime.now().isAfter(getBans().get(i).getUnbanTime()))
+				{
+					getBans().remove(i);
+					i--;
+				} else
+				{
+					try
+					{
+						isBanned = true;
+						neuerClient.getServerReadingThread().interrupt();
+						neuerClient.getInFromClient().close();
+						neuerClient.getOutToClient().close();
+						neuerClient.getClientSocket().close();
+					} catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		if (!isBanned)
+		{
+			getClients().add(neuerClient);
+		}
 	}
 
 	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
 	{
 		if (uebertragungObjekt instanceof Uebertragung)
 		{
-			Uebertragung uebertragung = new Uebertragung((Uebertragung) uebertragungObjekt);
+			Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
+			Ban newBan = client.getClientSecurity().addNewPing(uebertragung.getUebertragungszeitpunkt());
 
-			switch (((Uebertragung) uebertragungObjekt).getZweck())
+			if (newBan == null)
 			{
-			case 1:
-				sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
-
-				break;
-
-			case 2:
-				if (uebertragung.getUebertragung() instanceof Nachricht)
+				switch (((Uebertragung) uebertragungObjekt).getZweck())
 				{
-					getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-					broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
+				case 1:
+					sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
+
+					break;
+
+				case 2:
+					if (uebertragung.getUebertragung() instanceof Nachricht)
+					{
+						getNachrichten().add((Nachricht) uebertragung.getUebertragung());
+						broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
+					}
+
+					break;
+
+				case 3:
+					sendeNachrichtAnClient(new Uebertragung(0, null), client);
+
+				default:
+					//
+					break;
 				}
+			} else
+			{
+				getBans().add(newBan);
+				removeUser(client);
 
-				break;
-
-			case 3:
-				sendeNachrichtAnClient(new Uebertragung(0, null), client);
-
-			default:
-				//
-				break;
+				// TODO: SEND MESSAGE TO USER THAT HE IS BANNED AND DISPLAY IT
 			}
+		}
+	}
+
+	public void removeUser(ClientProxy client)
+	{
+		try
+		{
+			client.getServerReadingThread().interrupt();
+			client.getInFromClient().close();
+			client.getOutToClient().close();
+			client.getClientSocket().close();
+
+			getClients().remove(client);
+
+		} catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
@@ -152,6 +214,11 @@ public class ServerControl
 	public ArrayList<ClientProxy> getClients()
 	{
 		return clients;
+	}
+
+	public ArrayList<Ban> getBans()
+	{
+		return bans;
 	}
 
 	public ServerListenThread getServerListenThread()
