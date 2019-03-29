@@ -10,8 +10,6 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable
 {
-
-
     public FlowPane MenuBar;
     public Button btnClose;
     public Button btnMin;
