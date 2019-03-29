@@ -132,7 +132,7 @@ public class ServerControl
 	{
 		if (uebertragungObjekt instanceof Uebertragung)
 		{
-			Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
+			Uebertragung uebertragung = new Uebertragung((Uebertragung) uebertragungObjekt);
 			Ban newBan = client.getClientSecurity().addNewPing(uebertragung.getUebertragungszeitpunkt());
 
 			if (newBan == null)
