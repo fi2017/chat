@@ -4,9 +4,15 @@
 }
 
 .CloseButton:hover {
-    -fx-background-color: #000000A0;
+    -fx-background-color: #0000005F;
 }
 
 .MenuBar {
-    -fx-background-color: #AAAAAA;
+    -fx-background-color: #3990FF;
 }
+
+.SideBar {
+    -fx-background-color: #3990FF;
+
+}
+
