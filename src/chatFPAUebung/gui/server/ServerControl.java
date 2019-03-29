@@ -29,7 +29,8 @@ public class ServerControl
 		this.gui = new ServerGui();
 
 		this.nachrichten = new ArrayList<Nachricht>();
-		this.bans = new ArrayList<Ban>();
+		this.bans = new ArrayList<Ban>(); // TODO: Needs to be saved in a file later (Not right now as we ban ourselves
+											// for test purposes
 
 		setzeListener();
 		getGui().setVisible(true);

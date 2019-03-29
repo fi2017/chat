@@ -35,12 +35,12 @@ public class SecurityUnsafe
 
 		if (checkNewFlag()) // Checks if a new flag is needed
 		{
-			if (checkFlagsForBan()) // Checks if enough flags are collected to ban the client
-			{
-				return false;
-			} else
+			if (!checkFlagsForBan()) // Checks if enough flags are collected to ban the client
 			{
 				return true;
+			} else
+			{
+				return false;
 			}
 		} else
 		{
