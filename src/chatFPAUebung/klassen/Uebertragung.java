@@ -19,6 +19,13 @@ public class Uebertragung implements Serializable
 		this.uebertragungszeitpunkt = LocalDateTime.now();
 	}
 
+	public Uebertragung(Uebertragung uebertragungCopy)
+	{
+		this.zweck = uebertragungCopy.getZweck();
+		this.uebertragung = uebertragungCopy.uebertragung;
+		this.uebertragungszeitpunkt = LocalDateTime.now();
+	}
+
 	// Getter
 	public int getZweck()
 	{
