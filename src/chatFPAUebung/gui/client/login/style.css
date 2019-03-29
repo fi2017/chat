@@ -1,8 +1,0 @@
-.CloseButton {
-    -fx-background-color: #00000000;
-    -fx-background-radius: 0px;
-}
-
-.CloseButton:hover {
-    -fx-background-color: #000000A0;
-}
