@@ -6,3 +6,7 @@
 .CloseButton:hover {
     -fx-background-color: #000000A0;
 }
+
+.MenuBar {
+    -fx-background-color: #AAAAAA;
+}
