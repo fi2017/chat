@@ -36,15 +36,7 @@ public class Controller implements Initializable
         });
 
         btnMin.setOnAction(e -> {
-
-            if(!((Stage) btnMax.getScene().getWindow()).isIconified())
-            {
-                ((Stage)btnMin.getScene().getWindow()).setIconified(true);
-            }
-            else
-            {
-                ((Stage)btnMin.getScene().getWindow()).setIconified(false);
-            }
+            ((Stage)btnMin.getScene().getWindow()).setIconified(true);
         });
 
         MenuBar.setOnMousePressed(e -> {
