@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import chatFPAUebung.ddosProtection.Security;
 import chatFPAUebung.gui.server.ServerControl;
 import chatFPAUebung.threads.ServerReadingThread;
 
@@ -17,6 +18,8 @@ public class ClientProxy
 
 	private ServerReadingThread serverReadingThread;
 
+	private Security clientSecurity;
+
 	public ClientProxy(ServerControl control, Socket clientSocket)
 	{
 		try
@@ -24,6 +27,7 @@ public class ClientProxy
 			this.clientSocket = clientSocket;
 			this.outToClient = new ObjectOutputStream(getClientSocket().getOutputStream());
 			this.inFromClient = new ObjectInputStream(getClientSocket().getInputStream());
+			this.clientSecurity = new Security(this);
 
 			this.serverReadingThread = new ServerReadingThread(control, this);
 			getServerReadingThread().start();
@@ -66,5 +70,10 @@ public class ClientProxy
 	public void setInFromClient(ObjectInputStream inFromClient)
 	{
 		this.inFromClient = inFromClient;
+	}
+
+	public Security getClientSecurity()
+	{
+		return this.clientSecurity;
 	}
 }
