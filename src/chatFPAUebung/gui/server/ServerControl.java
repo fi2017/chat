@@ -1,6 +1,7 @@
 package chatFPAUebung.gui.server;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import chatFPAUebung.klassen.Ban;
@@ -94,7 +95,37 @@ public class ServerControl
 
 	public void empfangeClient(ClientProxy neuerClient)
 	{
-		getClients().add(neuerClient);
+		boolean isBanned = false;
+
+		for (int i = 0; i < getBans().size() && !isBanned; i++)
+		{
+			if (neuerClient.getClientSocket().getInetAddress().equals(getBans().get(i).getInternetAdress()))
+			{
+				if (LocalDateTime.now().isAfter(getBans().get(i).getUnbanTime()))
+				{
+					getBans().remove(i);
+					i--;
+				} else
+				{
+					try
+					{
+						isBanned = true;
+						neuerClient.getServerReadingThread().interrupt();
+						neuerClient.getInFromClient().close();
+						neuerClient.getOutToClient().close();
+						neuerClient.getClientSocket().close();
+					} catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		if (!isBanned)
+		{
+			getClients().add(neuerClient);
+		}
 	}
 
 	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
