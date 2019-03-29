@@ -164,6 +164,8 @@ public class ServerControl
 			{
 				getBans().add(newBan);
 				removeUser(client);
+
+				// TODO: SEND MESSAGE TO USER THAT HE IS BANNED AND DISPLAY IT
 			}
 		}
 	}
@@ -181,7 +183,6 @@ public class ServerControl
 
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
