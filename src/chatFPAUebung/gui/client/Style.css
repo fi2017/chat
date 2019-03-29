@@ -9,10 +9,19 @@
 
 .MenuBar {
     -fx-background-color: #3990FF;
+    -fx-z-index: 10;
 }
 
 .SideBar {
     -fx-background-color: #3990FF;
-
+    -fx-z-index: 1;
 }
 
+.ControlButton {
+    -fx-background-color: #00000000;
+        -fx-background-radius: 0px;
+}
+
+.ControlButton:hover {
+    -fx-background-color: #0000005F;
+}
