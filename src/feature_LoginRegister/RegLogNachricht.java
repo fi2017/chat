@@ -1,12 +1,12 @@
 package feature_LoginRegister;
 
-public class Register
+public class RegLogNachricht
 {
 	int protocolCase;
 	String username;
 	String password;
 	
-	public Register(int protCase, String uname, String pass)
+	public RegLogNachricht(int protCase, String uname, String pass)
 	{
 		setProtocolCase(protCase);
 		setUsername(uname);

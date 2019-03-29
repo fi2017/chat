@@ -38,7 +38,7 @@ public class LogRegControl
 	{
 		if(checkPasswordWith2nd())
 		{
-			schickeNachricht(new Register(70,getGui().getTextFieldUnameReg().getText(),getGui().getTextFieldPwReg().getText()));
+			schickeNachricht(new RegLogNachricht(70,getGui().getTextFieldUnameReg().getText(),getGui().getTextFieldPwReg().getText()));
 		}
 		else
 		{
@@ -48,7 +48,7 @@ public class LogRegControl
 	}
 	
 
-	private void schickeNachricht(Register register)
+	private void schickeNachricht(RegLogNachricht register)
 	{
 		//Code um an Server zu schicken
 	}
