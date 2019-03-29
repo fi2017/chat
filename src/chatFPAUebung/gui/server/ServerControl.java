@@ -1,7 +1,6 @@
 package chatFPAUebung.gui.server;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import chatFPAUebung.klassen.Ban;
@@ -101,7 +100,7 @@ public class ServerControl
 		{
 			if (neuerClient.getClientSocket().getInetAddress().equals(getBans().get(i).getInternetAdress()))
 			{
-				if (LocalDateTime.now().isAfter(getBans().get(i).getUnbanTime()))
+				if (!getBans().get(i).checkIfStillBanned())
 				{
 					getBans().remove(i);
 					i--;
