@@ -1,11 +1,14 @@
 package chatFPAUebung.klassen;
 
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 
-public class Ban
+public class Ban implements Serializable
 {
 	// Attributes
+	private static final long serialVersionUID = 1L;
+
 	private LocalDateTime banTime;
 	private LocalDateTime unbanTime;
 	private InetAddress internetAdress;

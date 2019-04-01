@@ -34,7 +34,7 @@ public class ServerListenThread extends Thread
 				{
 					Socket clientSocket = serverSocket.accept();
 					getControl().empfangeClient(new ClientProxy(getControl(), clientSocket));
-					System.err.println("Neuen User gefunden!");
+					System.err.println("\nNeuen User gefunden!");
 
 					serverSocket.close();
 					serverSocket = new ServerSocket(8008);

@@ -2,7 +2,9 @@ package chatFPAUebung.gui.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import chatFPAUebung.fileHandler.FileHandlerBans;
 import chatFPAUebung.klassen.Ban;
 import chatFPAUebung.klassen.ClientProxy;
 import chatFPAUebung.klassen.Nachricht;
@@ -29,8 +31,10 @@ public class ServerControl
 		this.gui = new ServerGui();
 
 		this.nachrichten = new ArrayList<Nachricht>();
-		this.bans = new ArrayList<Ban>(); // TODO: Needs to be saved in a file later (Not right now as we ban ourselves
-											// for test purposes
+
+		// this.bans = new ArrayList<Ban>(); // Needs to be discarded in the final
+		// version
+		this.bans = new ArrayList<Ban>(Arrays.asList((new FileHandlerBans()).readBans()));
 
 		setzeListener();
 		getGui().setVisible(true);
@@ -125,7 +129,10 @@ public class ServerControl
 		if (!isBanned)
 		{
 			getClients().add(neuerClient);
-			System.err.println("Neuen User zur Liste hinzugefügt!");
+			System.out.println("Neuen User zur Liste hinzugefügt!");
+		} else
+		{
+			System.err.println("Gebannter User wurde gekillt");
 		}
 	}
 
@@ -167,6 +174,8 @@ public class ServerControl
 				System.out.println("Habe User gebannt!");
 				getBans().add(newBan);
 				removeUser(client);
+
+				(new FileHandlerBans()).writeBans(getBans().toArray(new Ban[0]));
 
 				// TODO: SEND MESSAGE TO USER THAT HE IS BANNED AND DISPLAY IT
 			}
