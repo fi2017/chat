@@ -104,7 +104,7 @@ public class LogRegControl
 	{
 		if(checkPasswordWith2nd() || !checkEmptyReg())
 		{
-			sendeNachrichtAnServer(new Uebertragung(2, new RegLogNachricht(70,getGui().getTextFieldUnameReg().getText(),getGui().getTextFieldPwReg().getText())));
+			sendeNachrichtAnServer(new Uebertragung(2, new LogRegNachricht(70,getGui().getTextFieldUnameReg().getText(),getGui().getTextFieldPwReg().getText())));
 		}
 		else
 		{
