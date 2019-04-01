@@ -72,23 +72,26 @@ public class LogRegControl
 				break;
 
 			case 2: //wenn login nicht erfolgreich - PW falsch
-				
+				getGui().getLblErrormsg().setText("Passwort falsch");
 				break;
 
 			case 3:  //wenn login nicht erfolgreich  - User falsch/unbekannt
-				
+				getGui().getLblErrormsg().setText("User falsch");
 				break;	
 			case 4: //wenn login nicht erfolgreich - User schon eingeloggt
-				
+				getGui().getLblErrormsg().setText("User ist schon eingeloggt");
 				break;
 				
 			case 5: //wenn login nicht erfolgreich - User gebannt
+				getGui().getLblErrormsg().setText("Der Banhammer hat gesprochen!");
 				break;
 			case 6: // wenn register  erfolgreich
+				getGui().getLblErrormsg().setText("Registrierung erfolgreich");
 				break;
 			case 7: //wenn register nicht erfolgreich - Username schon benutzt
+				getGui().getLblErrormsg().setText("Username schon vergeben");
 			default:
-				//
+				getGui().getLblErrormsg().setText("Protokollfehler");
 				break;
 			}
 		}
