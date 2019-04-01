@@ -5,19 +5,17 @@ import java.net.SocketException;
 
 import chatFPAUebung.gui.server.ServerControl;
 import chatFPAUebung.klassen.ClientProxy;
-import feature_LoginRegister.LogRegServerControl;
 
 public class ServerReadingThread extends Thread
 {
 	// Attribute
 	private ServerControl control;
-	private LogRegServerControl loginControl;
 	private ClientProxy client;
 
 	// Main
-	public ServerReadingThread(LogRegServerControl loginControl, ClientProxy client)
+	public ServerReadingThread(ServerControl control, ClientProxy client)
 	{
-		this.loginControl = loginControl;
+		this.control = control;
 		this.client = client;
 
 		this.setName("ServerReadingThread");
@@ -31,14 +29,7 @@ public class ServerReadingThread extends Thread
 			try
 			{
 				Object input = getClient().getInFromClient().readObject();
-				if(loginControl!=null)
-				{
-					getLoginControl().empfangeNachrichtVonClient(input, getClient());
-				}
-				if(control!=null)
-				{
-					getControl().empfangeNachrichtVonClient(input, getClient());
-				}
+				getControl().empfangeNachrichtVonClient(input, getClient());
 			} catch (ClassNotFoundException e)
 			{
 				e.printStackTrace();
@@ -61,15 +52,5 @@ public class ServerReadingThread extends Thread
 	public ClientProxy getClient()
 	{
 		return this.client;
-	}
-
-	public LogRegServerControl getLoginControl()
-	{
-		return loginControl;
-	}
-
-	public void setLoginControl(LogRegServerControl loginControl)
-	{
-		this.loginControl = loginControl;
 	}
 }

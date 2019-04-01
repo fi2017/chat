@@ -7,15 +7,14 @@ import java.net.SocketTimeoutException;
 
 import chatFPAUebung.gui.server.ServerControl;
 import chatFPAUebung.klassen.ClientProxy;
-import feature_LoginRegister.LogRegServerControl;
 
 public class ServerListenThread extends Thread
 {
 	// Attribute
-	private LogRegServerControl control;
+	private ServerControl control;
 
 	// Konstruktor
-	public ServerListenThread(LogRegServerControl control)
+	public ServerListenThread(ServerControl control)
 	{
 		this.control = control;
 
@@ -35,8 +34,7 @@ public class ServerListenThread extends Thread
 				{
 					Socket clientSocket = serverSocket.accept();
 					getControl().empfangeClient(new ClientProxy(getControl(), clientSocket));
-					// TODO: übergeben des Clientsockets an LoginServer
-					
+
 					serverSocket.close();
 					serverSocket = new ServerSocket(8008);
 					serverSocket.setSoTimeout(1000);
@@ -58,7 +56,7 @@ public class ServerListenThread extends Thread
 	}
 
 	// Getter
-	public LogRegServerControl getControl()
+	public ServerControl getControl()
 	{
 		return this.control;
 	}
