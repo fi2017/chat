@@ -154,10 +154,6 @@ public class LogRegControl
 		return returnValue;
 	}
 
-	private void schickeNachricht()
-	{
-		//Code um an Server zu schicken
-	}
 
 	private boolean checkPasswordWith2nd()
 	{
