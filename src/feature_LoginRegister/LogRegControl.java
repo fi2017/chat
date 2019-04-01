@@ -112,7 +112,7 @@ public class LogRegControl
 	{
 		if(!checkEmptyLog())
 		{	
-			sendeNachrichtAnServer(new Uebertragung(2, new LogRegNachricht(getGui().getTextFieldUnameLog().getText(),getGui().getTextFieldPwLog().getText())));
+			sendeNachrichtAnServer(new Uebertragung(10, new LogRegNachricht(getGui().getTextFieldUnameLog().getText(),getGui().getTextFieldPwLog().getText())));
 		}
 		
 	}
@@ -121,7 +121,7 @@ public class LogRegControl
 	{
 		if(checkPasswordWith2nd() || !checkEmptyReg())
 		{
-			sendeNachrichtAnServer(new Uebertragung(2, new LogRegNachricht(getGui().getTextFieldUnameReg().getText(),getGui().getTextFieldPwReg().getText())));
+			sendeNachrichtAnServer(new Uebertragung(11, new LogRegNachricht(getGui().getTextFieldUnameReg().getText(),getGui().getTextFieldPwReg().getText())));
 		}
 		else
 		{
