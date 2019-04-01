@@ -121,7 +121,7 @@ public class LogRegGui extends JFrame
 		}
 		return lblPasswort;
 	}
-	private JLabel getLblErrormsg() {
+	public JLabel getLblErrormsg() {
 		if (lblErrormsg == null) {
 			lblErrormsg = new JLabel();
 			lblErrormsg.setBounds(10, 120, 189, 14);
