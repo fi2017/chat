@@ -23,6 +23,7 @@ public class LogRegGui extends JFrame
 	private JTextField textFieldPwRepeat;
 	private JLabel lblUsername;
 	private JLabel lblPasswort;
+	private JLabel lblErrormsg;
 	
 	
 
@@ -50,6 +51,7 @@ public class LogRegGui extends JFrame
 		contentPane.add(getTextFieldPwRepeat());
 		contentPane.add(getLblUsername());
 		contentPane.add(getLblPasswort());
+		contentPane.add(getLblErrormsg());
 	}
 	public JButton getBtnLogin() {
 		if (btnLogin == null) {
@@ -118,5 +120,12 @@ public class LogRegGui extends JFrame
 			lblPasswort.setBounds(10, 54, 77, 14);
 		}
 		return lblPasswort;
+	}
+	private JLabel getLblErrormsg() {
+		if (lblErrormsg == null) {
+			lblErrormsg = new JLabel();
+			lblErrormsg.setBounds(10, 120, 189, 14);
+		}
+		return lblErrormsg;
 	}
 }
