@@ -31,9 +31,6 @@ public class ServerControl
 		this.gui = new ServerGui();
 
 		this.nachrichten = new ArrayList<Nachricht>();
-
-		// this.bans = new ArrayList<Ban>(); // Needs to be discarded in the final
-		// version
 		this.bans = new ArrayList<Ban>(Arrays.asList((new FileHandlerBans()).readBans()));
 
 		setzeListener();
@@ -57,6 +54,7 @@ public class ServerControl
 	{
 		if (getServerListenThread() == null)
 		{
+			System.err.println("Der Server wurde auf Port 8008 gestartet!");
 			getGui().getLblFehlermeldung().setText("");
 
 			setServerListenThread(new ServerListenThread(this));
@@ -71,6 +69,7 @@ public class ServerControl
 	{
 		if (getServerListenThread() != null)
 		{
+			System.err.println("Der Server wurde gestoppt!");
 			getGui().getLblFehlermeldung().setText("");
 
 			getServerListenThread().interrupt();
@@ -184,6 +183,8 @@ public class ServerControl
 
 	public void removeUser(ClientProxy client)
 	{
+		System.err.println("\nDer Client mit der IP " + client.getClientSocket().getInetAddress() + " wurde entfernt!");
+
 		try
 		{
 			client.getServerReadingThread().interrupt();
@@ -195,7 +196,7 @@ public class ServerControl
 
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			getClients().remove(client);
 		}
 	}
 
@@ -209,7 +210,7 @@ public class ServerControl
 
 	public void sendeNachrichtAnClient(Uebertragung uebertragung, ClientProxy client)
 	{
-		(new ServerWritingThread(uebertragung, client)).start();
+		(new ServerWritingThread(uebertragung, client, this)).start();
 	}
 
 	// Getter

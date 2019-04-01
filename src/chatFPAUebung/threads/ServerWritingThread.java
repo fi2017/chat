@@ -2,6 +2,7 @@ package chatFPAUebung.threads;
 
 import java.io.IOException;
 
+import chatFPAUebung.gui.server.ServerControl;
 import chatFPAUebung.klassen.ClientProxy;
 import chatFPAUebung.klassen.Uebertragung;
 
@@ -10,12 +11,14 @@ public class ServerWritingThread extends Thread
 	// Attribute
 	private Uebertragung uebertragung;
 	private ClientProxy client;
+	private ServerControl control;
 
 	// Konstruktor
-	public ServerWritingThread(Uebertragung uebertragung, ClientProxy client)
+	public ServerWritingThread(Uebertragung uebertragung, ClientProxy client, ServerControl control)
 	{
 		this.uebertragung = uebertragung;
 		this.client = client;
+		this.control = control;
 
 		this.setName("ServerWritingThread");
 	}
@@ -30,7 +33,7 @@ public class ServerWritingThread extends Thread
 			getClient().getOutToClient().reset();
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			getControl().removeUser(getClient());
 		}
 	}
 
@@ -43,5 +46,10 @@ public class ServerWritingThread extends Thread
 	public ClientProxy getClient()
 	{
 		return client;
+	}
+
+	public ServerControl getControl()
+	{
+		return this.control;
 	}
 }
