@@ -8,11 +8,13 @@ import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ServerListenThread;
 import chatFPAUebung.threads.ServerWritingThread;
+import feature_LoginRegister.LogRegServerControl;
 
 public class ServerControl
 {
 	// Attribute
 	private ServerGui gui;
+	private LogRegServerControl loginServer;
 
 	private ArrayList<ClientProxy> clients;
 	private ServerListenThread serverListenThread;
@@ -44,14 +46,14 @@ public class ServerControl
 		getGui().getBtnStop().addActionListener(e -> stoppeServer());
 	}
 
-	public void starteServer()
+public void starteServer()
 	{
-		if (getServerListenThread() == null)
+		if (getLoginServer() == null)
 		{
 			getGui().getLblFehlermeldung().setText("");
 
-			setServerListenThread(new ServerListenThread(this));
-			getServerListenThread().start();
+			setLoginServer(new LogRegServerControl(this));
+			getLoginServer().start();
 		} else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft bereits!");
@@ -172,5 +174,15 @@ public class ServerControl
 	public void setServerListenThread(ServerListenThread serverListenThread)
 	{
 		this.serverListenThread = serverListenThread;
+	}
+
+	public LogRegServerControl getLoginServer()
+	{
+		return loginServer;
+	}
+
+	public void setLoginServer(LogRegServerControl login)
+	{
+		this.loginServer = login;
 	}
 }
