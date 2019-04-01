@@ -24,6 +24,7 @@ public class LogRegGui extends JFrame
 	private JLabel lblUsername;
 	private JLabel lblPasswort;
 	
+	
 
 	/**
 	 * Create the frame.

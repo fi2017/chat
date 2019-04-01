@@ -2,26 +2,17 @@ package feature_LoginRegister;
 
 public class LogRegNachricht
 {
-	int protocolCase;
 	String username;
 	String password;
 	
-	public LogRegNachricht(int protCase, String uname, String pass)
+	public LogRegNachricht( String uname, String pass)
 	{
-		setProtocolCase(protCase);
+
 		setUsername(uname);
 		setPassword(pass);
 	}
 
-	public int getProtocolCase()
-	{
-		return protocolCase;
-	}
-
-	public void setProtocolCase(int protocolCase)
-	{
-		this.protocolCase = protocolCase;
-	}
+	
 
 	public String getUsername()
 	{

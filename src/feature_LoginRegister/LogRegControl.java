@@ -62,16 +62,31 @@ public class LogRegControl
 
 			switch (((Uebertragung) uebertragungObjekt).getZweck())
 			{
-			case 1:
+			case 1://wenn login erfolgreich
+				ClientControl control= new ClientControl();
+				control.setClientSocket(clientSocket);
+				control.setInFromServer(inFromServer);
+				control.setOutToServer(outToServer);
+				control.setClientReadingThread(new ClientReadingThread(control));
 				
 				break;
 
-			case 2:
+			case 2: //wenn login nicht erfolgreich - PW falsch
 				
 				break;
 
-			case 3:
+			case 3:  //wenn login nicht erfolgreich  - User falsch/unbekannt
 				
+				break;	
+			case 4: //wenn login nicht erfolgreich - User schon eingeloggt
+				
+				break;
+				
+			case 5: //wenn login nicht erfolgreich - User gebannt
+				break;
+			case 6: // wenn register  erfolgreich
+				break;
+			case 7: //wenn register nicht erfolgreich - Username schon benutzt
 			default:
 				//
 				break;
@@ -92,19 +107,18 @@ public class LogRegControl
 
 	private void loginUser()
 	{
-		//wenn login erfolgreich
-		ClientControl control= new ClientControl();
-		control.setClientSocket(clientSocket);
-		control.setInFromServer(inFromServer);
-		control.setOutToServer(outToServer);
-		control.setClientReadingThread(new ClientReadingThread(control));
+		if(!checkEmptyLog())
+		{	
+			sendeNachrichtAnServer(new Uebertragung(2, new LogRegNachricht(getGui().getTextFieldUnameLog().getText(),getGui().getTextFieldPwLog().getText())));
+		}
+		
 	}
 
 	private void registerUser()
 	{
 		if(checkPasswordWith2nd() || !checkEmptyReg())
 		{
-			sendeNachrichtAnServer(new Uebertragung(2, new LogRegNachricht(70,getGui().getTextFieldUnameReg().getText(),getGui().getTextFieldPwReg().getText())));
+			sendeNachrichtAnServer(new Uebertragung(2, new LogRegNachricht(getGui().getTextFieldUnameReg().getText(),getGui().getTextFieldPwReg().getText())));
 		}
 		else
 		{
