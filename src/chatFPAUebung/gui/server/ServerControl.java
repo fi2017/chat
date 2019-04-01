@@ -30,7 +30,11 @@ public class ServerControl
 		this.gui = new ServerGui();
 
 		this.nachrichten = new ArrayList<Nachricht>();
-		this.bans = new ArrayList<Ban>();
+		this.bans = new ArrayList<Ban>(); // Needs to be discarded in the final version
+		/*
+		 * this.bans = new ArrayList<Ban>(Arrays.asList((new
+		 * FileHandlerBans()).readBans()));
+		 */
 
 		setzeListener();
 		getGui().setVisible(true);
@@ -164,6 +168,10 @@ public class ServerControl
 			{
 				getBans().add(newBan);
 				removeUser(client);
+
+				/*
+				 * (new FileHandlerBans()).writeBans(getBans().toArray(new Ban[0]));
+				 */
 
 				// TODO: SEND MESSAGE TO USER THAT HE IS BANNED AND DISPLAY IT
 			}
