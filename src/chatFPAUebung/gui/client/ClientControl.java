@@ -15,6 +15,7 @@ import chatFPAUebung.threads.ClientWritingThread;
 
 public class ClientControl
 {
+	//test
 	// Attribute
 	private ClientGui gui;
 	private DefaultListModel<Nachricht> listModel;
