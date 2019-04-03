@@ -116,7 +116,7 @@ public class ServerGui extends JFrame
 		{
 			lblFehlermeldung = new JLabel("");
 			lblFehlermeldung.setBounds(10, 111, 414, 14);
-		}
+		}//iidid
 		return lblFehlermeldung;
 	}
 	private JButton getBtnWartung() {
