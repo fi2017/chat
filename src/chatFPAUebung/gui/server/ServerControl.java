@@ -9,6 +9,7 @@ import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ServerListenThread;
 import chatFPAUebung.threads.ServerWritingThread;
 import feature_LoginRegister.LogRegServerControl;
+import feature_LoginRegister.User;
 
 public class ServerControl
 {
@@ -17,6 +18,7 @@ public class ServerControl
 	private LogRegServerControl loginServer;
 
 	private ArrayList<ClientProxy> clients;
+	private ArrayList<User> userList;
 	private ServerListenThread serverListenThread;
 
 	private ArrayList<Nachricht> nachrichten;
@@ -184,5 +186,15 @@ public void starteServer()
 	public void setLoginServer(LogRegServerControl login)
 	{
 		this.loginServer = login;
+	}
+
+	public ArrayList<User> getUserList()
+	{
+		return userList;
+	}
+
+	public void setUserList(ArrayList<User> userList)
+	{
+		this.userList = userList;
 	}
 }

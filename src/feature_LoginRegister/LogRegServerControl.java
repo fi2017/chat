@@ -21,6 +21,7 @@ public class LogRegServerControl extends Thread
 	private ServerReadingThread readingThread;
 	private ServerListenThread listenThread;
 	private ArrayList<ClientProxy> clients;
+	private ArrayList<User> userList;
 	
 	
 	
@@ -28,11 +29,13 @@ public class LogRegServerControl extends Thread
 	{
 		
 		this.control = control;
+		control.setUserList(getUserList());
 		setListenThread(new ServerListenThread(this));
 		getListenThread().start();
 		
 	}
 	
+
 	public void run()
 	{
 		
@@ -51,12 +54,12 @@ public class LogRegServerControl extends Thread
 			switch (((Uebertragung) uebertragungObjekt).getZweck())
 			{
 				
-			case 10: 				
-
+			case 10: //Loginversuch				
+					loginUser((LogRegNachricht)uebertragung.getUebertragung());
 				break;
 
-			case 11:
-				
+			case 11: //Registrierungsversuch
+					registerUser((LogRegNachricht)uebertragung.getUebertragung());
 
 				break;
 
@@ -67,6 +70,23 @@ public class LogRegServerControl extends Thread
 				break;
 			}
 		}
+	}
+
+	private boolean registerUser(LogRegNachricht uebertragung)
+	{
+		//überprüft in der Datenbank zuerst, ob der Nutzername schon vergeben ist
+		//wenn er noch nicht vergeben ist, wird ein neuer Nutzer in der Datenbank angelegt
+		//sonst wird die Fehlermeldung an den Client zurückgegeben, dass der Name schon vergeben ist 
+		return false;
+		
+		
+	}
+
+	private int loginUser(LogRegNachricht uebertragung)
+	{
+		//überprüft in der Datenbank zuerst, ob der Nutzername und Passwort übereinstimmen
+		//gibt Nachrichtenzweck zurück, je nachdem, ob erfolgreich oder fehler
+		return 8;
 	}
 
 	public void sendeNachrichtAnClient(Uebertragung uebertragung, ClientProxy client)
@@ -109,6 +129,18 @@ public class LogRegServerControl extends Thread
 	public void setClients(ArrayList<ClientProxy> clients)
 	{
 		this.clients = clients;
+	}
+
+
+	public ArrayList<User> getUserList()
+	{
+		return userList;
+	}
+
+
+	public void setUserList(ArrayList<User> userList)
+	{
+		this.userList = userList;
 	}
 	
 	
