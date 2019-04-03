@@ -7,6 +7,7 @@ public class User
 	private int id;
 	private String password;
 	private int globalRollenNummer;
+	private boolean banned=false;
 	private boolean online=false;
 	
 	public User()
@@ -70,6 +71,16 @@ public class User
 	public void setOnline(boolean online)
 	{
 		this.online = online;
+	}
+
+	public boolean isBanned()
+	{
+		return banned;
+	}
+
+	public void setBanned(boolean banned)
+	{
+		this.banned = banned;
 	}
 	
 	
