@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.rmi.activation.ActivationGroup_Stub;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
+import javax.swing.*;
 
+import chatFPAUebung.klassen.Chatroom;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
@@ -24,6 +27,9 @@ public class ClientControl
 	private ObjectInputStream inFromServer;
 
 	private ClientReadingThread clientReadingThread;
+
+	private ArrayList<Chatroom> chatrooms = new ArrayList<Chatroom>();
+	private ArrayList<DefaultListModel> listmodels = new ArrayList<DefaultListModel>();
 
 	// Konstruktor
 	public ClientControl()
@@ -60,10 +66,12 @@ public class ClientControl
 
 			setClientReadingThread(new ClientReadingThread(this));
 			getClientReadingThread().start();
-		} catch (IOException e)
+		}
+		catch(IOException e)
 		{
 			e.printStackTrace();
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -73,46 +81,53 @@ public class ClientControl
 
 	public void empfangeNachrichtVonServer(Object uebertragungObjekt)
 	{
-		if (uebertragungObjekt instanceof Uebertragung)
+		if(uebertragungObjekt instanceof Uebertragung)
 		{
 			Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
 
-			switch (((Uebertragung) uebertragungObjekt).getZweck())
+			switch(((Uebertragung) uebertragungObjekt).getZweck())
 			{
-			case 1:
-				if (uebertragung.getUebertragung() instanceof Nachricht[])
-				{
-					if (((Nachricht[]) uebertragung.getUebertragung()).length != 0)
+				case 1:
+					if(uebertragung.getUebertragung() instanceof Nachricht[])
 					{
-						getListModel().clear();
+						DefaultListModel aktuellesModel=listmodels.get(((Uebertragung) uebertragungObjekt).getZiel());
 
-						for (Nachricht aktNachricht : (Nachricht[]) uebertragung.getUebertragung())
+						if(((Nachricht[]) uebertragung.getUebertragung()).length != 0)
 						{
-							getListModel().addElement(aktNachricht);
+							aktuellesModel.clear();
+
+							for(Nachricht aktNachricht : (Nachricht[]) uebertragung.getUebertragung())
+							{
+								aktuellesModel.addElement(aktNachricht);
+							}
+
+							zeigeNeuesteNachricht();
 						}
+					}
+
+					break;
+
+				case 2:
+					if(uebertragung.getUebertragung() instanceof Nachricht)
+					{
+						DefaultListModel aktuellesModel=listmodels.get(((Uebertragung) uebertragungObjekt).getZiel());
+						aktuellesModel.addElement((Nachricht) uebertragung.getUebertragung());
 
 						zeigeNeuesteNachricht();
 					}
-				}
 
-				break;
+					break;
 
-			case 2:
-				if (uebertragung.getUebertragung() instanceof Nachricht)
-				{
-					getListModel().addElement((Nachricht) uebertragung.getUebertragung());
+				case 3:
+					sendeNachrichtAnServer(new Uebertragung(0, null));
+					break;
 
-					zeigeNeuesteNachricht();
-				}
+				case 4:
+					chatrooms.add((Chatroom) uebertragung.getUebertragung());
 
-				break;
-
-			case 3:
-				sendeNachrichtAnServer(new Uebertragung(0, null));
-
-			default:
-				//
-				break;
+				default:
+					//
+					break;
 			}
 		}
 	}
@@ -129,16 +144,62 @@ public class ClientControl
 
 	public void sendeNachricht()
 	{
-		if (getGui().getTextFieldNachricht().getText().trim().length() != 0)
+		if(getGui().getTextFieldNachricht().getText().trim().length() != 0)
 		{
 			getGui().getLblFehlermeldung().setText("");
-			sendeNachrichtAnServer(new Uebertragung(2,
-					new Nachricht(getGui().getTextFieldNachricht().getText(), LocalDateTime.now())));
-		} else
+			sendeNachrichtAnServer(new Uebertragung(2, new Nachricht(getGui().getTextFieldNachricht().getText(), LocalDateTime.now())));
+		}
+		else
 		{
 			getGui().getLblFehlermeldung().setText("Sie muessen einen Text eingeben!");
 		}
 	}
+
+	public void sendeNachrichtVonChatroom(ClientGui gui) //Methode für ChatroomGUI
+	{
+		if(getGui().getTextFieldNachricht().getText()!=null)
+		{
+			ListModel model = getGui().getList().getModel();
+			int ziel=listmodels.indexOf(model);
+			gui.getLblFehlermeldung().setText("");
+			sendeNachrichtAnServer(new Uebertragung(2, ziel, new Nachricht(gui.getTextFieldNachricht().getText(), LocalDateTime.now())));
+		}
+	}
+
+
+	//Chatrooms
+	public void erstelleChatroom(String name, int teilnehmerAnzahl, String passwort)
+	{
+		Chatroom chat = new Chatroom(name, teilnehmerAnzahl);
+		if(passwort != null)
+		{
+			chat.setPasswort(passwort);
+		}
+		try
+		{
+			DefaultListModel neuesListModel = new DefaultListModel();
+			chat.setChatmodel(neuesListModel);
+			Uebertragung neuerchatroom = new Uebertragung(4, chat);
+			listmodels.add(neuesListModel);
+			outToServer.writeObject(neuerchatroom);
+			outToServer.flush();
+		}
+		catch(Exception e)
+		{
+
+		}
+
+
+	}
+
+	//Listmodel wechseln in Gui
+	public void switchModel()
+	{
+
+	}
+
+
+	//Chatrooms Ende
 
 	public void sendeNachrichtAnServer(Uebertragung uebertragung)
 	{
@@ -194,5 +255,30 @@ public class ClientControl
 	public DefaultListModel<Nachricht> getListModel()
 	{
 		return this.listModel;
+	}
+
+	public void setListModel(DefaultListModel aktuellesModel)
+	{
+		this.listModel=aktuellesModel;
+	}
+
+	public ArrayList<Chatroom> getChatrooms()
+	{
+		return chatrooms;
+	}
+
+	public void setChatrooms(ArrayList<Chatroom> chatrooms)
+	{
+		this.chatrooms = chatrooms;
+	}
+
+	public ArrayList<DefaultListModel> getListmodels()
+	{
+		return listmodels;
+	}
+
+	public void setListmodels(ArrayList<DefaultListModel> listmodels)
+	{
+		this.listmodels = listmodels;
 	}
 }

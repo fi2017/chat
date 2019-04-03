@@ -3,6 +3,7 @@ package chatFPAUebung.gui.server;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import chatFPAUebung.klassen.Chatroom;
 import chatFPAUebung.klassen.ClientProxy;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
@@ -16,8 +17,8 @@ public class ServerControl
 
 	private ArrayList<ClientProxy> clients;
 	private ServerListenThread serverListenThread;
-
 	private ArrayList<Nachricht> nachrichten;
+	private ArrayList<Chatroom> chatrooms = new ArrayList<Chatroom>();
 
 	// Konstruktor
 	public ServerControl()
@@ -46,13 +47,14 @@ public class ServerControl
 
 	public void starteServer()
 	{
-		if (getServerListenThread() == null)
+		if(getServerListenThread() == null)
 		{
 			getGui().getLblFehlermeldung().setText("");
 
 			setServerListenThread(new ServerListenThread(this));
 			getServerListenThread().start();
-		} else
+		}
+		else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft bereits!");
 		}
@@ -60,12 +62,12 @@ public class ServerControl
 
 	public void stoppeServer()
 	{
-		if (getServerListenThread() != null)
+		if(getServerListenThread() != null)
 		{
 			getGui().getLblFehlermeldung().setText("");
 
 			getServerListenThread().interrupt();
-			for (ClientProxy aktClient : getClients())
+			for(ClientProxy aktClient : getClients())
 			{
 				try
 				{
@@ -73,7 +75,8 @@ public class ServerControl
 					aktClient.getInFromClient().close();
 					aktClient.getOutToClient().close();
 					aktClient.getClientSocket().close();
-				} catch (IOException e)
+				}
+				catch(IOException e)
 				{
 					e.printStackTrace();
 				}
@@ -82,7 +85,8 @@ public class ServerControl
 			getClients().clear();
 			setServerListenThread(null);
 
-		} else
+		}
+		else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft noch nicht!");
 		}
@@ -95,41 +99,53 @@ public class ServerControl
 
 	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
 	{
-		if (uebertragungObjekt instanceof Uebertragung)
+		if(uebertragungObjekt instanceof Uebertragung)
 		{
 			Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
 
-			switch (((Uebertragung) uebertragungObjekt).getZweck())
+			switch(((Uebertragung) uebertragungObjekt).getZweck())
 			{
-			case 1:
-				sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
+				case 1:
+					sendeNachrichtAnClient(new Uebertragung(1, ((Uebertragung) uebertragungObjekt).getZiel(), getNachrichten().toArray(new Nachricht[0])), client);
 
-				break;
+					break;
 
-			case 2:
-				if (uebertragung.getUebertragung() instanceof Nachricht)
-				{
-					getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-					broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
-				}
+				case 2:
+					if(uebertragung.getUebertragung() instanceof Nachricht)
+					{
+						getNachrichten().add((Nachricht) uebertragung.getUebertragung());
+						broadcasteNachricht((Nachricht) uebertragung.getUebertragung(), uebertragung.getZiel());
+					}
 
-				break;
+					break;
 
-			case 3:
-				sendeNachrichtAnClient(new Uebertragung(0, null), client);
+				case 3:
+					sendeNachrichtAnClient(new Uebertragung(0, null), client);
+					break;
+				//Chatroom hinzufügen
+				case 4:
+					chatrooms.add((Chatroom) ((Uebertragung) uebertragungObjekt).getUebertragung());
+					for(ClientProxy aktClient : getClients())
+					{
+						sendeNachrichtAnClient((Uebertragung) uebertragungObjekt, aktClient);
+					}
+					break;
 
-			default:
-				//
-				break;
+
+				default:
+					//
+					break;
+
+
 			}
 		}
 	}
 
-	public void broadcasteNachricht(Nachricht nachricht)
+	public void broadcasteNachricht(Nachricht nachricht, int ziel)
 	{
-		for (ClientProxy aktClient : getClients())
+		for(ClientProxy aktClient : getClients())
 		{
-			sendeNachrichtAnClient(new Uebertragung(2, nachricht), aktClient);
+			sendeNachrichtAnClient(new Uebertragung(2, ziel, nachricht), aktClient);
 		}
 	}
 
