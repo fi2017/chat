@@ -12,13 +12,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Chat Projekt");
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setScene(new Scene(root));
+        Scene s = new Scene(root);
+        s.getStylesheets().add("http://fonts.googleapis.com/css?family=Gafata");
+        primaryStage.setTitle("Chat");
+        System.setProperty("prism.lcdtext", "false");
+        primaryStage.setScene(s);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
-        primaryStage.setResizable(true);
     }
-
 
     public static void main(String[] args) {
         launch(args);

@@ -1,27 +1,91 @@
-.CloseButton {
+.Font {
+    -fx-font-family: 'Poiret One';
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+
+.MenuBar {
+    /*-fx-background-color:  linear-gradient(to right, #5b5da5, #afb9e6);*/
+    -fx-background-color:  #5b5da5;
+}
+
+.MenuButton {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-weight: 0;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.Search {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+    -fx-border-style: none;
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+}
+
+.SearchButton:hover{
+    -fx-background-color: #5b5da5;
+}
+
+.Friendlist {
+    -fx-background-color: #FFFFFF59;
+}
+
+.WindowButton {
     -fx-background-color: #00000000;
     -fx-background-radius: 0px;
 }
 
-.CloseButton:hover {
+.WindowButton:hover {
     -fx-background-color: #0000005F;
 }
 
-.MenuBar {
-    -fx-background-color: #3990FF;
-    -fx-z-index: 10;
+.Chat {
+    -fx-border-style: none;
+    -fx-background-color: Transparent;
 }
 
-.SideBar {
-    -fx-background-color: #3990FF;
-    -fx-z-index: 1;
+.AddRoom {
+    -fx-background-color:  #00000090;
 }
 
-.ControlButton {
-    -fx-background-color: #00000000;
-        -fx-background-radius: 0px;
+.AddRoomPane {
+    -fx-background-color: #FFFFFF;
 }
 
-.ControlButton:hover {
-    -fx-background-color: #0000005F;
+.AddRoomFont {
+    -fx-text-fill: white;
+}
+
+.AddRoomTextField {
+    -fx-font-family: 'Poiret One';
+    -fx-font-size: 16;
+    -fx-background-color: Transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 0;
+}
+
+.Room {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0;
+}
+
+.Room:hover {
+    -fx-background-color: #E9E9E9;
+}
+
+.Remove-Border {
+    -fx-background-radius: 0;
+    -fx-border-style: none;
+    -fx-background-color: Transparent;
+}
+
+.Remove-Border > .viewport {
+    -fx-background-color: transparent;
+}
+
+.ChatInput {
+    -fx-font-size: 16px;
 }
