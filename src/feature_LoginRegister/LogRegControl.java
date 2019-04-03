@@ -90,6 +90,9 @@ public class LogRegControl
 				break;
 			case 7: //wenn register nicht erfolgreich - Username schon benutzt
 				getGui().getLblErrormsg().setText("Username schon vergeben");
+			break;
+			case 8: //wenn bei der Übertragung was schiefgeht
+				getGui().getLblErrormsg().setText("Übertragungsfehler");
 			default:
 				getGui().getLblErrormsg().setText("Protokollfehler");
 				break;

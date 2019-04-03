@@ -51,20 +51,18 @@ public class LogRegServerControl extends Thread
 			switch (((Uebertragung) uebertragungObjekt).getZweck())
 			{
 				
-			case 1: 
+			case 10: 				
+
+				break;
+
+			case 11:
 				
 
 				break;
 
-			case 2:
 				
 
-				break;
-
-			case 3:
-				
-
-			default:
+			default: sendeNachrichtAnClient(new Uebertragung(8,"Uebertragungsfehler"),client);
 				//
 				break;
 			}
