@@ -6,19 +6,20 @@ import java.util.ArrayList;
 
 public class SecurityUnsafe
 {
-	// Final
-	private static int flagsNeededForBan = 4; // How many flags a user needs to get to be banned
-	private static int flagsNeededInSeconds = 10; // In what time the flags need to be collected to be banned
+	// Finals
+	private static int flagsNeededForBan = 4; // Sets how many flags a user needs to get to be banned
+	private static int flagsNeededInSeconds = 10; // Sets in what time the above set flags need to be collected in
+													// order for the user to be banned
 
-	private static int sendingTimeDifferenceDeviation = 100; // How many MS the time difference between 2 messages can
-																// be from the avg. to still be eventually from a bot
+	private static int sendingTimeDifferenceDeviation = 100; // Sets how many MS the time difference between 2 messages
+																// is allowed be from the avg. to still receive a flag
 
 	// Attributes
-	private ArrayList<LocalDateTime> pings; // All messages from the user to the server
-	private ArrayList<LocalDateTime> flags; // All times when the user was detected to be a bot eventually
+	private ArrayList<LocalDateTime> pings; // Shows the sending time of all messages from the user to the server
+	private ArrayList<LocalDateTime> flags; // Shows all times when the user was detected to be a bot eventually
 
-	private int avgSendingTimeDifferenceMS; // What the avg. time between two messages from the user is in the last X
-											// seconds ago
+	private int avgSendingTimeDifferenceMS; // Shows what the avg. time between two messages from the user is in the
+											// last X seconds ago
 
 	// Constructor
 	public SecurityUnsafe()
@@ -28,9 +29,9 @@ public class SecurityUnsafe
 	}
 
 	// Methods
-	public boolean addNewPing(LocalDateTime messageSendingTime)
+	public boolean addNewPing(LocalDateTime messageSendingTime) // Adds a new ping whenever the user sends a message to
+																// the server
 	{
-		// Adds a new ping whenever the user sends a message to the server
 		getPings().add(messageSendingTime);
 
 		if (checkNewFlag()) // Checks if a new flag is needed
@@ -48,24 +49,21 @@ public class SecurityUnsafe
 		}
 	}
 
-	private boolean checkNewFlag()
+	private boolean checkNewFlag() // Checks if a new flag needs to be added and adds it if so
 	{
 		calculateNewAvgSendingTime();
 
-		// Checks if a flag is possible
-		if (getAvgSendingTimeDifferenceMS() != 0)
+		if (getAvgSendingTimeDifferenceMS() != 0) // Checks if a flag is possible
 		{
 			long sendingTimeDifferenceMS = ChronoUnit.MILLIS.between(getPings().get(getPings().size() - 1),
 					getPings().get(getPings().size() - 2));
 
-			// Checks if the difference of time between the message is around the avg. time
-			// between messages
+			// Checks if the difference of time between the message from the avg. time is
+			// big enough to probably not be from a bot
 			if ((sendingTimeDifferenceMS + sendingTimeDifferenceDeviation >= getAvgSendingTimeDifferenceMS()
 					&& sendingTimeDifferenceMS <= getAvgSendingTimeDifferenceMS())
 					|| (sendingTimeDifferenceMS - sendingTimeDifferenceDeviation <= getAvgSendingTimeDifferenceMS()
-							&& sendingTimeDifferenceMS >= getAvgSendingTimeDifferenceMS())) // IF ACT. DIF + iS > AVG
-																							// AND
-																							// ACT. DIF - IS < AVG
+							&& sendingTimeDifferenceMS >= getAvgSendingTimeDifferenceMS()))
 			{
 				getFlags().add(LocalDateTime.now()); // Adds a new Flag for the current time
 
@@ -80,7 +78,7 @@ public class SecurityUnsafe
 		}
 	}
 
-	private void calculateNewAvgSendingTime()
+	private void calculateNewAvgSendingTime() // Calculates the avg. sending time within the last X seconds
 	{
 		int lastPingInListFromXsecondsOrLessAgo = 0;
 
@@ -119,9 +117,9 @@ public class SecurityUnsafe
 		}
 	}
 
-	private boolean checkFlagsForBan()
+	private boolean checkFlagsForBan() // Checks if the user collected enough flags in order to be banned
 	{
-		// Checks if there are enough flags at the moment
+		// Checks if there are enough flags at the moment to even be able to get a ban
 		if (getFlags().size() >= flagsNeededForBan)
 		{
 			LocalDateTime earliestNeededFlag = getFlags().get(getFlags().size() - flagsNeededForBan - 1);
@@ -141,8 +139,8 @@ public class SecurityUnsafe
 		}
 	}
 
-	// Returns the difference between 2 LocalDateTimes in MS
-	private long getDifferenceFromTimesInMS(LocalDateTime ping1, LocalDateTime ping2)
+	private long getDifferenceFromTimesInMS(LocalDateTime ping1, LocalDateTime ping2) // Returns the difference between
+																						// 2 LocalDateTimes in MS
 	{
 		return ChronoUnit.MILLIS.between(ping1, ping2);
 	}

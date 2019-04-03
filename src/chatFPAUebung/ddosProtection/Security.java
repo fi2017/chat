@@ -26,11 +26,15 @@ public class Security
 	}
 
 	// Methods
-	public Ban addNewPing(LocalDateTime messageSendingTime)
+	public Ban addNewPing(LocalDateTime messageSendingTime) // Checks if the user may be a bot whenever the user sends a
+															// message to the server - Returns the ban if so
 	{
-		if (getSecuritySafe().addNewPing(messageSendingTime))
+		if (getSecuritySafe().addNewPing(messageSendingTime)) // Checks if the 100% accurate security detected
+																// suspicious
+																// behavior
 		{
-			if (getSecurityUnsafe().addNewPing(messageSendingTime))
+			if (getSecurityUnsafe().addNewPing(messageSendingTime)) // Checks if the not 100% accurate security detected
+																	// suspicious behavior
 			{
 				return null;
 			} else
