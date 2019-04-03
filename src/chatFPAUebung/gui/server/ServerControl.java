@@ -141,6 +141,20 @@ public void starteServer()
 	{
 		(new ServerWritingThread(uebertragung, client)).start();
 	}
+	//Datenbankzugriff
+	public void connectToDatabase()
+	{
+		//connection
+		
+		
+		readUserFromDatabase();
+	}
+	
+
+	private void readUserFromDatabase()
+	{
+		
+	}
 
 	// Getter
 	public ServerGui getGui()
