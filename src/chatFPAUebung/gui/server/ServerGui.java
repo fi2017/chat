@@ -19,6 +19,8 @@ public class ServerGui extends JFrame
 	private JTextField txtPortnr;
 	private JLabel lblPortnummer;
 	private JLabel lblFehlermeldung;
+	private JButton btnWartung;
+	private JTextField txtWartung;
 
 	/**
 	 * Launch the application.
@@ -52,7 +54,7 @@ public class ServerGui extends JFrame
 	private void initialize()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 134);
+		setBounds(100, 100, 450, 166);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -63,6 +65,8 @@ public class ServerGui extends JFrame
 		contentPane.add(getLblPortnummer());
 		contentPane.add(getLblFehlermeldung());
 		this.setTitle("Server");
+		contentPane.add(getBtnWartung());
+		contentPane.add(getTxtWartung());
 	}
 
 	public JButton getBtnStart()
@@ -111,8 +115,23 @@ public class ServerGui extends JFrame
 		if (lblFehlermeldung == null)
 		{
 			lblFehlermeldung = new JLabel("");
-			lblFehlermeldung.setBounds(10, 77, 414, 14);
-		}
+			lblFehlermeldung.setBounds(10, 111, 414, 14);
+		}//iidid
 		return lblFehlermeldung;
+	}
+	private JButton getBtnWartung() {
+		if (btnWartung == null) {
+			btnWartung = new JButton("Wartung ");
+			btnWartung.setBounds(130, 79, 89, 23);
+		}
+		return btnWartung;
+	}
+	private JTextField getTxtWartung() {
+		if (txtWartung == null) {
+			txtWartung = new JTextField();
+			txtWartung.setBounds(10, 80, 96, 20);
+			txtWartung.setColumns(10);
+		}
+		return txtWartung;
 	}
 }
