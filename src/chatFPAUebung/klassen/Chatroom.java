@@ -3,7 +3,7 @@ package chatFPAUebung.klassen;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Chatroom
+public class Chatroom implements interfaces.BlackListInterface
 {
     private String name;
     private static int idNew = 0;
@@ -48,13 +48,13 @@ public class Chatroom
         teilnehmer.remove(c);
     }
 
-    public void bannen(ClientProxy c)
+    public void addUserToBlackList(String username)
     {
-        blacklist.add(c.getName());
+        blacklist.add(username);
     }
-    public void entbannen(ClientProxy c)
+    public void removeUserFromBlackList(String username)
     {
-        blacklist.remove(c.getName());
+        blacklist.remove(username);
     }
 
     public Chatroom(String name, int maxTeilnehmer)
