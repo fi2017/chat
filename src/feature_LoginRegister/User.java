@@ -6,7 +6,6 @@ public class User
 	private String username;
 	private int id;
 	private String password;
-	private int battletag;
 	private int globalRollenNummer;
 	
 	public User()
@@ -14,12 +13,11 @@ public class User
 		
 	}
 	
-	public User(String uname, String pw, int id, int btag,int grnummer)
+	public User(String uname, String pw, int id,int grnummer)
 	{
 		setUsername(uname);
 		setPassword(pw);
 		setId(id);
-		setBattletag(btag);
 		setGlobalRollenNummer(grnummer);
 	}
 
@@ -51,16 +49,6 @@ public class User
 	public void setPassword(String password)
 	{
 		this.password = password;
-	}
-
-	public int getBattletag()
-	{
-		return battletag;
-	}
-
-	public void setBattletag(int battletag)
-	{
-		this.battletag = battletag;
 	}
 
 	public int getGlobalRollenNummer()
