@@ -12,17 +12,49 @@ public class Chatroom
     private String passwort;
     private DefaultListModel Chatmodel;
 
-    ArrayList<ClientProxy> teilnehmer = new ArrayList<ClientProxy>();
-    ArrayList<String> blacklist = new ArrayList<String>();   //Methode zum blacklisten
+    private ArrayList<ClientProxy> teilnehmer = new ArrayList<ClientProxy>();
+    private ArrayList<String> blacklist = new ArrayList<String>();   //Methode zum blacklisten
 
-    public void hinzufuegen(ClientProxy c)
+    public String hinzufuegen(ClientProxy c)
     {
-        teilnehmer.add(c);
+        String grund;
+        boolean gebannt=false;
+        for(String s : blacklist)
+        {
+            if(s.equals(c.getName()))
+            {
+                gebannt=true;
+            }
+        }
+        if(gebannt==true)
+        {
+            grund = "gebannt";
+        }
+        else if(maxTeilnehmer<=teilnehmer.size())
+        {
+            grund = "voll";
+        }
+        else
+        {
+            teilnehmer.add(c);
+            grund = "beitritt";
+        }
+
+        return grund;
     }
 
     public void entfernen(ClientProxy c)
     {
         teilnehmer.remove(c);
+    }
+
+    public void bannen(ClientProxy c)
+    {
+        blacklist.add(c.getName());
+    }
+    public void entbannen(ClientProxy c)
+    {
+        blacklist.remove(c.getName());
     }
 
     public Chatroom(String name, int maxTeilnehmer)
