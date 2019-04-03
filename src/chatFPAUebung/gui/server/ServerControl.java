@@ -33,6 +33,7 @@ public class ServerControl
 
 		setzeListener();
 		getGui().setVisible(true);
+		createTestenvironment();
 	}
 
 	// Main
@@ -141,6 +142,16 @@ public void starteServer()
 	{
 		(new ServerWritingThread(uebertragung, client)).start();
 	}
+	
+	public void createTestenvironment()
+	{
+		this.userList = new ArrayList<User>();
+		getUserList().add(new User("Richard","123",1,0));
+		getUserList().add(new User("Lukas","1234",2,1));
+		getUserList().add(new User("Joshua","1235",3,1));
+		getUserList().add(new User("Reis","1236",4,1));
+	}
+	
 	//Datenbankzugriff
 	public void connectToDatabase()
 	{
