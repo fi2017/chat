@@ -8,6 +8,10 @@ import chatFPAUebung.klassen.ClientProxy;
 
 public class Security
 {
+	// Finals
+	private static final int banTimeObviousBehavior = 1;
+	private static final int banTimeStrikingBehavior = 7;
+
 	// Attributes
 	private ClientProxy client;
 	private SecuritySafe securitySafe; // Indicates Bots 100% accurate
@@ -31,16 +35,16 @@ public class Security
 				return null;
 			} else
 			{
-				return new Ban(messageSendingTime, messageSendingTime.plusDays(7),
+				return new Ban(messageSendingTime, messageSendingTime.plusDays(banTimeStrikingBehavior),
 						getClient().getClientSocket().getInetAddress(),
-						"Banned for striking behavior till " + messageSendingTime.plusDays(7)
+						"Banned for striking behavior till " + messageSendingTime.plusDays(banTimeStrikingBehavior)
 								.format(DateTimeFormatter.ofPattern("dd.MM.yyyy - HH.mm.ss")));
 			}
 		} else
 		{
-			return new Ban(messageSendingTime, messageSendingTime.plusDays(1),
+			return new Ban(messageSendingTime, messageSendingTime.plusDays(banTimeObviousBehavior),
 					getClient().getClientSocket().getInetAddress(),
-					"Banned for obvious behavior till " + messageSendingTime.plusDays(1)
+					"Banned for obvious behavior till " + messageSendingTime.plusDays(banTimeObviousBehavior)
 							.format(DateTimeFormatter.ofPattern("dd.MM.yyyy - HH.mm.ss")));
 		}
 	}
