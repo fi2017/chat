@@ -7,13 +7,14 @@ public class User
 	private int id;
 	private String password;
 	private int globalRollenNummer;
+	private boolean online=false;
 	
 	public User()
 	{
 		
 	}
 	
-	public User(String uname, String pw, int id,int grnummer)
+	public User(String uname, String pw, int id, int grnummer)
 	{
 		setUsername(uname);
 		setPassword(pw);
@@ -59,6 +60,16 @@ public class User
 	public void setGlobalRollenNummer(int globalRollenNummer)
 	{
 		this.globalRollenNummer = globalRollenNummer;
+	}
+
+	public boolean isOnline()
+	{
+		return online;
+	}
+
+	public void setOnline(boolean online)
+	{
+		this.online = online;
 	}
 	
 	
