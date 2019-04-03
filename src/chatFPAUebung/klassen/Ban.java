@@ -11,15 +11,15 @@ public class Ban implements Serializable
 
 	private LocalDateTime banTime;
 	private LocalDateTime unbanTime;
-	private InetAddress internetAdress;
+	private InetAddress internetAddress;
 	private String banReason;
 
 	// Constructor
-	public Ban(LocalDateTime banTime, LocalDateTime unbanTime, InetAddress internetAdress, String banReason)
+	public Ban(LocalDateTime banTime, LocalDateTime unbanTime, InetAddress internetAddress, String banReason)
 	{
 		this.banTime = banTime;
 		this.unbanTime = unbanTime;
-		this.internetAdress = internetAdress;
+		this.internetAddress = internetAddress;
 		this.banReason = banReason;
 	}
 
@@ -46,9 +46,9 @@ public class Ban implements Serializable
 		return unbanTime;
 	}
 
-	public InetAddress getInternetAdress()
+	public InetAddress getInternetAddress()
 	{
-		return internetAdress;
+		return internetAddress;
 	}
 
 	public String getBanReason()

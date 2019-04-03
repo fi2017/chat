@@ -102,7 +102,7 @@ public class ServerControl
 
 		for (int i = 0; i < getBans().size() && !isBanned; i++)
 		{
-			if (neuerClient.getClientSocket().getInetAddress().equals(getBans().get(i).getInternetAdress()))
+			if (neuerClient.getClientSocket().getInetAddress().equals(getBans().get(i).getInternetAddress()))
 			{
 				if (!getBans().get(i).checkIfStillBanned())
 				{
