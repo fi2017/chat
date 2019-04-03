@@ -30,6 +30,7 @@ public class LogRegControl
 		setGui(g);
 		g.setVisible(true);
 		addActionListenersToGuiObjects();
+		erstelleVerbindung();
 	}
 	
 
@@ -39,6 +40,7 @@ public class LogRegControl
 		try
 		{
 			setClientSocket(new Socket("localhost", 8008));
+			System.out.println("Socket erstellt");
 			setOutToServer(new ObjectOutputStream(getClientSocket().getOutputStream()));
 			setInFromServer(new ObjectInputStream(getClientSocket().getInputStream()));
 
@@ -76,7 +78,7 @@ public class LogRegControl
 				break;
 
 			case 3:  //wenn login nicht erfolgreich  - User falsch/unbekannt
-				getGui().getLblErrormsg().setText("User falsch");
+				getGui().getLblErrormsg().setText("Username nicht bekannt");
 				break;	
 			case 4: //wenn login nicht erfolgreich - User schon eingeloggt
 				getGui().getLblErrormsg().setText("User ist schon eingeloggt");
@@ -116,6 +118,7 @@ public class LogRegControl
 		if(!checkEmptyLog())
 		{	
 			sendeNachrichtAnServer(new Uebertragung(10, new LogRegNachricht(getGui().getTextFieldUnameLog().getText(),getGui().getTextFieldPwLog().getText())));
+			System.out.println("LogRegControl: sendenNachricht() aus Methode loginUser()");
 		}
 		
 	}
@@ -138,9 +141,10 @@ public class LogRegControl
 	{
 		boolean returnValue=false;
 		
-		if(getGui().getTextFieldPwLog().getText().trim().length() != 0 || getGui().getTextFieldUnameLog().getText().trim().length() != 0)
+		if(getGui().getTextFieldPwLog().getText().trim().length() == 0 || getGui().getTextFieldUnameLog().getText().trim().length() == 0)
 		{
 			returnValue = true;
+			System.out.println("Login Textfelder leer");
 		}
 		
 		return returnValue;
@@ -149,7 +153,7 @@ public class LogRegControl
 	{
 		boolean returnValue=false;
 		
-		if(getGui().getTextFieldPwReg().getText().trim().length() != 0 || getGui().getTextFieldUnameReg().getText().trim().length() != 0)
+		if(getGui().getTextFieldPwReg().getText().trim().length() == 0 || getGui().getTextFieldUnameReg().getText().trim().length() == 0)
 		{
 			returnValue = true;
 		}
@@ -162,7 +166,7 @@ public class LogRegControl
 	{
 		boolean returnValue=false;
 		
-		if(getGui().getTextFieldPwReg().equals(getGui().getTextFieldPwRepeat()))
+		if(getGui().getTextFieldPwReg().getText().equals(getGui().getTextFieldPwRepeat().getText()))
 		{
 			returnValue = true;
 		}

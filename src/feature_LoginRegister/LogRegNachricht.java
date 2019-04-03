@@ -1,6 +1,8 @@
 package feature_LoginRegister;
 
-public class LogRegNachricht
+import java.io.Serializable;
+
+public class LogRegNachricht implements Serializable
 {
 	String username;
 	String password;

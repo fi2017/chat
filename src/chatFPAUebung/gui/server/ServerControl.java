@@ -146,7 +146,9 @@ public void starteServer()
 	public void createTestenvironment()
 	{
 		this.userList = new ArrayList<User>();
-		getUserList().add(new User("Richard","123",1,0));
+		User u = new User("Richard","123",1,0);
+		u.setBanned(true);
+		getUserList().add(u);
 		getUserList().add(new User("Lukas","1234",2,1));
 		getUserList().add(new User("Joshua","1235",3,1));
 		getUserList().add(new User("Reis","1236",4,1));
