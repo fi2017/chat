@@ -11,7 +11,7 @@ import chatFPAUebung.threads.ServerReadingThread;
 
 public class ClientProxy
 {
-	// Attribute
+	// Attributes
 	private Socket clientSocket;
 	private ObjectOutputStream outToClient;
 	private ObjectInputStream inFromClient;
@@ -19,6 +19,7 @@ public class ClientProxy
 	private ServerReadingThread serverReadingThread;
 	private Security clientSecurity;
 
+	// Constructor
 	public ClientProxy(ServerControl control, Socket clientSocket)
 	{
 		try
@@ -36,6 +37,7 @@ public class ClientProxy
 		}
 	}
 
+	// Getter
 	public Socket getClientSocket()
 	{
 		return clientSocket;
