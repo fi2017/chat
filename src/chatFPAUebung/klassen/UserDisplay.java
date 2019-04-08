@@ -35,4 +35,5 @@ public class UserDisplay implements Serializable
 	{
 		return username;
 	}
+
 }
