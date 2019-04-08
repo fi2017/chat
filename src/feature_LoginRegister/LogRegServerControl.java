@@ -1,0 +1,224 @@
+package feature_LoginRegister;
+
+import java.util.ArrayList;
+
+import chatFPAUebung.gui.server.ServerControl;
+import chatFPAUebung.klassen.ClientProxy;
+import chatFPAUebung.klassen.Nachricht;
+import chatFPAUebung.klassen.Uebertragung;
+import chatFPAUebung.threads.ServerListenThread;
+import chatFPAUebung.threads.ServerReadingThread;
+import chatFPAUebung.threads.ServerWritingThread;
+
+public class LogRegServerControl extends Thread
+{
+	//nimmt Connections an (ServerListenThread) und überprüft Logindaten in der Datenbank
+	//Wenn Daten übereinstimmen, wird der Client an die ServerControl übergeben
+	//Ansonsten wird die Verbindung nach einer Fehlermeldung an den Client wieder geschlossen (vllt. nach x Versuchen?)
+	//Registrierung läuft analog ab
+	
+	private ServerControl control;
+	private ServerReadingThread readingThread;
+	private ServerListenThread listenThread;
+	private ArrayList<ClientProxy> clients;
+	
+	
+	
+	public LogRegServerControl(ServerControl control, ArrayList<ClientProxy> clients)
+	{
+		
+		setControl(control);
+		setClients(clients);
+		
+		setListenThread(new ServerListenThread(this));
+		getListenThread().start();
+		
+		
+	}
+	
+	
+	public void run()
+	{
+		
+	}
+	public void empfangeClient(ClientProxy neuerClient)
+	{
+		getClients().add(neuerClient);
+	}
+	
+	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
+	{
+		if (uebertragungObjekt instanceof Uebertragung)
+		{
+			Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
+
+			switch (((Uebertragung) uebertragungObjekt).getZweck())
+			{
+				
+			case 10: //Loginversuch				
+					switch(loginUser((LogRegNachricht)uebertragung.getUebertragung()))
+					{
+						case 1: sendeNachrichtAnClient(new Uebertragung(1,""),client);
+								client.getServerReadingThread().setControl(control);
+								client.getServerReadingThread().setLoginControl(null);
+							break;
+						case 2: sendeNachrichtAnClient(new Uebertragung(2,""),client);
+							break;
+						case 3: sendeNachrichtAnClient(new Uebertragung(3,""),client);
+							break;
+						case 4: sendeNachrichtAnClient(new Uebertragung(4,""),client);
+							break;
+						case 5: sendeNachrichtAnClient(new Uebertragung(5,""),client);
+							break;
+						case 0: sendeNachrichtAnClient(new Uebertragung(8,""),client);
+						
+
+					}
+				break;
+
+			case 11: //Registrierungsversuch
+					if(!registerUser((LogRegNachricht)uebertragung.getUebertragung()))
+					{
+						sendeNachrichtAnClient(new Uebertragung(7,""),client);
+					}
+					else
+					{
+						sendeNachrichtAnClient(new Uebertragung(6,""),client);
+					}
+
+				break;
+
+				
+
+			default: sendeNachrichtAnClient(new Uebertragung(8,""),client);
+				//
+				break;
+			}
+		}
+	}
+
+	private boolean registerUser(LogRegNachricht uebertragung)
+	{
+		boolean userSchonVergeben=false;
+		
+		for(User u : control.getUserList())
+		{
+			if(u.getUsername().equals(uebertragung.username))
+					{
+						userSchonVergeben=true;
+					}
+		}
+		if(userSchonVergeben==true)
+		{
+			return false;
+		}
+		else
+		{
+			User newUser=new User(uebertragung.getUsername(), uebertragung.getPassword() ,control.getUserList().get(control.getUserList().size()-1).getId()+1,1);
+			control.getUserList().add(newUser);
+			return true;
+		}
+		//überprüft in der UserList zuerst, ob der Nutzername schon vergeben ist
+		//wenn er noch nicht vergeben ist, wird ein neuer User in der Userlist erstellt
+		//sonst wird die Fehlermeldung an den Client zurückgegeben, dass der Name schon vergeben ist 
+		
+		
+		
+	}
+
+	private int loginUser(LogRegNachricht uebertragung)
+	{
+		//überprüft in der Datenbank zuerst, ob der Nutzername und Passwort übereinstimmen
+		//gibt Nachrichtenzweck zurück, je nachdem, ob erfolgreich oder fehler
+		int returnValue=0;
+		System.out.println(uebertragung.getUsername() + uebertragung.getPassword());
+		for(User u : control.getUserList())
+		{
+			System.out.println(u.getUsername()+u.getPassword()+u.isBanned()+u.isOnline());
+			if(u.getUsername().equals(uebertragung.getUsername()))
+			{
+				if(!u.isBanned())
+				{
+					if(!u.isOnline())
+					{
+						if(u.getPassword().equals(uebertragung.getPassword()))
+						{
+							System.out.println("Login erfolgreich");
+							returnValue=1;
+							u.setOnline(true);
+							break;
+						}
+						else
+						{
+							returnValue=2;
+							break;
+						}
+					}
+					else
+					{
+						returnValue=4;
+						break;
+					}
+				}
+				else
+				{
+					System.out.println("gebannt");
+					returnValue=5;
+					break;
+				}
+			}
+			else
+			{
+				returnValue=3;
+				break;
+			}
+		}
+		return returnValue;
+	}
+
+	public void sendeNachrichtAnClient(Uebertragung uebertragung, ClientProxy client)
+	{
+		(new ServerWritingThread(uebertragung, client)).start();
+	}
+
+	
+	//Getter / Setter
+	public ServerControl getControl()
+	{
+		return control;
+	}
+	public void setControl(ServerControl control)
+	{
+		this.control = control;
+	}
+	public ServerReadingThread getReadingThread()
+	{
+		return readingThread;
+	}
+	public void setReadingThread(ServerReadingThread readingThread)
+	{
+		this.readingThread = readingThread;
+	}
+	public ServerListenThread getListenThread()
+	{
+		return listenThread;
+	}
+	public void setListenThread(ServerListenThread listenThread)
+	{
+		this.listenThread = listenThread;
+	}
+
+	public ArrayList<ClientProxy> getClients()
+	{
+		return clients;
+	}
+
+	public void setClients(ArrayList<ClientProxy> clients)
+	{
+		this.clients = clients;
+	}
+
+	
+	
+	 
+}

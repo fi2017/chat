@@ -12,6 +12,7 @@ import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
 import chatFPAUebung.threads.ClientWritingThread;
+import feature_LoginRegister.LogRegReadingThread;
 
 public class ClientControl
 {
@@ -25,7 +26,7 @@ public class ClientControl
 	private ObjectInputStream inFromServer;
 
 	private ClientReadingThread clientReadingThread;
-
+	
 	// Konstruktor
 	public ClientControl()
 	{
@@ -33,43 +34,21 @@ public class ClientControl
 		this.listModel = new DefaultListModel<Nachricht>();
 
 		setzeListener();
-		erstelleVerbindung();
-
+		
 		getGui().setVisible(true);
 	}
-
-	// Main
-	public static void main(String[] args)
-	{
-		new ClientControl();
-	}
+	
+//	// Main
+//	public static void main(String[] args)
+//	{
+//		new ClientControl();
+//	}
 
 	// Methoden
 	public void setzeListener()
 	{
 		getGui().getList().setModel(getListModel());
 		getGui().getBtnSenden().addActionListener(e -> sendeNachricht());
-	}
-
-	public void erstelleVerbindung()
-	{
-		try
-		{
-			setClientSocket(new Socket("localhost", 8008));
-			setOutToServer(new ObjectOutputStream(getClientSocket().getOutputStream()));
-			setInFromServer(new ObjectInputStream(getClientSocket().getInputStream()));
-
-			setClientReadingThread(new ClientReadingThread(this));
-			getClientReadingThread().start();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		sendeNachrichtAnServer(new Uebertragung(1, null));
 	}
 
 	public void empfangeNachrichtVonServer(Object uebertragungObjekt)
@@ -143,7 +122,7 @@ public class ClientControl
 
 	public void sendeNachrichtAnServer(Uebertragung uebertragung)
 	{
-		(new ClientWritingThread(uebertragung, this)).run();
+		(new ClientWritingThread(uebertragung, getOutToServer())).run();
 	}
 
 	// Getter

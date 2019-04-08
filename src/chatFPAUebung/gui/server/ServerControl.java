@@ -11,13 +11,17 @@ import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ServerListenThread;
 import chatFPAUebung.threads.ServerWritingThread;
+import feature_LoginRegister.LogRegServerControl;
+import feature_LoginRegister.User;
 
 public class ServerControl
 {
 	// Attribute
 	private ServerGui gui;
+	private LogRegServerControl loginServer;
 
 	private ArrayList<ClientProxy> clients;
+	private ArrayList<User> userList;
 	private ServerListenThread serverListenThread;
 
 	private ArrayList<Nachricht> nachrichten;
@@ -35,6 +39,7 @@ public class ServerControl
 
 		setzeListener();
 		getGui().setVisible(true);
+		createTestenvironment();
 	}
 
 	// Main
@@ -50,15 +55,15 @@ public class ServerControl
 		getGui().getBtnStop().addActionListener(e -> stoppeServer());
 	}
 
-	public void starteServer()
+public void starteServer()
 	{
-		if (getServerListenThread() == null)
+		if (getLoginServer() == null)
 		{
 			System.err.println("Der Server wurde auf Port 8008 gestartet!");
 			getGui().getLblFehlermeldung().setText("");
 
-			setServerListenThread(new ServerListenThread(this));
-			getServerListenThread().start();
+			setLoginServer(new LogRegServerControl(this,clients));
+			getLoginServer().start();
 		} else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft bereits!");
@@ -212,6 +217,32 @@ public class ServerControl
 	{
 		(new ServerWritingThread(uebertragung, client, this)).start();
 	}
+	
+	public void createTestenvironment()
+	{
+		this.userList = new ArrayList<User>();
+		User u = new User("Richard","123",1,0);
+		u.setBanned(true);
+		getUserList().add(u);
+		getUserList().add(new User("Lukas","1234",2,1));
+		getUserList().add(new User("Joshua","1235",3,1));
+		getUserList().add(new User("Reis","1236",4,1));
+	}
+	
+	//Datenbankzugriff
+	public void connectToDatabase()
+	{
+		//connection
+		
+		
+		readUserFromDatabase();
+	}
+	
+
+	private void readUserFromDatabase()
+	{
+		
+	}
 
 	// Getter
 	public ServerGui getGui()
@@ -252,5 +283,25 @@ public class ServerControl
 	public void setServerListenThread(ServerListenThread serverListenThread)
 	{
 		this.serverListenThread = serverListenThread;
+	}
+
+	public LogRegServerControl getLoginServer()
+	{
+		return loginServer;
+	}
+
+	public void setLoginServer(LogRegServerControl login)
+	{
+		this.loginServer = login;
+	}
+
+	public ArrayList<User> getUserList()
+	{
+		return userList;
+	}
+
+	public void setUserList(ArrayList<User> userList)
+	{
+		this.userList = userList;
 	}
 }

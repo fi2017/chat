@@ -8,6 +8,7 @@ import java.net.Socket;
 import chatFPAUebung.ddosProtection.Security;
 import chatFPAUebung.gui.server.ServerControl;
 import chatFPAUebung.threads.ServerReadingThread;
+import feature_LoginRegister.LogRegServerControl;
 
 public class ClientProxy
 {
@@ -19,8 +20,7 @@ public class ClientProxy
 	private ServerReadingThread serverReadingThread;
 	private Security clientSecurity;
 
-	// Constructor
-	public ClientProxy(ServerControl control, Socket clientSocket)
+	public ClientProxy(LogRegServerControl control, Socket clientSocket)
 	{
 		try
 		{
