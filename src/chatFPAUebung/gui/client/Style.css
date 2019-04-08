@@ -89,3 +89,9 @@
 .ChatInput {
     -fx-font-size: 16px;
 }
+
+
+.MessageRecieved {
+    -fx-background-color: #5b5da5;
+    -fx-text-fill: white;
+}
