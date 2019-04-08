@@ -25,6 +25,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -158,12 +159,22 @@ public class ClientControl implements Initializable
 
         //AddRoom Sidebar Raum erstellen
         btnAddRoomCreate.setOnAction(e ->
-                {
-                    erstelleChatroom(txtFieldRoomName.getText(), 15, txtFieldRoomPw.getText());
-                    createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText());
-                });
-        txtFieldRoomName.setOnAction(e -> createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText()));
-        txtFieldRoomPw.setOnAction(e -> createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText()));
+        {
+            erstelleChatroom(txtFieldRoomName.getText(), 15, txtFieldRoomPw.getText());
+            createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText());
+        });
+
+        txtFieldRoomName.setOnAction(e ->
+        {
+            erstelleChatroom(txtFieldRoomName.getText(), 15, txtFieldRoomPw.getText());
+            createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText());
+        });
+
+        txtFieldRoomPw.setOnAction(e ->
+        {
+            erstelleChatroom(txtFieldRoomName.getText(), 15, txtFieldRoomPw.getText());
+            createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText());
+        });
 
         //Chatroom fenster
         //TODO: Evtl. Schauen welcher Chat grade geöffnet ist, und dementsprechend die friendlist bzw. die roomlist öffnen. (Generics mit Wildcards)
@@ -403,26 +414,27 @@ public class ClientControl implements Initializable
         tmp.setY(5);
         tmp.setFill(Color.BLACK);
 
-        Label l = new Label(msg);
-        l.setLayoutY(50);
-        l.setLayoutX(50);
-        l.setMaxWidth(250);
+        Text t = new Text(msg);
+        t.setWrappingWidth(250);
+        t.setX(40);
+        t.setY(40);
+        t.setFill(Color.WHITE);
 
-        l.setWrapText(true);
-        l.setPadding(new Insets(30, 20, 20, 30));
-        l.setTranslateX(-25);
-        l.setTranslateY(-25);
-        l.getStyleClass().add("MessageRecieved");
+        Pane txtPane = new Pane();
+        txtPane.setPrefWidth(300);
+        txtPane.setMinHeight(25);
+        txtPane.setLayoutX(25);
+        txtPane.setLayoutY(25);
+        txtPane.getStyleClass().add("MessageRecieved");
+        txtPane.getChildren().add(t);
+        txtPane.setPadding(new Insets(0, 0, 10, 0));
 
 
-        p.getChildren().add(l);
+        p.getChildren().add(txtPane);
         p.getChildren().add(tmp);
 
         for(Chatroom c : chatrooms)
         {
-            //TODO:
-            // Scheinbar klappt das hier nicht. Ich kann per Klick die Räume wechseln, aber nur in einen Schreiben.
-            // Zumindest kommt die Nachricht nur an einem an.
             if(c.getContainer().isVisible())
             {
                 c.getContainer().getChildren().add(p);
