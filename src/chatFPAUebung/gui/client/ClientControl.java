@@ -100,6 +100,7 @@ public class ClientControl implements Initializable
         //Anwendung in "startform" geben
         vBoxRoom.setSpacing(5);
         this.listModel = new DefaultListModel<Nachricht>();
+        listmodels.add(listModel);
         toggleNewRoom(1200, false);
         erstelleVerbindung();
         hideLists();
@@ -194,7 +195,7 @@ public class ClientControl implements Initializable
             e.printStackTrace();
         }
 
-        sendeNachrichtAnServer(new Uebertragung(1, null));
+        sendeNachrichtAnServer(new Uebertragung(1, 0,null));
     }
 
     public void empfangeNachrichtVonServer(Object uebertragungObjekt)
@@ -230,8 +231,6 @@ public class ClientControl implements Initializable
                     {
                         DefaultListModel aktuellesModel=listmodels.get(((Uebertragung) uebertragungObjekt).getZiel());
                         aktuellesModel.addElement((Nachricht) uebertragung.getUebertragung());
-
-                        //zeigeNeuesteNachricht();
                     }
 
                     break;
@@ -239,7 +238,7 @@ public class ClientControl implements Initializable
                 case 3:
                     sendeNachrichtAnServer(new Uebertragung(0, null));
                     break;
-
+//Hinzufügen eines neu erstellten Chatrooms in die ClientGui
                 case 4:
                     chatrooms.add((Chatroom) uebertragung.getUebertragung());
 
@@ -249,18 +248,6 @@ public class ClientControl implements Initializable
             }
         }
     }
-
-/*
-    public void zeigeNeuesteNachricht()
-    {
-        getGui().getList().ensureIndexIsVisible(getListModel().getSize());
-
-        // Benoetigt um einen Anzeige-Bug zu fixen
-        getGui().getList().setSelectedIndex(0);
-        getGui().getList().setSelectedIndex(getListModel().getSize() - 1);
-        getGui().getList().clearSelection();
-    }
-*/
 
     public void sendeNachricht()
     {
