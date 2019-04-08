@@ -18,7 +18,7 @@ public class ServerControl
 {
 	// Attribute
 	private ServerGui gui;
-	private LogRegServerControl loginServer;
+	private LogRegServerControl loginServer = null;
 
 	private ArrayList<ClientProxy> clients;
 	private ArrayList<User> userList;
@@ -72,12 +72,12 @@ public void starteServer()
 
 	public void stoppeServer()
 	{
-		if (getServerListenThread() != null)
+		if (getLoginServer() != null)
 		{
 			System.err.println("Der Server wurde gestoppt!");
 			getGui().getLblFehlermeldung().setText("");
 
-			getServerListenThread().interrupt();
+			getLoginServer().getListenThread().interrupt();
 			for (ClientProxy aktClient : getClients())
 			{
 				try
@@ -93,7 +93,8 @@ public void starteServer()
 			}
 
 			getClients().clear();
-			setServerListenThread(null);
+			getLoginServer().setListenThread(null);
+			setLoginServer(null);
 
 		} else
 		{

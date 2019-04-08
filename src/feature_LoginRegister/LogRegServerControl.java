@@ -170,7 +170,6 @@ public class LogRegServerControl extends Thread
 			else
 			{
 				returnValue=3;
-				break;
 			}
 		}
 		return returnValue;
