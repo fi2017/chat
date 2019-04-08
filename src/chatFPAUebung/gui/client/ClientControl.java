@@ -328,7 +328,6 @@ public class ClientControl implements Initializable
     //Methode wird aufgerufen, wenn man auf den Button "Erstellen" einer neuen Gruppe drückt.
     //Sie erzeugt eine neue Gruppe in der Sidebar Gruppen.
     //Ein Neues Gruppenobjekt wird angelegt.
-    //TODO: Einbauen einer DisplayRoom Klasse, die für die einzelnen Rooms zuständig ist und den Namen, ID und ?Teilnehmerliste? speichert.
     private void createRoom(String name, String pw)
     {
         if(!name.equals("") && !pw.equals(""))
@@ -379,6 +378,7 @@ public class ClientControl implements Initializable
                     c.getContainer().setLayoutY(0);
                     c.getContainer().setPrefWidth(850);
                     c.getContainer().setPrefHeight(600);
+                    c.getContainer().setMinHeight(600);
 
                     paneChat.getChildren().add(c.getContainer());
                     c.getContainer().setVisible(true);
@@ -432,6 +432,7 @@ public class ClientControl implements Initializable
 
         p.getChildren().add(txtPane);
         p.getChildren().add(tmp);
+        p.setMinHeight(p.getHeight());
 
         for(Chatroom c : chatrooms)
         {
