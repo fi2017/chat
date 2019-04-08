@@ -175,6 +175,7 @@ public class ClientControl implements Initializable
         txtFieldChat.setOnAction(e -> createRecievedMessage(txtFieldChat.getText()));
     }
 
+    //Erstellt Verbindung zum Server
     public void erstelleVerbindung()
     {
         try
@@ -198,6 +199,7 @@ public class ClientControl implements Initializable
         sendeNachrichtAnServer(new Uebertragung(1, 0,null));
     }
 
+    //Protokoll für das Empfangen von Nachrichten
     public void empfangeNachrichtVonServer(Object uebertragungObjekt)
     {
         if(uebertragungObjekt instanceof Uebertragung)
@@ -206,6 +208,7 @@ public class ClientControl implements Initializable
 
             switch(((Uebertragung) uebertragungObjekt).getZweck())
             {
+                //Empfangen von allen bisherigen Nachrichten
                 case 1:
                     if(uebertragung.getUebertragung() instanceof Nachricht[])
                     {
@@ -226,6 +229,7 @@ public class ClientControl implements Initializable
 
                     break;
 
+                    //Empfangen von neuen Nachrichten
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
@@ -235,10 +239,12 @@ public class ClientControl implements Initializable
 
                     break;
 
+                    //Schließen der ListModels wenn Verbindung durchtrennt
                 case 3:
-                    sendeNachrichtAnServer(new Uebertragung(0, null));
+                    sendeNachrichtAnServer(new Uebertragung(0,null));
                     break;
-//Hinzufügen eines neu erstellten Chatrooms in die ClientGui
+
+                //Hinzufügen eines neu erstellten Chatrooms in die ClientGui
                 case 4:
                     chatrooms.add((Chatroom) uebertragung.getUebertragung());
 
@@ -249,20 +255,7 @@ public class ClientControl implements Initializable
         }
     }
 
-    public void sendeNachricht()
-    {
-        if(txtFieldChat.getText().trim().length() != 0)
-        {
-            //getGui().getLblFehlermeldung().setText("");
-            sendeNachrichtAnServer(new Uebertragung(2, new Nachricht(txtFieldChat.getText(), LocalDateTime.now())));
-        }
-        else
-        {
-//            getGui().getLblFehlermeldung().setText("Sie muessen einen Text eingeben!");
-        }
-    }
-
-/*
+    //Sende Nachricht an einen Chatroom (Benötigen ID des aktuell benutzen Chatrooms)
     public void sendeNachrichtVonChatroom(ClientGui gui) //Methode für ChatroomGUI
     {
         if(getGui().getTextFieldNachricht().getText() != null)
@@ -273,7 +266,6 @@ public class ClientControl implements Initializable
             sendeNachrichtAnServer(new Uebertragung(2, ziel, new Nachricht(txtFieldChat.getText(), LocalDateTime.now())));
         }
     }
-*/
 
 
     //Chatrooms

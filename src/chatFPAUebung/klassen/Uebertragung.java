@@ -17,17 +17,17 @@ public class Uebertragung implements Serializable
 	* */
 
 
-	// Konstruktor
-	public Uebertragung(int zweck, Object uebertragung)
-	{
-		this.zweck = zweck;
-		this.uebertragung = uebertragung;
-	}
-
+	// Konstruktor (Ziel == Chatroom welcher die Nachrichte erhalten soll)
 	public Uebertragung(int zweck, int ziel, Object uebertragung)
 	{
 		this.zweck = zweck;
 		this.ziel = ziel;
+		this.uebertragung = uebertragung;
+	}
+
+	public Uebertragung(int zweck, Object uebertragung)
+	{
+		this.zweck = zweck;
 		this.uebertragung = uebertragung;
 	}
 

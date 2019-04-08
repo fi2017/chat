@@ -15,6 +15,7 @@ public class Chatroom implements interfaces.BlackListInterface
     private ArrayList<ClientProxy> teilnehmer = new ArrayList<ClientProxy>();
     private ArrayList<String> blacklist = new ArrayList<String>();   //Methode zum blacklisten
 
+    //Hinzufuegen eines Clients sowie abprüfen der Bannliste
     public String hinzufuegen(ClientProxy c)
     {
         String grund;
@@ -43,20 +44,25 @@ public class Chatroom implements interfaces.BlackListInterface
         return grund;
     }
 
+    //Austreten eines Clients aus dem Chatroom
     public void entfernen(ClientProxy c)
     {
         teilnehmer.remove(c);
     }
 
+    //Bannen eines Users
     public void addUserToBlackList(String username)
     {
         blacklist.add(username);
     }
+
+    //Aufheben eines Banns von einem User
     public void removeUserFromBlackList(String username)
     {
         blacklist.remove(username);
     }
 
+    //Konstruktor
     public Chatroom(String name, int maxTeilnehmer)
     {
         this.id = idNew;
@@ -65,6 +71,7 @@ public class Chatroom implements interfaces.BlackListInterface
         this.maxTeilnehmer = maxTeilnehmer;
     }
 
+    //Getter und Setter
     public String getName()
     {
         return name;

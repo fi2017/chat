@@ -44,6 +44,7 @@ public class ServerControl
 		getGui().getBtnStop().addActionListener(e -> stoppeServer());
 	}
 
+	//Starten eines Servers
 	public void starteServer()
 	{
 		if (getServerListenThread() == null)
@@ -59,6 +60,7 @@ public class ServerControl
 		}
 	}
 
+	//Runterfahren des Servers
 	public void stoppeServer()
 	{
 		if (getServerListenThread() != null)
@@ -90,11 +92,13 @@ public class ServerControl
 		}
 	}
 
+	//Hinzufügen eines Clients zum Server
 	public void empfangeClient(ClientProxy neuerClient)
 	{
 		getClients().add(neuerClient);
 	}
 
+	//Protokoll für das Empfangen eines Clients
 	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
 	{
 		if (uebertragungObjekt instanceof Uebertragung)
