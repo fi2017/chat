@@ -178,7 +178,7 @@ public class LogRegServerControl extends Thread
 
 	public void sendeNachrichtAnClient(Uebertragung uebertragung, ClientProxy client)
 	{
-		(new ServerWritingThread(uebertragung, client)).start();
+		(new ServerWritingThread(uebertragung, client, getControl())).start();
 	}
 
 	
