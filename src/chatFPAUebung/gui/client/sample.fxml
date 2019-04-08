@@ -25,14 +25,7 @@
       <AnchorPane fx:id="paneChat" layoutX="350.0" layoutY="50.0" prefHeight="650.0" prefWidth="850.0" styleClass="Chat">
          <children>
             <TextField fx:id="txtFieldChat" layoutX="75.0" layoutY="605.0" maxHeight="40.0" maxWidth="500.0" prefHeight="40.0" prefWidth="500.0" style="-fx-background-radius: 100; -fx-border-style: none; -fx-background-color: #00000010;" styleClass="ChatInput" />
-            <ScrollPane hbarPolicy="NEVER" prefHeight="600.0" prefWidth="850.0" styleClass="Remove-Border" vbarPolicy="NEVER">
-               <content>
-                  <VBox fx:id="vBoxChat" prefHeight="600.0" prefWidth="850.0" spacing="50.0">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets></VBox>
-               </content>
-            </ScrollPane>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="600.0" prefWidth="850.0" styleClass="Remove-Border" vbarPolicy="NEVER" />
          </children></AnchorPane>
       <VBox fx:id="friendList" layoutY="50.0" maxWidth="350.0" prefHeight="650.0" prefWidth="350.0" styleClass="Friendlist" visible="false">
          <children>

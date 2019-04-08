@@ -157,18 +157,22 @@ public class ClientControl implements Initializable
         btnSettingsReturn.setOnAction(e -> toggleSettings(0, false));
 
         //AddRoom Sidebar Raum erstellen
-        btnAddRoomCreate.setOnAction(e -> createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText()));
+        btnAddRoomCreate.setOnAction(e ->
+                {
+                    erstelleChatroom(txtFieldRoomName.getText(), 15, txtFieldRoomPw.getText());
+                    createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText());
+                });
         txtFieldRoomName.setOnAction(e -> createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText()));
         txtFieldRoomPw.setOnAction(e -> createRoom(txtFieldRoomName.getText(), txtFieldRoomPw.getText()));
 
         //Chatroom fenster
         //TODO: Evtl. Schauen welcher Chat grade geöffnet ist, und dementsprechend die friendlist bzw. die roomlist öffnen. (Generics mit Wildcards)
         paneChat.setOnMouseClicked(e -> {
-            if(paneAddRoomName.isVisible())
+            if(addRoom.isVisible())
             {
                 toggleNewRoom(1200, false);
-                toggleList(0, friendList);
-                moveActivePane(btnFriends);
+                switchList(roomList, friendList);
+                moveActivePane(btnRoom);
                 movePaneChat(350.0);
             }
         });
@@ -256,7 +260,7 @@ public class ClientControl implements Initializable
     }
 
     //Sende Nachricht an einen Chatroom (Benötigen ID des aktuell benutzen Chatrooms)
-    public void sendeNachrichtVonChatroom(ClientGui gui) //Methode für ChatroomGUI
+    /*public void sendeNachrichtVonChatroom(ClientGui gui) //Methode für ChatroomGUI
     {
         if(getGui().getTextFieldNachricht().getText() != null)
         {
@@ -265,7 +269,7 @@ public class ClientControl implements Initializable
             //gui.getLblFehlermeldung().setText("");
             sendeNachrichtAnServer(new Uebertragung(2, ziel, new Nachricht(txtFieldChat.getText(), LocalDateTime.now())));
         }
-    }
+    }*/
 
 
     //Chatrooms
@@ -275,20 +279,22 @@ public class ClientControl implements Initializable
         if(passwort != null)
         {
             chat.setPasswort(passwort);
-        }
-        try
-        {
-            DefaultListModel neuesListModel = new DefaultListModel();
-            chat.setChatmodel(neuesListModel);
-            Uebertragung neuerchatroom = new Uebertragung(4, chat);
-            listmodels.add(neuesListModel);
-            outToServer.writeObject(neuerchatroom);
-            outToServer.flush();
-        }
-        catch(Exception e)
-        {
+            try
+            {
+                DefaultListModel neuesListModel = new DefaultListModel();
+                chat.setChatmodel(neuesListModel);
+                Uebertragung neuerchatroom = new Uebertragung(4, chat);
+                listmodels.add(neuesListModel);
+                outToServer.writeObject(neuerchatroom);
+                outToServer.flush();
+                chatrooms.add(chat);
+            }
+            catch(Exception e)
+            {
 
+            }
         }
+
 
 
     }
@@ -316,11 +322,7 @@ public class ClientControl implements Initializable
     {
         if(!name.equals("") && !pw.equals(""))
         {
-            //Aktuell geht nur JPG & PNG
-            //JPEG geht nicht.
-            //Alle anderen Formate wurden noch nicht getestet
-            //TODO: Mehrere Bildformate Testen!
-            // Abfangen von Fehlern, wenn die Ausgewählte Datei kein Bild ist.
+
             FileChooser fc = new FileChooser();
             File img = fc.showOpenDialog(friendList.getScene().getWindow());
 
@@ -349,9 +351,28 @@ public class ClientControl implements Initializable
             p.getChildren().add(i);
             p.getChildren().add(b);
 
-            p.setOnMouseClicked(e -> {
-                openChatroom();
+            b.setOnMouseClicked(e -> {
+                openChatroom(e.getSource());
             });
+
+            for(Chatroom c : chatrooms)
+            {
+                //Wüsste gerade nicht, wie ich die ID von dem Room, den ich angeklick habe bekommen sollte.
+                //Ich könnte nochmal eine Klasse machen, die die Liste an Chatrooms hat, in der ich dann jeweils nochmal die ID speicher
+                //Sollte mir was bringen, glaube ich. Aber bin grade zu müde um mehr nachzudenken zu können.
+
+                if(c.getName().equals(name))
+                {
+                    c.setContainer(new VBox());
+                    c.getContainer().setLayoutX(0);
+                    c.getContainer().setLayoutY(0);
+                    c.getContainer().setPrefWidth(850);
+                    c.getContainer().setPrefHeight(600);
+
+                    paneChat.getChildren().add(c.getContainer());
+                    c.getContainer().setVisible(true);
+                }
+            }
 
             vBoxRoom.getChildren().add(p);
             toggleNewRoom(1200, false);
@@ -364,17 +385,16 @@ public class ClientControl implements Initializable
         }
     }
 
+    //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
     private void createRecievedMessage(String msg)
     {
         Pane p = new Pane();
-        p.setMinSize(25, 300);
         //TODO: Auf User-Klasse warten...
-//        ImageView i = new ImageView("file:" + ((File)User.img).getAbsolutePath());
-//        i.setFitWidth(50);
-//        i.setFitHeight(50);
-//        i.setX(5);
-//        i.setY(5);
-
+        //        ImageView i = new ImageView("file:" + ((File)User.img).getAbsolutePath());
+        //        i.setFitWidth(50);
+        //        i.setFitHeight(50);
+        //        i.setX(5);
+        //        i.setY(5);
 
         Rectangle tmp = new Rectangle();
         tmp.setWidth(50);
@@ -387,24 +407,43 @@ public class ClientControl implements Initializable
         l.setLayoutY(50);
         l.setLayoutX(50);
         l.setMaxWidth(250);
+
         l.setWrapText(true);
         l.setPadding(new Insets(30, 20, 20, 30));
         l.setTranslateX(-25);
         l.setTranslateY(-25);
         l.getStyleClass().add("MessageRecieved");
 
-//        p.getChildren().add(i);
+
         p.getChildren().add(l);
         p.getChildren().add(tmp);
 
-        vBoxChat.getChildren().add(p);
+        for(Chatroom c : chatrooms)
+        {
+            //TODO:
+            // Scheinbar klappt das hier nicht. Ich kann per Klick die Räume wechseln, aber nur in einen Schreiben.
+            // Zumindest kommt die Nachricht nur an einem an.
+            if(c.getContainer().isVisible())
+            {
+                c.getContainer().getChildren().add(p);
+            }
+        }
+
     }
 
     //Chatraum wird anhand von der angeklickten Gruppe (oder des Freundes) erstellt.
-    //TODO: implementierung der Funktion und evtl. einer Hilfsklasse.
-    private void openChatroom()
+    private void openChatroom(Object sender)
     {
-
+        for(Chatroom c : chatrooms)
+        {
+            //Wüsste gerade nicht, wie ich die ID von dem Room, den ich angeklick habe bekommen sollte.
+            if(c.getName().equals(((Button)sender).getText()))
+            {
+                c.getContainer().setVisible(true);
+            }
+            else
+                c.getContainer().setVisible(false);
+        }
     }
 
     //TODO: Noch nicht in gebrauch, da keine User Klasse vorhanden ist und die Freundesliste noch nicht erstellt ist.

@@ -1,9 +1,11 @@
 package chatFPAUebung.klassen;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.ArrayList;
+import javafx.scene.layout.VBox;
 
-public class Chatroom implements interfaces.BlackListInterface
+public class Chatroom implements interfaces.BlackListInterface, Serializable //Ihr habt vergessen des einzubinden, hoffe des ist okay wenn ich's mach :D
 {
     private String name;
     private static int idNew = 0;
@@ -11,6 +13,7 @@ public class Chatroom implements interfaces.BlackListInterface
     private int maxTeilnehmer;
     private String passwort;
     private DefaultListModel Chatmodel;
+    private VBox container;
 
     private ArrayList<ClientProxy> teilnehmer = new ArrayList<ClientProxy>();
     private ArrayList<String> blacklist = new ArrayList<String>();   //Methode zum blacklisten
@@ -128,4 +131,13 @@ public class Chatroom implements interfaces.BlackListInterface
         Chatmodel = chatmodel;
     }
 
+    public VBox getContainer()
+    {
+        return container;
+    }
+
+    public void setContainer(VBox container)
+    {
+        this.container = container;
+    }
 }
