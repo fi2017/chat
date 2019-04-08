@@ -1,6 +1,7 @@
 package chatFPAUebung.klassen;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class Uebertragung implements Serializable
 {
@@ -8,12 +9,21 @@ public class Uebertragung implements Serializable
 	private static final long serialVersionUID = 1L;
 	private int zweck;
 	private Object uebertragung;
+	private LocalDateTime uebertragungszeitpunkt;
 
 	// Konstruktor
 	public Uebertragung(int zweck, Object uebertragung)
 	{
 		this.zweck = zweck;
 		this.uebertragung = uebertragung;
+		this.uebertragungszeitpunkt = LocalDateTime.now();
+	}
+
+	public Uebertragung(Uebertragung uebertragungCopy)
+	{
+		this.zweck = uebertragungCopy.getZweck();
+		this.uebertragung = uebertragungCopy.getUebertragung();
+		this.uebertragungszeitpunkt = LocalDateTime.now();
 	}
 
 	// Getter
@@ -25,5 +35,10 @@ public class Uebertragung implements Serializable
 	public Object getUebertragung()
 	{
 		return uebertragung;
+	}
+
+	public LocalDateTime getUebertragungszeitpunkt()
+	{
+		return this.uebertragungszeitpunkt;
 	}
 }

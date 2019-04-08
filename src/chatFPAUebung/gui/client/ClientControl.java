@@ -16,6 +16,7 @@ import feature_LoginRegister.LogRegReadingThread;
 
 public class ClientControl
 {
+	//test
 	// Attribute
 	private ClientGui gui;
 	private DefaultListModel<Nachricht> listModel;

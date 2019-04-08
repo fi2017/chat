@@ -34,6 +34,8 @@ public class ServerListenThread extends Thread
 				try
 				{
 					Socket clientSocket = serverSocket.accept();
+
+					System.err.println("\nNeuen User gefunden - IP: " + clientSocket.getInetAddress());
 					getControl().empfangeClient(new ClientProxy(getControl(), clientSocket));
 					// TODO: übergeben des Clientsockets an LoginServer
 					

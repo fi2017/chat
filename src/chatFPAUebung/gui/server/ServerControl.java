@@ -2,7 +2,10 @@ package chatFPAUebung.gui.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import chatFPAUebung.fileHandler.FileHandlerBans;
+import chatFPAUebung.klassen.Ban;
 import chatFPAUebung.klassen.ClientProxy;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
@@ -23,6 +26,8 @@ public class ServerControl
 
 	private ArrayList<Nachricht> nachrichten;
 
+	private ArrayList<Ban> bans;
+
 	// Konstruktor
 	public ServerControl()
 	{
@@ -30,6 +35,7 @@ public class ServerControl
 		this.gui = new ServerGui();
 
 		this.nachrichten = new ArrayList<Nachricht>();
+		this.bans = new ArrayList<Ban>(Arrays.asList((new FileHandlerBans()).readBans()));
 
 		setzeListener();
 		getGui().setVisible(true);
@@ -53,6 +59,7 @@ public void starteServer()
 	{
 		if (getLoginServer() == null)
 		{
+			System.err.println("Der Server wurde auf Port 8008 gestartet!");
 			getGui().getLblFehlermeldung().setText("");
 
 			setLoginServer(new LogRegServerControl(this,clients));
@@ -67,6 +74,7 @@ public void starteServer()
 	{
 		if (getServerListenThread() != null)
 		{
+			System.err.println("Der Server wurde gestoppt!");
 			getGui().getLblFehlermeldung().setText("");
 
 			getServerListenThread().interrupt();
@@ -95,38 +103,105 @@ public void starteServer()
 
 	public void empfangeClient(ClientProxy neuerClient)
 	{
-		getClients().add(neuerClient);
+		boolean isBanned = false;
+
+		for (int i = 0; i < getBans().size() && !isBanned; i++)
+		{
+			if (neuerClient.getClientSocket().getInetAddress().equals(getBans().get(i).getInternetAddress()))
+			{
+				if (!getBans().get(i).checkIfStillBanned())
+				{
+					getBans().remove(i);
+					i--;
+				} else
+				{
+					try
+					{
+						isBanned = true;
+						neuerClient.getServerReadingThread().interrupt();
+						neuerClient.getInFromClient().close();
+						neuerClient.getOutToClient().close();
+						neuerClient.getClientSocket().close();
+					} catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		if (!isBanned)
+		{
+			getClients().add(neuerClient);
+			System.out.println("Neuen User zur Liste hinzugefügt!");
+		} else
+		{
+			System.err.println("Gebannter User wurde gekillt");
+		}
 	}
 
 	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
 	{
 		if (uebertragungObjekt instanceof Uebertragung)
 		{
-			Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
+			Uebertragung uebertragung = new Uebertragung((Uebertragung) uebertragungObjekt);
+			Ban newBan = client.getClientSecurity().addNewPing(uebertragung.getUebertragungszeitpunkt());
 
-			switch (((Uebertragung) uebertragungObjekt).getZweck())
+			if (newBan == null)
 			{
-			case 1:
-				sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
-
-				break;
-
-			case 2:
-				if (uebertragung.getUebertragung() instanceof Nachricht)
+				System.out.println("Habe Nachricht vom User erhalten!");
+				switch (((Uebertragung) uebertragungObjekt).getZweck())
 				{
-					getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-					broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
+				case 1:
+					sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
+
+					break;
+
+				case 2:
+					if (uebertragung.getUebertragung() instanceof Nachricht)
+					{
+						getNachrichten().add((Nachricht) uebertragung.getUebertragung());
+						broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
+					}
+
+					break;
+
+				case 3:
+					sendeNachrichtAnClient(new Uebertragung(0, null), client);
+
+				default:
+					//
+					break;
 				}
+			} else
+			{
+				System.out.println("Habe User gebannt!");
+				getBans().add(newBan);
+				removeUser(client);
 
-				break;
+				(new FileHandlerBans()).writeBans(getBans().toArray(new Ban[0]));
 
-			case 3:
-				sendeNachrichtAnClient(new Uebertragung(0, null), client);
-
-			default:
-				//
-				break;
+				// TODO: SEND MESSAGE TO USER THAT HE IS BANNED AND DISPLAY IT
 			}
+		}
+	}
+
+	public void removeUser(ClientProxy client)
+	{
+		System.err.println("\nDer Client mit der IP " + client.getClientSocket().getInetAddress() + " wurde entfernt!");
+
+		try
+		{
+			client.getServerReadingThread().interrupt();
+			client.getInFromClient().close();
+			client.getOutToClient().close();
+			client.getClientSocket().close();
+
+			getClients().remove(client);
+
+		} catch (IOException e)
+		{
+			getClients().remove(client);
 		}
 	}
 
@@ -140,7 +215,7 @@ public void starteServer()
 
 	public void sendeNachrichtAnClient(Uebertragung uebertragung, ClientProxy client)
 	{
-		(new ServerWritingThread(uebertragung, client)).start();
+		(new ServerWritingThread(uebertragung, client, this)).start();
 	}
 	
 	public void createTestenvironment()
@@ -183,6 +258,11 @@ public void starteServer()
 	public ArrayList<ClientProxy> getClients()
 	{
 		return clients;
+	}
+
+	public ArrayList<Ban> getBans()
+	{
+		return bans;
 	}
 
 	public ServerListenThread getServerListenThread()
