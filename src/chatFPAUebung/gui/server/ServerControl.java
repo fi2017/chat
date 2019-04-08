@@ -55,7 +55,7 @@ public void starteServer()
 		{
 			getGui().getLblFehlermeldung().setText("");
 
-			setLoginServer(new LogRegServerControl(this));
+			setLoginServer(new LogRegServerControl(this,clients));
 			getLoginServer().start();
 		} else
 		{

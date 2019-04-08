@@ -57,7 +57,12 @@ public class ServerReadingThread extends Thread
 	{
 		return this.control;
 	}
-
+	
+	public void setControl(ServerControl control)
+	{
+		this.control = control;
+	}
+	
 	public ClientProxy getClient()
 	{
 		return this.client;
@@ -72,4 +77,6 @@ public class ServerReadingThread extends Thread
 	{
 		this.loginControl = loginControl;
 	}
+
+	
 }

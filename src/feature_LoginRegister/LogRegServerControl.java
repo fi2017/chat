@@ -20,15 +20,15 @@ public class LogRegServerControl extends Thread
 	private ServerControl control;
 	private ServerReadingThread readingThread;
 	private ServerListenThread listenThread;
-	private ArrayList<ClientProxy> clients= new ArrayList<ClientProxy>();
+	private ArrayList<ClientProxy> clients;
 	
 	
 	
-	public LogRegServerControl(ServerControl control)
+	public LogRegServerControl(ServerControl control, ArrayList<ClientProxy> clients)
 	{
 		
-		this.control = control;
-		
+		setControl(control);
+		setClients(clients);
 		
 		setListenThread(new ServerListenThread(this));
 		getListenThread().start();
@@ -59,6 +59,8 @@ public class LogRegServerControl extends Thread
 					switch(loginUser((LogRegNachricht)uebertragung.getUebertragung()))
 					{
 						case 1: sendeNachrichtAnClient(new Uebertragung(1,""),client);
+								client.getServerReadingThread().setControl(control);
+								client.getServerReadingThread().setLoginControl(null);
 							break;
 						case 2: sendeNachrichtAnClient(new Uebertragung(2,""),client);
 							break;
