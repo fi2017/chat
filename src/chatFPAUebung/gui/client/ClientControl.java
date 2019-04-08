@@ -436,7 +436,7 @@ public class ClientControl implements Initializable
         p.setMinSize(350, 50);
         p.setPrefSize(350, 50);
         p.setMaxSize(350, 50);
-        p.setVisible(true); 
+        p.setVisible(true);
 
         Button b = new Button();
         b.setMinSize(295, 50);
