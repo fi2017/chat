@@ -52,7 +52,8 @@ public class ServerControl
 
 			setServerListenThread(new ServerListenThread(this));
 			getServerListenThread().start();
-		} else
+		}
+		else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft bereits!");
 		}
@@ -82,7 +83,8 @@ public class ServerControl
 			getClients().clear();
 			setServerListenThread(null);
 
-		} else
+		}
+		else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft noch nicht!");
 		}
