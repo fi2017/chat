@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ServerGui extends JFrame
 {
@@ -20,7 +22,7 @@ public class ServerGui extends JFrame
 	private JLabel lblPortnummer;
 	private JLabel lblFehlermeldung;
 	private JButton btnWartung;
-	private JTextField txtWartung;
+	private JTextField txtSekunden;
 
 	/**
 	 * Launch the application.
@@ -66,7 +68,7 @@ public class ServerGui extends JFrame
 		contentPane.add(getLblFehlermeldung());
 		this.setTitle("Server");
 		contentPane.add(getBtnWartung());
-		contentPane.add(getTxtWartung());
+		contentPane.add(getTxtSekunden());
 	}
 
 	public JButton getBtnStart()
@@ -119,19 +121,19 @@ public class ServerGui extends JFrame
 		}//iidid
 		return lblFehlermeldung;
 	}
-	private JButton getBtnWartung() {
+	public JButton getBtnWartung() {
 		if (btnWartung == null) {
 			btnWartung = new JButton("Wartung ");
 			btnWartung.setBounds(130, 79, 89, 23);
 		}
 		return btnWartung;
 	}
-	private JTextField getTxtWartung() {
-		if (txtWartung == null) {
-			txtWartung = new JTextField();
-			txtWartung.setBounds(10, 80, 96, 20);
-			txtWartung.setColumns(10);
+	public JTextField getTxtSekunden() {
+		if (txtSekunden == null) {
+			txtSekunden = new JTextField();
+			txtSekunden.setBounds(10, 80, 96, 20);
+			txtSekunden.setColumns(10);
 		}
-		return txtWartung;
+		return txtSekunden;
 	}
 }

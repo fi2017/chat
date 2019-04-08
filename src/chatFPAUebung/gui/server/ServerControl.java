@@ -7,6 +7,7 @@ import chatFPAUebung.klassen.ClientProxy;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ServerListenThread;
+import chatFPAUebung.threads.ServerMaintenanceThread;
 import chatFPAUebung.threads.ServerWritingThread;
 
 public class ServerControl
@@ -16,6 +17,7 @@ public class ServerControl
 
 	private ArrayList<ClientProxy> clients;
 	private ServerListenThread serverListenThread;
+	private ServerMaintenanceThread serverMaintenanceThread;
 
 	private ArrayList<Nachricht> nachrichten;
 
@@ -42,6 +44,13 @@ public class ServerControl
 	{
 		getGui().getBtnStart().addActionListener(e -> starteServer());
 		getGui().getBtnStop().addActionListener(e -> stoppeServer());
+		getGui().getBtnWartung().addActionListener(e -> maintenanceIn(Integer.parseInt(gui.getTxtSekunden().getText())));
+	}
+	
+	public void maintenanceIn(int sec)
+	{
+		setServerMaintenanceThread(new ServerMaintenanceThread(sec * 1000, this));
+		getServerMaintenanceThread().start();
 	}
 
 	public void starteServer()
@@ -172,5 +181,15 @@ public class ServerControl
 	public void setServerListenThread(ServerListenThread serverListenThread)
 	{
 		this.serverListenThread = serverListenThread;
+	}
+	
+	public ServerMaintenanceThread getServerMaintenanceThread()
+	{
+		return serverMaintenanceThread;
+	}
+	
+	public void setServerMaintenanceThread(ServerMaintenanceThread serverMaintenanceThread)
+	{
+		this.serverMaintenanceThread = serverMaintenanceThread;
 	}
 }
