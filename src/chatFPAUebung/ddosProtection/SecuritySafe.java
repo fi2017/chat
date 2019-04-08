@@ -52,7 +52,7 @@ public class SecuritySafe
 			LocalDateTime newestPing = getPings().get(pingsPerSecond - 1);
 			LocalDateTime oldestPing = getPings().get(0);
 
-			if (ChronoUnit.MILLIS.between(newestPing, oldestPing) < 1000)
+			if (ChronoUnit.MILLIS.between(oldestPing, newestPing) < 1000)
 			{
 				return true;
 			} else
