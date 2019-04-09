@@ -256,7 +256,7 @@ public class ClientControl implements Initializable
                     }
                     break;
 
-                    //Empfangen von neuen Nachrichten
+                //Empfangen von neuen Nachrichten
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
@@ -278,7 +278,7 @@ public class ClientControl implements Initializable
 
                     break;
 
-                    //Schließen der ListModels wenn Verbindung durchtrennt
+                //Schließen der ListModels wenn Verbindung durchtrennt
                 case 3:
                     sendeNachrichtAnServer(new Uebertragung(0,null));
                     break;

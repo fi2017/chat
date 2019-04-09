@@ -3,6 +3,8 @@ package chatFPAUebung.klassen;
 import javax.swing.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
 public class Chatroom implements interfaces.BlackListInterface, Serializable //Ihr habt vergessen des einzubinden, hoffe des ist okay wenn ich's mach :D
@@ -13,6 +15,7 @@ public class Chatroom implements interfaces.BlackListInterface, Serializable //I
     private int maxTeilnehmer;
     private String passwort;
     private DefaultListModel Chatmodel;
+    private ScrollPane scrollPane;
     private VBox container;
 
     //TODO: Die Liste an ClientProxys macht keinen Sinn, da wir die Klasse in der ClientControl, also Clientseitig verwenden.
@@ -143,5 +146,15 @@ public class Chatroom implements interfaces.BlackListInterface, Serializable //I
     public void setContainer(VBox container)
     {
         this.container = container;
+    }
+
+    public ScrollPane getScrollPane()
+    {
+        return scrollPane;
+    }
+
+    public void setScrollPane(ScrollPane scrollPane)
+    {
+        this.scrollPane = scrollPane;
     }
 }
