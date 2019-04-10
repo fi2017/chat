@@ -1,5 +1,6 @@
 package feature_LoginRegister;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import chatFPAUebung.gui.server.ServerControl;
@@ -137,7 +138,7 @@ public class LogRegServerControl extends Thread
 			System.out.println(u.getUsername()+u.getPassword()+u.isBanned()+u.isOnline());
 			if(u.getUsername().equals(uebertragung.getUsername()))
 			{
-				if(!u.isBanned())
+				if(!u.isBanned().equals(LocalDateTime.now()))
 				{
 					if(!u.isOnline())
 					{
@@ -146,6 +147,7 @@ public class LogRegServerControl extends Thread
 							System.out.println("Login erfolgreich");
 							returnValue=1;
 							u.setOnline(true);
+							u.setNeu(true);
 							break;
 						}
 						else

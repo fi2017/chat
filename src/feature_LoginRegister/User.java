@@ -11,6 +11,7 @@ public class User
 	private int globalRollenNummer;
 	private Date banned = new Date(0);
 	private boolean online=false;
+	private boolean neu = false;
 	
 	public User()
 	{
@@ -83,6 +84,16 @@ public class User
 	public void setBanned(Date date)
 	{
 		this.banned = date;
+	}
+
+	public boolean isNeu()
+	{
+		return neu;
+	}
+
+	public void setNeu(boolean neu)
+	{
+		this.neu = neu;
 	}
 	
 	
