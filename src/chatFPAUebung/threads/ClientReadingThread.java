@@ -15,13 +15,14 @@ public class ClientReadingThread extends Thread
 	public ClientReadingThread(ClientControl control)
 	{
 		this.control = control;
-
+		System.out.println("ClientReadingThread geöffnet");
 		this.setName("ClientReadingThread");
 	}
 
 	// Run
 	public void run()
 	{
+		System.out.println("ClientReadingThread gestartet");
 		while (!this.isInterrupted() && this.isAlive())
 		{
 			try
@@ -30,12 +31,14 @@ public class ClientReadingThread extends Thread
 				getControl().empfangeNachrichtVonServer(input);
 			} catch (EOFException e)
 			{
+				e.printStackTrace();
 				this.interrupt();
 			} catch (ClassNotFoundException e)
 			{
 				e.printStackTrace();
 			} catch (SocketException e)
 			{
+				e.printStackTrace();
 				this.interrupt();
 			} catch (IOException e)
 			{

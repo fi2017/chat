@@ -12,6 +12,7 @@ import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
 import chatFPAUebung.threads.ClientWritingThread;
+import feature_LoginRegister.LogRegControl;
 import feature_LoginRegister.LogRegReadingThread;
 
 public class ClientControl
@@ -28,8 +29,9 @@ public class ClientControl
 	private ClientReadingThread clientReadingThread;
 	
 	// Konstruktor
-	public ClientControl()
+	public ClientControl(LogRegControl c)
 	{
+		c = null;
 		this.gui = new ClientGui();
 		this.listModel = new DefaultListModel<Nachricht>();
 
@@ -53,6 +55,7 @@ public class ClientControl
 
 	public void empfangeNachrichtVonServer(Object uebertragungObjekt)
 	{
+		getGui().getLblFehlermeldung().setText("empfangen");
 		if (uebertragungObjekt instanceof Uebertragung)
 		{
 			Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
@@ -122,6 +125,7 @@ public class ClientControl
 
 	public void sendeNachrichtAnServer(Uebertragung uebertragung)
 	{
+		getGui().getLblFehlermeldung().setText("Gesendet");
 		(new ClientWritingThread(uebertragung, getOutToServer())).run();
 	}
 

@@ -65,11 +65,16 @@ public class LogRegControl
 			switch (((Uebertragung) uebertragungObjekt).getZweck())
 			{
 			case 1://wenn login erfolgreich
-				ClientControl control= new ClientControl();
+				ClientControl control= new ClientControl(this);
 				control.setClientSocket(clientSocket);
 				control.setInFromServer(inFromServer);
 				control.setOutToServer(outToServer);
 				control.setClientReadingThread(new ClientReadingThread(control));
+				control.getClientReadingThread().start();
+				gui.dispose();
+				gui = null;
+				ReadingThread.interrupt();
+				ReadingThread = null;
 				
 				break;
 
