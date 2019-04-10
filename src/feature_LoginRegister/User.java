@@ -1,5 +1,7 @@
 package feature_LoginRegister;
 
+import java.sql.Date;
+
 public class User
 {
 
@@ -7,7 +9,7 @@ public class User
 	private int id;
 	private String password;
 	private int globalRollenNummer;
-	private boolean banned=false;
+	private Date banned = new Date(0);
 	private boolean online=false;
 	
 	public User()
@@ -73,14 +75,14 @@ public class User
 		this.online = online;
 	}
 
-	public boolean isBanned()
+	public Date isBanned()
 	{
 		return banned;
 	}
 
-	public void setBanned(boolean banned)
+	public void setBanned(Date date)
 	{
-		this.banned = banned;
+		this.banned = date;
 	}
 	
 	
