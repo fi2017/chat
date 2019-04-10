@@ -70,6 +70,7 @@ public void starteServer()
 		}
 	}
 
+	//Runterfahren des Servers
 	public void stoppeServer()
 	{
 		if (getLoginServer() != null)
@@ -96,12 +97,14 @@ public void starteServer()
 			getLoginServer().setListenThread(null);
 			setLoginServer(null);
 
-		} else
+		}
+		else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft noch nicht!");
 		}
 	}
 
+	//Hinzufügen eines Clients zum Server
 	public void empfangeClient(ClientProxy neuerClient)
 	{
 		boolean isBanned = false;
@@ -141,6 +144,7 @@ public void starteServer()
 		}
 	}
 
+	//Protokoll für das Empfangen eines Clients
 	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
 	{
 		if (uebertragungObjekt instanceof Uebertragung)
@@ -218,7 +222,7 @@ public void starteServer()
 	{
 		(new ServerWritingThread(uebertragung, client, this)).start();
 	}
-	
+
 	public void createTestenvironment()
 	{
 		this.userList = new ArrayList<User>();
@@ -229,20 +233,20 @@ public void starteServer()
 		getUserList().add(new User("Joshua","1235",3,1));
 		getUserList().add(new User("Reis","1236",4,1));
 	}
-	
+
 	//Datenbankzugriff
 	public void connectToDatabase()
 	{
 		//connection
-		
-		
+
+
 		readUserFromDatabase();
 	}
-	
+
 
 	private void readUserFromDatabase()
 	{
-		
+
 	}
 
 	// Getter
