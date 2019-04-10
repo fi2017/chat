@@ -15,9 +15,9 @@ public class Chatroom implements interfaces.BlackListInterface, Serializable //I
     private int maxTeilnehmer;
     private String passwort;
     private DefaultListModel Chatmodel;
+    //Relevant um auf die einzelnen Chatrooms zuzugreifen und inhalte hinzuzufügen
     private ScrollPane scrollPane;
     private VBox container;
-
     //TODO: Die Liste an ClientProxys macht keinen Sinn, da wir die Klasse in der ClientControl, also Clientseitig verwenden.
     // Somit können die Clients keine "ClientProxys" haben. Nur andere User. Deshalb brauchen wir hier die Klasse User, die die
     // Informationen, wie Name, ID, Password, ?Chatrooms? etc. beinhalten muss.

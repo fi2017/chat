@@ -15,6 +15,7 @@ import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
 import chatFPAUebung.threads.ClientWritingThread;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -177,18 +178,25 @@ public class ClientControl implements Initializable
         txtFieldChat.setOnAction(e -> {
 
             //TODO:
+            // Hier muss ich jetzt eigentlich die Nachricht and den Server senden, aber ich brauchen den ajktuellen USer
+
+/*            //TODO:
             // Aktuell nur Temporär, der Funktionsaufruf muss dann ins Protokoll kommen, wo man eine Nachricht erhält.
             for(Chatroom c : chatrooms)
             {
+
                 if(c.getScrollPane().isVisible())
                 {
+                    sendeNachricht(c.getId());
                     i++;
                     if(i % 2 == 0)
                         createSentMessage(txtFieldChat.getText());
                     else
                         createRecievedMessage(txtFieldChat.getText());
                 }
-            }
+            }*/
+
+            sendeNachricht(getActiveChatroom().getId());
             txtFieldChat.setText("");
         });
     }
@@ -244,14 +252,6 @@ public class ClientControl implements Initializable
                             {
                                 aktuellesModel.addElement(aktNachricht);
                             }
-
-                            //zeigeNeuesteNachricht();
-                            //TODO:
-                            // Ich muss hier noch wissen, von wem die Nachricht kommt.
-                            // Bitte im Protokoll noch hinzufügen.
-                            // Weiterhin: Was genau soll hier gemacht werden?
-                            // Es sollen doch eh alle Nachrichten angezeigt werden, oder?
-                            // Oder check ich's grade nicht?
                         }
                     }
                     break;
@@ -260,20 +260,29 @@ public class ClientControl implements Initializable
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
+/*
                         DefaultListModel aktuellesModel=listmodels.get(((Uebertragung) uebertragungObjekt).getZiel());
                         aktuellesModel.addElement(uebertragung.getUebertragung());
+*/
 
                         //TODO:
                         // Ich muss hier noch wissen, von wem die Nachricht kommt.
                         // Bitte im Protokoll noch hinzufügen.
-                        /*if(((Nachricht) uebertragung.getUebertragung()).getSender() != user)
+
+                        //User user = new User();
+                        //user.setUsername("Michael");
+                        //user.setId(1);
+                        /*
+                        if(((Nachricht) uebertragung.getUebertragung()).getSender() != user)
                         {
                             createRecievedMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                         }
                         else
                         {
                             createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
-                        }*/
+                        }
+                        */
+                        createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                     }
 
                     break;
@@ -295,13 +304,12 @@ public class ClientControl implements Initializable
     }
 
     //Sende Nachricht an einen Chatroom (Benötigen ID des aktuell benutzen Chatrooms)
-    public void sendeNachrichtVonChatroom(Chatroom c) //Methode für ChatroomGUI
+    public void sendeNachricht(int i) //Methode für ChatroomGUI
     {
         if(txtFieldChat.getText() != null)
         {
-            ListModel model = c.getChatmodel();
-            int ziel=c.getId();
-            sendeNachrichtAnServer(new Uebertragung(2, ziel, new Nachricht(txtFieldChat.getText(), LocalDateTime.now())));
+            //2 normale senden der Nachrichten
+            sendeNachrichtAnServer(new Uebertragung(2, i, new Nachricht(txtFieldChat.getText(), LocalDateTime.now())));
         }
     }
 
@@ -502,7 +510,8 @@ public class ClientControl implements Initializable
         p.getChildren().add(txtPane);
         p.getChildren().add(tmp);
 
-        getActiveChatroom().getContainer().getChildren().add(p);
+
+        Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
     }
 
     //TODO: Noch nicht in gebrauch, da keine User Klasse vorhanden ist und die Freundesliste noch nicht erstellt ist.
