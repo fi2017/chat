@@ -1,4 +1,4 @@
-package chatFPAUebung.gui.client;
+package chatFPAUebung.gui.client.clientMain;
 
 
 import java.io.IOException;
@@ -350,7 +350,7 @@ public class ClientControl implements Initializable
 
     public void sendeNachrichtAnServer(Uebertragung uebertragung)
     {
-        (new ClientWritingThread(uebertragung, this)).run();
+        (new ClientWritingThread(uebertragung, getOutToServer())).run();
     }
 
     //Methode wird aufgerufen, wenn man auf den Button "Erstellen" einer neuen Gruppe drückt.
@@ -361,9 +361,13 @@ public class ClientControl implements Initializable
         FileChooser fc = new FileChooser();
         File img = fc.showOpenDialog(friendList.getScene().getWindow());
 
-        ImageView i = new ImageView("file:" + img.getAbsolutePath());
+        c.setImage(img);
+
+        ImageView i = new ImageView("file:" + c.getImage().getAbsolutePath());
         i.setFitWidth(50);
         i.setFitHeight(50);
+
+
 
         Pane p = new Pane();
         p.setMinSize(350, 50);

@@ -3,6 +3,7 @@ package chatFPAUebung.gui.server;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.sql.*;
 
 import chatFPAUebung.fileHandler.FileHandlerBans;
 import chatFPAUebung.klassen.Ban;
@@ -20,6 +21,9 @@ public class ServerControl
 	private ServerGui gui;
 	private LogRegServerControl loginServer = null;
 
+	private Connection con;
+	private PreparedStatement preparedStmt;
+	private String myDriver = "org.mariadb.jdbc.Driver";
 	private ArrayList<ClientProxy> clients;
 	private ArrayList<User> userList;
 	private ServerListenThread serverListenThread;
@@ -32,14 +36,22 @@ public class ServerControl
 	public ServerControl()
 	{
 		this.clients = new ArrayList<ClientProxy>();
+		this.userList = new ArrayList<>();
 		this.gui = new ServerGui();
-
+		try
+		{
+			Class.forName(myDriver);
+		} catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.nachrichten = new ArrayList<Nachricht>();
 		this.bans = new ArrayList<Ban>(Arrays.asList((new FileHandlerBans()).readBans()));
 
 		setzeListener();
 		getGui().setVisible(true);
-		createTestenvironment();
+		//createTestenvironment();
 	}
 
 	// Main
@@ -55,7 +67,7 @@ public class ServerControl
 		getGui().getBtnStop().addActionListener(e -> stoppeServer());
 	}
 
-public void starteServer()
+	public void starteServer()
 	{
 		if (getLoginServer() == null)
 		{
@@ -64,18 +76,110 @@ public void starteServer()
 
 			setLoginServer(new LogRegServerControl(this,clients));
 			getLoginServer().start();
+			readDatabase();
 		} else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft bereits!");
 		}
 	}
 
-	//Runterfahren des Servers
+	//Datenbank zugriff mit User erstellen
+
+	private void readDatabase()
+	{
+		try
+		{
+			con  = DriverManager.getConnection("jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017");
+			//String for database connection
+			Statement stmt=con.createStatement();
+			ResultSet rs=stmt.executeQuery("select u.* from user u");
+			while(rs.next())
+			{
+				mkUser(rs);
+			}
+			con.close();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			System.out.println("Fehler beim Verbinden mit der Datenbank / Datenbank Fehler");
+		}
+	}
+
+	private void mkUser(ResultSet rs)
+	{
+		User user = new User();
+		try
+		{
+			user.setId(rs.getInt(1));
+			user.setUsername(rs.getString(2));
+			user.setPassword(rs.getString(3));
+			user.setGlobalRollenNummer(rs.getInt(4));
+			user.setBanned(rs.getDate(5));
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		getUserList().add(user);
+	}
+
+	public void writeToDatabase() throws SQLException
+	{
+		try
+		{
+			con  = DriverManager.getConnection("jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017");
+			String query = "INSERT INTO user (Username, Password, Role, AccountStatus) " +
+					"VALUES (?,?,?,?)";
+			preparedStmt = con.prepareStatement(query);
+
+			for(User u : getUserList())
+			{
+				if(u.isNeu())
+				{
+					preparedStmt.setString(1,u.getUsername());
+					preparedStmt.setString(2,u.getPassword());
+					preparedStmt.setInt(3,u.getGlobalRollenNummer());
+					preparedStmt.setDate(4,u.isBanned());
+					preparedStmt.executeUpdate();
+				}
+			}
+
+
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+
+			if (preparedStmt != null) {
+				preparedStmt.close();
+			}
+
+			if (con != null) {
+				con.close();
+			}
+		}
+
+	}
+
 	public void stoppeServer()
 	{
 		if (getLoginServer() != null)
 		{
 			System.err.println("Der Server wurde gestoppt!");
+			try
+			{
+				writeToDatabase();
+			} catch (SQLException e1)
+			{
+				System.out.println("Error beim Schreiben in Datenbank");
+				e1.printStackTrace();
+			}
+			System.out.println("Datenbank wurde beschrieben!");
 			getGui().getLblFehlermeldung().setText("");
 
 			getLoginServer().getListenThread().interrupt();
@@ -97,14 +201,12 @@ public void starteServer()
 			getLoginServer().setListenThread(null);
 			setLoginServer(null);
 
-		}
-		else
+		} else
 		{
 			getGui().getLblFehlermeldung().setText("Der Server laeuft noch nicht!");
 		}
 	}
 
-	//Hinzufügen eines Clients zum Server
 	public void empfangeClient(ClientProxy neuerClient)
 	{
 		boolean isBanned = false;
@@ -144,7 +246,6 @@ public void starteServer()
 		}
 	}
 
-	//Protokoll für das Empfangen eines Clients
 	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
 	{
 		if (uebertragungObjekt instanceof Uebertragung)
@@ -157,26 +258,26 @@ public void starteServer()
 				System.out.println("Habe Nachricht vom User erhalten!");
 				switch (((Uebertragung) uebertragungObjekt).getZweck())
 				{
-				case 1:
-					sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
+					case 1:
+						sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
 
-					break;
+						break;
 
-				case 2:
-					if (uebertragung.getUebertragung() instanceof Nachricht)
-					{
-						getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-						broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
-					}
+					case 2:
+						if (uebertragung.getUebertragung() instanceof Nachricht)
+						{
+							getNachrichten().add((Nachricht) uebertragung.getUebertragung());
+							broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
+						}
 
-					break;
+						break;
 
-				case 3:
-					sendeNachrichtAnClient(new Uebertragung(0, null), client);
+					case 3:
+						sendeNachrichtAnClient(new Uebertragung(0, null), client);
 
-				default:
-					//
-					break;
+					default:
+						//
+						break;
 				}
 			} else
 			{
@@ -221,32 +322,6 @@ public void starteServer()
 	public void sendeNachrichtAnClient(Uebertragung uebertragung, ClientProxy client)
 	{
 		(new ServerWritingThread(uebertragung, client, this)).start();
-	}
-
-	public void createTestenvironment()
-	{
-		this.userList = new ArrayList<User>();
-		User u = new User("Richard","123",1,0);
-		u.setBanned(true);
-		getUserList().add(u);
-		getUserList().add(new User("Lukas","1234",2,1));
-		getUserList().add(new User("Joshua","1235",3,1));
-		getUserList().add(new User("Reis","1236",4,1));
-	}
-
-	//Datenbankzugriff
-	public void connectToDatabase()
-	{
-		//connection
-
-
-		readUserFromDatabase();
-	}
-
-
-	private void readUserFromDatabase()
-	{
-
 	}
 
 	// Getter

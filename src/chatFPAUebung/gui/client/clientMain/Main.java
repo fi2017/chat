@@ -1,4 +1,4 @@
-package chatFPAUebung.gui.client;
+package chatFPAUebung.gui.client.clientMain;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -4,7 +4,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.SocketException;
 
-import chatFPAUebung.gui.client.ClientControl;
+import chatFPAUebung.gui.client.clientMain.ClientControl;
 
 public class ClientReadingThread extends Thread
 {
@@ -15,7 +15,7 @@ public class ClientReadingThread extends Thread
 	public ClientReadingThread(ClientControl control)
 	{
 		this.control = control;
-		System.out.println("ClientReadingThread geöffnet");
+		System.out.println("ClientReadingThread geï¿½ffnet");
 		this.setName("ClientReadingThread");
 	}
 
