@@ -1,4 +1,4 @@
-package sample.startScene;
+package chatFPAUebung.gui.client.loginMenu.startScene;
 
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;

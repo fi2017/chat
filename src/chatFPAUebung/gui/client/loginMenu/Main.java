@@ -1,4 +1,4 @@
-package sample;
+package chatFPAUebung.gui.client.loginMenu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

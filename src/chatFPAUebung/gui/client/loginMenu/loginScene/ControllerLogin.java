@@ -1,4 +1,4 @@
-package sample.loginScene;
+package chatFPAUebung.gui.client.loginMenu.loginScene;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;

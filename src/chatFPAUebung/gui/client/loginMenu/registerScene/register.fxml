@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="gridContainerLogin" prefHeight="400.0" prefWidth="350.0" styleClass="body" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.loginScene.ControllerLogin">
+<GridPane fx:id="gridContainerLogin" prefHeight="400.0" prefWidth="350.0" styleClass="body" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.loginMenu.loginScene.ControllerLogin">
     <columnConstraints>
         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
