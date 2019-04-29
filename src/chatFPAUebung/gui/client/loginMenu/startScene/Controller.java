@@ -9,12 +9,16 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -215,11 +219,34 @@ public class Controller implements Initializable
 					control.setOutToServer(outToServer);
 					control.setClientReadingThread(new ClientReadingThread(control));
 					control.getClientReadingThread().start();*/
-                    Platform.runLater(
-                            ()-> ((Stage)closeButton.getScene().getWindow()).close()
-                    );
+
                     ReadingThread.interrupt();
                     ReadingThread = null;
+
+                    Platform.runLater( () -> {
+
+                        ((Stage) closeButton.getScene().getWindow()).close();
+                        try
+                        {
+                            Stage primaryStage = new Stage();
+                            Parent root = FXMLLoader.load(getClass().getResource("../../clientMain/sample.fxml"));
+                            Scene s = new Scene(root);
+                            s.getStylesheets().add("http://fonts.googleapis.com/css?family=Gafata");
+                            primaryStage.setTitle("Chat");
+                            System.setProperty("prism.lcdtext", "false");
+                            primaryStage.setScene(s);
+                            primaryStage.initStyle(StageStyle.TRANSPARENT);
+                            primaryStage.show();
+
+                        }
+                        catch (IOException ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    });
+
+
+
 
                     break;
 
