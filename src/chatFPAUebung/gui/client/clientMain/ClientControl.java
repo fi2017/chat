@@ -195,7 +195,8 @@ public class ClientControl implements Initializable
                         createRecievedMessage(txtFieldChat.getText());
                 }
             }*/
-
+            System.out.println(getActiveChatroom().getContainer().isVisible());
+            System.out.println(getActiveChatroom().getScrollPane().isVisible());
             sendeNachricht(getActiveChatroom().getId());
             txtFieldChat.setText("");
         });
@@ -235,10 +236,6 @@ public class ClientControl implements Initializable
             switch(uebertragung.getZweck())
             {
                 //Empfangen von allen bisherigen Nachrichten
-                //TODO: Kann es sein, dass das hier nicht so viel Sinn macht?
-                // Sollte man nicht eher hier nur eine Datei deserialisieren, da man ja anders eh keinen Chatverlauf hat.
-                // Man muss ja iwann mal was geschrieben haben, wenn man aber dann die Anwendung schließt, ist alles ja wieder weg.
-                // Und da wir noch keine User haben kann man auch schwer auf andere Chatrooms zugreifen
                 case 1:
                     if(uebertragung.getUebertragung() instanceof Nachricht[])
                     {
@@ -257,6 +254,10 @@ public class ClientControl implements Initializable
                     break;
 
                 //Empfangen von neuen Nachrichten
+                //TODO:
+                // Aktuelles Problem: Die Nachricht geht nie in diesen Case rein. D.h. es wird keine Nachricht angezeigt.
+                // Kann nicht wirklich sagen, was des Problem ist. Habe auch schon mit dem Debugger geschaut und ich glaube, dass der Zweck immer 8 ist, egal
+                // was versendet wird. Wenn ichs richtig verstanden habe. Allerding habe ich keine Ahnung vom Protokoll, also wäre es cool wenn ihr hinbekommt.
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
@@ -282,6 +283,7 @@ public class ClientControl implements Initializable
                             createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                         }
                         */
+                        System.out.println(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                         createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                     }
 
@@ -431,6 +433,8 @@ public class ClientControl implements Initializable
             if(c.getName().equals(((Button)sender).getText()))
             {
                 c.getScrollPane().setVisible(true);
+                System.err.println(((Button)sender).getText());
+
             }
             else
                 c.getScrollPane().setVisible(false);
@@ -473,6 +477,8 @@ public class ClientControl implements Initializable
 
         p.getChildren().add(txtPane);
         p.getChildren().add(tmp);
+
+
 
         getActiveChatroom().getContainer().getChildren().add(p);
     }
@@ -661,7 +667,9 @@ public class ClientControl implements Initializable
                 new KeyValue(returnArrow.rotateProperty(), angle, Interpolator.EASE_BOTH)));
         t.play();
     }
-    // Getter
+
+
+    // Getter und Setter
     public Socket getClientSocket()
     {
         return clientSocket;
