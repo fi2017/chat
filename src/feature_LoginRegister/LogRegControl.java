@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.time.LocalDateTime;
 
-import chatFPAUebung.gui.client.ClientControl;
+import chatFPAUebung.gui.client.clientMain.ClientControl;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
@@ -19,12 +19,12 @@ public class LogRegControl
 	private ObjectOutputStream outToServer;
 	private ObjectInputStream inFromServer;
 	private LogRegReadingThread ReadingThread;
-	
+
 	public static void main(String[] args)
 	{
 		new LogRegControl(new LogRegGui());
 	}
-	
+
 	public LogRegControl(LogRegGui g)
 	{
 		setGui(g);
@@ -32,7 +32,7 @@ public class LogRegControl
 		addActionListenersToGuiObjects();
 		erstelleVerbindung();
 	}
-	
+
 
 
 	public void erstelleVerbindung()
@@ -64,45 +64,45 @@ public class LogRegControl
 
 			switch (((Uebertragung) uebertragungObjekt).getZweck())
 			{
-			case 1://wenn login erfolgreich
-				ClientControl control= new ClientControl(this);
-				control.setClientSocket(clientSocket);
-				control.setInFromServer(inFromServer);
-				control.setOutToServer(outToServer);
-				control.setClientReadingThread(new ClientReadingThread(control));
-				control.getClientReadingThread().start();
-				gui.dispose();
-				gui = null;
-				ReadingThread.interrupt();
-				ReadingThread = null;
-				
-				break;
+				case 1://wenn login erfolgreich
+/*					ClientControl control= new ClientControl(this);
+					control.setClientSocket(clientSocket);
+					control.setInFromServer(inFromServer);
+					control.setOutToServer(outToServer);
+					control.setClientReadingThread(new ClientReadingThread(control));
+					control.getClientReadingThread().start();*/
+					gui.dispose();
+					gui = null;
+					ReadingThread.interrupt();
+					ReadingThread = null;
 
-			case 2: //wenn login nicht erfolgreich - PW falsch
-				getGui().getLblErrormsg().setText("Passwort falsch");
-				break;
+					break;
 
-			case 3:  //wenn login nicht erfolgreich  - User falsch/unbekannt
-				getGui().getLblErrormsg().setText("Username nicht bekannt");
-				break;	
-			case 4: //wenn login nicht erfolgreich - User schon eingeloggt
-				getGui().getLblErrormsg().setText("User ist schon eingeloggt");
-				break;
-				
-			case 5: //wenn login nicht erfolgreich - User gebannt
-				getGui().getLblErrormsg().setText("Der Banhammer hat gesprochen!");
-				break;
-			case 6: // wenn register  erfolgreich
-				getGui().getLblErrormsg().setText("Registrierung erfolgreich");
-				break;
-			case 7: //wenn register nicht erfolgreich - Username schon benutzt
-				getGui().getLblErrormsg().setText("Username schon vergeben");
-			break;
-			case 8: //wenn bei der Übertragung was schiefgeht
-				getGui().getLblErrormsg().setText("Übertragungsfehler");
-			default:
-				getGui().getLblErrormsg().setText("Protokollfehler");
-				break;
+				case 2: //wenn login nicht erfolgreich - PW falsch
+					getGui().getLblErrormsg().setText("Passwort falsch");
+					break;
+
+				case 3:  //wenn login nicht erfolgreich  - User falsch/unbekannt
+					getGui().getLblErrormsg().setText("Username nicht bekannt");
+					break;
+				case 4: //wenn login nicht erfolgreich - User schon eingeloggt
+					getGui().getLblErrormsg().setText("User ist schon eingeloggt");
+					break;
+
+				case 5: //wenn login nicht erfolgreich - User gebannt
+					getGui().getLblErrormsg().setText("Der Banhammer hat gesprochen!");
+					break;
+				case 6: // wenn register  erfolgreich
+					getGui().getLblErrormsg().setText("Registrierung erfolgreich");
+					break;
+				case 7: //wenn register nicht erfolgreich - Username schon benutzt
+					getGui().getLblErrormsg().setText("Username schon vergeben");
+					break;
+				case 8: //wenn bei der ï¿½bertragung was schiefgeht
+					getGui().getLblErrormsg().setText("ï¿½bertragungsfehler");
+				default:
+					getGui().getLblErrormsg().setText("Protokollfehler");
+					break;
 			}
 		}
 	}
@@ -110,8 +110,8 @@ public class LogRegControl
 	public void sendeNachrichtAnServer(Uebertragung uebertragung)
 	{
 		(new ClientWritingThread(uebertragung, getOutToServer())).run();
-	}	
-	
+	}
+
 	private void addActionListenersToGuiObjects()
 	{
 		getGui().getBtnLogin().addActionListener(e->loginUser());
@@ -121,11 +121,11 @@ public class LogRegControl
 	private void loginUser()
 	{
 		if(!checkEmptyLog())
-		{	
+		{
 			sendeNachrichtAnServer(new Uebertragung(10, new LogRegNachricht(getGui().getTextFieldUnameLog().getText(),getGui().getTextFieldPwLog().getText())));
 			System.out.println("LogRegControl: sendenNachricht() aus Methode loginUser()");
 		}
-		
+
 	}
 
 	private void registerUser()
@@ -136,33 +136,33 @@ public class LogRegControl
 		}
 		else
 		{
-			// Später in der Gui als Label Anzeige einfügen
-			System.out.println("Passwörter stimmen nicht überein!");
+			// Spï¿½ter in der Gui als Label Anzeige einfï¿½gen
+			System.out.println("Passwï¿½rter stimmen nicht ï¿½berein!");
 		}
 	}
-	
+
 
 	private boolean checkEmptyLog()
 	{
 		boolean returnValue=false;
-		
+
 		if(getGui().getTextFieldPwLog().getText().trim().length() == 0 || getGui().getTextFieldUnameLog().getText().trim().length() == 0)
 		{
 			returnValue = true;
 			System.out.println("Login Textfelder leer");
 		}
-		
+
 		return returnValue;
 	}
 	private boolean checkEmptyReg()
 	{
 		boolean returnValue=false;
-		
+
 		if(getGui().getTextFieldPwReg().getText().trim().length() == 0 || getGui().getTextFieldUnameReg().getText().trim().length() == 0)
 		{
 			returnValue = true;
 		}
-		
+
 		return returnValue;
 	}
 
@@ -170,18 +170,18 @@ public class LogRegControl
 	private boolean checkPasswordWith2nd()
 	{
 		boolean returnValue=false;
-		
+
 		if(getGui().getTextFieldPwReg().getText().equals(getGui().getTextFieldPwRepeat().getText()))
 		{
 			returnValue = true;
 		}
-		
+
 		return returnValue;
 	}
 
 	//GETTER SETTER
-	
-	
+
+
 	public LogRegGui getGui()
 	{
 		return gui;

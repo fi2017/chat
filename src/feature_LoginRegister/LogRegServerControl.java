@@ -1,6 +1,5 @@
 package feature_LoginRegister;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -14,40 +13,40 @@ import chatFPAUebung.threads.ServerWritingThread;
 
 public class LogRegServerControl extends Thread
 {
-	//nimmt Connections an (ServerListenThread) und überprüft Logindaten in der Datenbank
-	//Wenn Daten übereinstimmen, wird der Client an die ServerControl übergeben
+	//nimmt Connections an (ServerListenThread) und ï¿½berprï¿½ft Logindaten in der Datenbank
+	//Wenn Daten ï¿½bereinstimmen, wird der Client an die ServerControl ï¿½bergeben
 	//Ansonsten wird die Verbindung nach einer Fehlermeldung an den Client wieder geschlossen (vllt. nach x Versuchen?)
-	//Registrierung läuft analog ab
-	
+	//Registrierung lï¿½uft analog ab
+
 	private ServerControl control;
 	private ServerReadingThread readingThread;
 	private ServerListenThread listenThread;
 	private ArrayList<ClientProxy> clients;
-	
-	
-	
+
+
+
 	public LogRegServerControl(ServerControl control, ArrayList<ClientProxy> clients)
 	{
-		
+
 		setControl(control);
 		setClients(clients);
-		
+
 		setListenThread(new ServerListenThread(this));
 		getListenThread().start();
-		
-		
+
+
 	}
-	
-	
+
+
 	public void run()
 	{
-		
+
 	}
 	public void empfangeClient(ClientProxy neuerClient)
 	{
 		getClients().add(neuerClient);
 	}
-	
+
 	public void empfangeNachrichtVonClient(Object uebertragungObjekt, ClientProxy client)
 	{
 		if (uebertragungObjekt instanceof Uebertragung)
@@ -56,13 +55,13 @@ public class LogRegServerControl extends Thread
 
 			switch (((Uebertragung) uebertragungObjekt).getZweck())
 			{
-				
-			case 10: //Loginversuch				
+
+				case 10: //Loginversuch
 					switch(loginUser((LogRegNachricht)uebertragung.getUebertragung()))
 					{
 						case 1: sendeNachrichtAnClient(new Uebertragung(1,""),client);
-								client.getServerReadingThread().setControl(control);
-								client.getServerReadingThread().setLoginControl(null);
+							client.getServerReadingThread().setControl(control);
+							client.getServerReadingThread().setLoginControl(null);
 							break;
 						case 2: sendeNachrichtAnClient(new Uebertragung(2,""),client);
 							break;
@@ -73,12 +72,12 @@ public class LogRegServerControl extends Thread
 						case 5: sendeNachrichtAnClient(new Uebertragung(5,""),client);
 							break;
 						case 0: sendeNachrichtAnClient(new Uebertragung(8,""),client);
-						
+
 
 					}
-				break;
+					break;
 
-			case 11: //Registrierungsversuch
+				case 11: //Registrierungsversuch
 					if(!registerUser((LogRegNachricht)uebertragung.getUebertragung()))
 					{
 						sendeNachrichtAnClient(new Uebertragung(7,""),client);
@@ -88,13 +87,13 @@ public class LogRegServerControl extends Thread
 						sendeNachrichtAnClient(new Uebertragung(6,""),client);
 					}
 
-				break;
+					break;
 
-				
 
-			default: sendeNachrichtAnClient(new Uebertragung(8,""),client);
-				//
-				break;
+
+				default: sendeNachrichtAnClient(new Uebertragung(8,""),client);
+					//
+					break;
 			}
 		}
 	}
@@ -102,13 +101,13 @@ public class LogRegServerControl extends Thread
 	private boolean registerUser(LogRegNachricht uebertragung)
 	{
 		boolean userSchonVergeben=false;
-		
+
 		for(User u : control.getUserList())
 		{
 			if(u.getUsername().equals(uebertragung.username))
-					{
-						userSchonVergeben=true;
-					}
+			{
+				userSchonVergeben=true;
+			}
 		}
 		if(userSchonVergeben==true)
 		{
@@ -120,18 +119,18 @@ public class LogRegServerControl extends Thread
 			control.getUserList().add(newUser);
 			return true;
 		}
-		//überprüft in der UserList zuerst, ob der Nutzername schon vergeben ist
+		//ï¿½berprï¿½ft in der UserList zuerst, ob der Nutzername schon vergeben ist
 		//wenn er noch nicht vergeben ist, wird ein neuer User in der Userlist erstellt
-		//sonst wird die Fehlermeldung an den Client zurückgegeben, dass der Name schon vergeben ist 
-		
-		
-		
+		//sonst wird die Fehlermeldung an den Client zurï¿½ckgegeben, dass der Name schon vergeben ist
+
+
+
 	}
 
 	private int loginUser(LogRegNachricht uebertragung)
 	{
-		//überprüft in der Datenbank zuerst, ob der Nutzername und Passwort übereinstimmen
-		//gibt Nachrichtenzweck zurück, je nachdem, ob erfolgreich oder fehler
+		//ï¿½berprï¿½ft in der Datenbank zuerst, ob der Nutzername und Passwort ï¿½bereinstimmen
+		//gibt Nachrichtenzweck zurï¿½ck, je nachdem, ob erfolgreich oder fehler
 		int returnValue=0;
 		System.out.println(uebertragung.getUsername() + uebertragung.getPassword());
 		for(User u : control.getUserList())
@@ -139,7 +138,7 @@ public class LogRegServerControl extends Thread
 			System.out.println(u.getUsername()+u.getPassword()+u.isBanned()+u.isOnline());
 			if(u.getUsername().equals(uebertragung.getUsername()))
 			{
-				if(!u.isBanned().isAfter((LocalDate.now())))
+				if(!u.isBanned().equals(LocalDateTime.now()))
 				{
 					if(!u.isOnline())
 					{
@@ -184,7 +183,7 @@ public class LogRegServerControl extends Thread
 		(new ServerWritingThread(uebertragung, client, getControl())).start();
 	}
 
-	
+
 	//Getter / Setter
 	public ServerControl getControl()
 	{
@@ -221,7 +220,7 @@ public class LogRegServerControl extends Thread
 		this.clients = clients;
 	}
 
-	
-	
-	 
+
+
+
 }

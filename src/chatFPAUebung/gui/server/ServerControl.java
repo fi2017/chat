@@ -38,7 +38,11 @@ public class ServerControl
 		this.clients = new ArrayList<ClientProxy>();
 		this.userList = new ArrayList<>();
 		this.gui = new ServerGui();
+<<<<<<< HEAD
 	    try
+=======
+		try
+>>>>>>> branch 'master' of https://github.com/fi2017/chat.git
 		{
 			Class.forName(myDriver);
 		} catch (ClassNotFoundException e)
@@ -84,6 +88,7 @@ public class ServerControl
 	}
 
 	//Datenbank zugriff mit User erstellen
+<<<<<<< HEAD
 	
 	private void readDatabase()
 	{
@@ -164,6 +169,88 @@ public class ServerControl
 			}
 		}
 		
+=======
+
+	private void readDatabase()
+	{
+		try
+		{
+			con  = DriverManager.getConnection("jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017");
+			//String for database connection
+			Statement stmt=con.createStatement();
+			ResultSet rs=stmt.executeQuery("select u.* from user u");
+			while(rs.next())
+			{
+				mkUser(rs);
+			}
+			con.close();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			System.out.println("Fehler beim Verbinden mit der Datenbank / Datenbank Fehler");
+		}
+	}
+
+	private void mkUser(ResultSet rs)
+	{
+		User user = new User();
+		try
+		{
+			user.setId(rs.getInt(1));
+			user.setUsername(rs.getString(2));
+			user.setPassword(rs.getString(3));
+			user.setGlobalRollenNummer(rs.getInt(4));
+			user.setBanned(rs.getDate(5));
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		getUserList().add(user);
+	}
+
+	public void writeToDatabase() throws SQLException
+	{
+		try
+		{
+			con  = DriverManager.getConnection("jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017");
+			String query = "INSERT INTO user (Username, Password, Role, AccountStatus) " +
+					"VALUES (?,?,?,?)";
+			preparedStmt = con.prepareStatement(query);
+
+			for(User u : getUserList())
+			{
+				if(u.isNeu())
+				{
+					preparedStmt.setString(1,u.getUsername());
+					preparedStmt.setString(2,u.getPassword());
+					preparedStmt.setInt(3,u.getGlobalRollenNummer());
+					preparedStmt.setDate(4,u.isBanned());
+					preparedStmt.executeUpdate();
+				}
+			}
+
+
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+
+			if (preparedStmt != null) {
+				preparedStmt.close();
+			}
+
+			if (con != null) {
+				con.close();
+			}
+		}
+
+>>>>>>> branch 'master' of https://github.com/fi2017/chat.git
 	}
 
 	public void stoppeServer()
@@ -258,26 +345,26 @@ public class ServerControl
 				System.out.println("Habe Nachricht vom User erhalten!");
 				switch (((Uebertragung) uebertragungObjekt).getZweck())
 				{
-				case 1:
-					sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
+					case 1:
+						sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
 
-					break;
+						break;
 
-				case 2:
-					if (uebertragung.getUebertragung() instanceof Nachricht)
-					{
-						getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-						broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
-					}
+					case 2:
+						if (uebertragung.getUebertragung() instanceof Nachricht)
+						{
+							getNachrichten().add((Nachricht) uebertragung.getUebertragung());
+							broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
+						}
 
-					break;
+						break;
 
-				case 3:
-					sendeNachrichtAnClient(new Uebertragung(0, null), client);
+					case 3:
+						sendeNachrichtAnClient(new Uebertragung(0, null), client);
 
-				default:
-					//
-					break;
+					default:
+						//
+						break;
 				}
 			} else
 			{

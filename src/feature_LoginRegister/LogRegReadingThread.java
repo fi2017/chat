@@ -4,7 +4,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.SocketException;
 
-import chatFPAUebung.gui.client.ClientControl;
+import chatFPAUebung.gui.client.clientMain.ClientControl;
 import chatFPAUebung.threads.ClientReadingThread;
 
 public class LogRegReadingThread extends Thread

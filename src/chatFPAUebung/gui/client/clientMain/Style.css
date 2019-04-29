@@ -1,0 +1,108 @@
+.Font {
+    -fx-font-family: 'Poiret One';
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+
+.MenuBar {
+    /*-fx-background-color:  linear-gradient(to right, #5b5da5, #afb9e6);*/
+    -fx-background-color:  #5b5da5;
+}
+
+.MenuButton {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-weight: 0;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.Search {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+    -fx-border-style: none;
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+}
+
+.SearchButton:hover{
+    -fx-background-color: #5b5da5;
+}
+
+.Friendlist {
+    -fx-background-color: #FFFFFF59;
+}
+
+.WindowButton {
+    -fx-background-color: #00000000;
+    -fx-background-radius: 0px;
+}
+
+.WindowButton:hover {
+    -fx-background-color: #0000005F;
+}
+
+.Chat {
+    -fx-border-style: none;
+    -fx-background-color: Transparent;
+}
+
+.AddRoom {
+    -fx-background-color:  #00000090;
+}
+
+.AddRoomPane {
+    -fx-background-color: #FFFFFF;
+}
+
+.AddRoomFont {
+    -fx-text-fill: white;
+}
+
+.AddRoomTextField {
+    -fx-font-family: 'Poiret One';
+    -fx-font-size: 16;
+    -fx-background-color: Transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 0;
+}
+
+.Room {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0;
+}
+
+.Room:hover {
+    -fx-background-color: #E9E9E9;
+}
+
+.Remove-Border {
+    -fx-background-radius: 0;
+    -fx-border-style: none;
+    -fx-background-color: Transparent;
+}
+
+.Remove-Border > .viewport {
+    -fx-background-color: transparent;
+}
+
+.ChatInput {
+    -fx-font-size: 16px;
+}
+
+
+.MessageRecieved {
+    -fx-background-color: #5b5da5;
+}
+
+.MessageSent {
+    -fx-background-color: #F5F5F5;
+}
+
+.DropShadow {
+    -fx-effect: dropshadow(three-pass-box, #00000059, 40, 0, 0, 0);
+}
+
+.ImageDropShadow {
+    -fx-effect: dropshadow(three-pass-box, #000000, 15, 0, 0, 0);
+}

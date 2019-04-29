@@ -3,7 +3,7 @@ package chatFPAUebung.threads;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import chatFPAUebung.gui.client.ClientControl;
+import chatFPAUebung.gui.client.clientMain.ClientControl;
 import chatFPAUebung.klassen.Uebertragung;
 
 public class ClientWritingThread extends Thread
