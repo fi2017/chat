@@ -31,7 +31,6 @@ public class ServerControl
 	private ArrayList<Nachricht> nachrichten;
 
 	private ArrayList<Ban> bans;
-
 	// Konstruktor
 	public ServerControl()
 	{
@@ -89,7 +88,7 @@ public class ServerControl
 	{
 		try
 		{
-			con  = DriverManager.getConnection("jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017");
+			con  = DriverManager.getConnection("jdbc:mariadb://localhost/fi2017_chatdb?user=root");
 			//String for database connection
 			Statement stmt=con.createStatement();
 			ResultSet rs=stmt.executeQuery("select u.* from user u");
@@ -129,7 +128,7 @@ public class ServerControl
 	{
 		try
 		{
-			con  = DriverManager.getConnection("jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017");
+			con  = DriverManager.getConnection("jdbc:mariadb://localhost/fi2017_chatdb?user=root");
 			String query = "INSERT INTO user (Username, Password, Role, AccountStatus) " +
 					"VALUES (?,?,?,?)";
 			preparedStmt = con.prepareStatement(query);

@@ -12,7 +12,78 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane fx:id="parentContainer" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.startScene.Controller">
+<?import javafx.scene.control.TextField?>
+<Pane fx:id="parentContainer" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.loginMenu.startScene.Controller">
+    <GridPane fx:id="gridContainerLogin" prefHeight="400.0" prefWidth="350.0" styleClass="body" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+        <columnConstraints>
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="28.0" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints prefHeight="100.0" />
+        </rowConstraints>
+        <children>
+            <Pane GridPane.rowIndex="1">
+                <Label layoutX="50.0" layoutY="42.0" styleClass="BelowLabel" GridPane.rowIndex="1">USERNAME</Label>
+                <TextField fx:id="textFieldUsernameLogin" layoutX="50.0" layoutY="63.0" styleClass="TextFieldLogin" GridPane.rowIndex="2" />
+                <Label layoutX="50.0" layoutY="162.0" styleClass="BelowLabel" GridPane.rowIndex="3">PASSWORD</Label>
+                <TextField fx:id="textFieldPasswordLogin" layoutX="50.0" layoutY="183.0" styleClass="TextFieldLogin" GridPane.rowIndex="4" />
+                <Button fx:id="backButtonLogin" layoutX="300.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="BackButton">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/back.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="BottomPane" GridPane.rowIndex="2">
+                <Button fx:id="loginButtonLogin" layoutX="25.0" layoutY="25.0" prefWidth="300.0" styleClass="PaneButton">Login</Button>
+            </Pane>
+        </children>
+
+        <stylesheets>
+            <URL value="@../stylesheet.css" />
+        </stylesheets>
+    </GridPane>
+
+    <GridPane fx:id="gridContainerRegister" prefHeight="400.0" prefWidth="350.0" styleClass="body" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+        <columnConstraints>
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="28.0" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints prefHeight="100.0" />
+        </rowConstraints>
+        <children>
+            <Pane GridPane.rowIndex="1">
+                <Label layoutX="50.0" layoutY="42.0" styleClass="BelowLabel" GridPane.rowIndex="1">USERNAME</Label>
+                <TextField fx:id="textFieldUsernameRegister" layoutX="50.0" layoutY="63.0" styleClass="TextFieldLogin" GridPane.rowIndex="2" />
+                <Label layoutX="50.0" layoutY="162.0" styleClass="BelowLabel" GridPane.rowIndex="3">PASSWORD</Label>
+                <TextField fx:id="textFieldPasswordRegister" layoutX="50.0" layoutY="183.0" styleClass="TextFieldLogin" GridPane.rowIndex="4" />
+                <Button fx:id="backButtonRegister" layoutX="300.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="BackButton">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/back.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="BottomPane" GridPane.rowIndex="2">
+                <Button fx:id="registerButtonRegister" layoutX="25.0" layoutY="25.0" prefWidth="300.0" styleClass="PaneButton">Register</Button>
+            </Pane>
+        </children>
+
+        <stylesheets>
+            <URL value="@../stylesheet.css" />
+        </stylesheets>
+    </GridPane>
+
 <GridPane fx:id="gridContainer" prefHeight="400.0" prefWidth="350.0" styleClass="body" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
