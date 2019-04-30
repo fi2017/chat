@@ -67,4 +67,9 @@ public class Uebertragung implements Serializable
 	{
 		return this.uebertragungszeitpunkt;
 	}
+	
+	public Object getUser()
+	{
+		return user;
+	}
 }
