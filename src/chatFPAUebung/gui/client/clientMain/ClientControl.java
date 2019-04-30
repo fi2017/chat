@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.*;
 import chatFPAUebung.klassen.Chatroom;
+import chatFPAUebung.feature_LoginRegister.User;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
@@ -73,6 +74,7 @@ public class ClientControl implements Initializable
 
     private double xOffset;
     private double yOffset;
+    private User user;
     private DefaultListModel<Nachricht> listModel;
     private Socket clientSocket;
     private ObjectOutputStream outToServer;
@@ -730,5 +732,15 @@ public class ClientControl implements Initializable
     public void setListmodels(ArrayList<DefaultListModel> listmodels)
     {
         this.listmodels = listmodels;
+    }
+    
+    public void setUser(User user)
+    {
+    	this.user = user;
+    }
+    
+    public User getUser()
+    {
+    	return this.user;
     }
 }

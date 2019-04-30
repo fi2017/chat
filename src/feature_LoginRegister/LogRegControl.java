@@ -66,6 +66,7 @@ public class LogRegControl
 			{
 				case 1://wenn login erfolgreich
 /*					ClientControl control= new ClientControl(this);
+ * 					control.setUser(((User)((Uebertragung)uebertragungObjekt).getUser()));
 					control.setClientSocket(clientSocket);
 					control.setInFromServer(inFromServer);
 					control.setOutToServer(outToServer);
