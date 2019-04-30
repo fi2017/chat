@@ -274,6 +274,11 @@ public class ServerControl
 					case 3:
 						sendeNachrichtAnClient(new Uebertragung(0, null), client);
 
+						//TODO: Hier fehlt case 4: indem der erstellte Chatroom einer liste hinzugefügt wird.
+						// Diese Liste wird einen neuen Benutzer beim einloggen dann gegeben, damit der den Chatrooms auch beitreten kann
+						// Oder der Client sendet seine Eingabe (Name vom Chatroom) an den Server, der dann alles erledigt und nur den einen
+						// zurück gibt.
+
 					default:
 						//
 						break;

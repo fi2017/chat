@@ -195,8 +195,7 @@ public class ClientControl implements Initializable
                         createRecievedMessage(txtFieldChat.getText());
                 }
             }*/
-            System.out.println(getActiveChatroom().getContainer().isVisible());
-            System.out.println(getActiveChatroom().getScrollPane().isVisible());
+            createSentMessage(txtFieldChat.getText());
             sendeNachricht(getActiveChatroom().getId());
             txtFieldChat.setText("");
         });
@@ -446,19 +445,11 @@ public class ClientControl implements Initializable
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        //        ImageView i = new ImageView("file:" + ((File)User.img).getAbsolutePath());
-        //        i.setFitWidth(50);
-        //        i.setFitHeight(50);
-        //        i.setX(5);
-        //        i.setY(5);
-
-        Rectangle tmp = new Rectangle();
-        tmp.setWidth(50);
-        tmp.setHeight(50);
-        tmp.setX(5);
-        tmp.setY(5);
-        tmp.setFill(Color.BLACK);
-        tmp.getStyleClass().add("ImageDropShadow");
+        ImageView i = new ImageView("file:C:/Schule/wichtig.jpg");
+        i.setFitWidth(50);
+        i.setFitHeight(50);
+        i.setX(5);
+        i.setY(5);
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -476,7 +467,7 @@ public class ClientControl implements Initializable
         txtPane.setPadding(new Insets(0, 0, 10, 0));
 
         p.getChildren().add(txtPane);
-        p.getChildren().add(tmp);
+        p.getChildren().add(i);
 
 
 
@@ -488,19 +479,11 @@ public class ClientControl implements Initializable
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        //        ImageView i = new ImageView("file:" + ((File)User.img).getAbsolutePath());
-        //        i.setFitWidth(50);
-        //        i.setFitHeight(50);
-        //        i.setX(5);
-        //        i.setY(5);
-
-        Rectangle tmp = new Rectangle();
-        tmp.setWidth(50);
-        tmp.setHeight(50);
-        tmp.setX(795);
-        tmp.setY(5);
-        tmp.setFill(Color.BLACK);
-        tmp.getStyleClass().add("ImageDropShadow");
+        ImageView i = new ImageView("file:C:/Schule/wichtig.jpg");
+        i.setFitWidth(50);
+        i.setFitHeight(50);
+        i.setX(745);
+        i.setY(5);
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -509,8 +492,8 @@ public class ClientControl implements Initializable
         t.setFill(Color.BLACK);
 
         Pane txtPane = new Pane();
-        txtPane.setPrefWidth(300);
-        txtPane.setLayoutX(525);
+        txtPane.setPrefWidth(275);
+        txtPane.setLayoutX(500);
         txtPane.setLayoutY(25);
         txtPane.getStyleClass().add("MessageSent");
         txtPane.getStyleClass().add("DropShadow");
@@ -518,7 +501,7 @@ public class ClientControl implements Initializable
         txtPane.setPadding(new Insets(0, 0, 15, 0));
 
         p.getChildren().add(txtPane);
-        p.getChildren().add(tmp);
+        p.getChildren().add(i);
 
 
         Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
@@ -553,7 +536,6 @@ public class ClientControl implements Initializable
         online.setFill(Color.GREEN);
         p.getChildren().add(b);
         p.getChildren().add(online);
-
     }
 
     public Chatroom getActiveChatroom()

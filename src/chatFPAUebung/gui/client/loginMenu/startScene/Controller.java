@@ -229,7 +229,7 @@ public class Controller implements Initializable
                         try
                         {
                             Stage primaryStage = new Stage();
-                            Parent root = FXMLLoader.load(getClass().getResource("../../clientMain/sample.fxml"));
+                            Parent root = FXMLLoader.load(getClass().getResource("../../clientMain/clientGUI.fxml"));
                             Scene s = new Scene(root);
                             s.getStylesheets().add("http://fonts.googleapis.com/css?family=Gafata");
                             primaryStage.setTitle("Chat");
