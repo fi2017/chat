@@ -69,6 +69,7 @@ public class ClientControl implements Initializable
     public AnchorPane paneChat;
     public TextField txtFieldChat;
     public ScrollPane scrollPaneChat;
+    public Button btnAttatchment;
 
 
     private double xOffset;
@@ -198,6 +199,17 @@ public class ClientControl implements Initializable
             createSentMessage(txtFieldChat.getText());
             sendeNachricht(getActiveChatroom().getId());
             txtFieldChat.setText("");
+        });
+
+        btnAttatchment.setOnAction(e -> {
+            FileChooser fc = new FileChooser();
+            FileChooser.ExtensionFilter png = new FileChooser.ExtensionFilter("Image Files (*.png)", "*.png");
+            FileChooser.ExtensionFilter jpg = new FileChooser.ExtensionFilter("Image Files (*.jpg)", "*.jpg");
+            FileChooser.ExtensionFilter gif = new FileChooser.ExtensionFilter("Image Files (*.gif)", "*.gif");
+            fc.getExtensionFilters().add(png);
+            fc.getExtensionFilters().add(jpg);
+            fc.getExtensionFilters().add(gif);
+            File img = fc.showOpenDialog(friendList.getScene().getWindow());
         });
     }
 
@@ -360,8 +372,13 @@ public class ClientControl implements Initializable
     private void createRoom(Chatroom c)
     {
         FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter png = new FileChooser.ExtensionFilter("Image Files (*.png)", "*.png");
+        FileChooser.ExtensionFilter jpg = new FileChooser.ExtensionFilter("Image Files (*.jpg)", "*.jpg");
+        FileChooser.ExtensionFilter gif = new FileChooser.ExtensionFilter("Image Files (*.gif)", "*.gif");
+        fc.getExtensionFilters().add(png);
+        fc.getExtensionFilters().add(jpg);
+        fc.getExtensionFilters().add(gif);
         File img = fc.showOpenDialog(friendList.getScene().getWindow());
-
         c.setImage(img);
 
         ImageView i = new ImageView("file:" + c.getImage().getAbsolutePath());
