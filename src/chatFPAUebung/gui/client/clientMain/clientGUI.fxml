@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="700.0" maxWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.clientMain.ClientControl">
+<AnchorPane fx:id="paneBackground" maxHeight="700.0" maxWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.clientMain.ClientControl">
    <children>
       <AnchorPane fx:id="paneChat" layoutX="350.0" layoutY="50.0" prefHeight="650.0" prefWidth="850.0" styleClass="Chat">
          <children>

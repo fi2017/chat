@@ -19,6 +19,7 @@ import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -68,8 +69,8 @@ public class ClientControl implements Initializable
     public Button btnSearchRoom;
     public AnchorPane paneChat;
     public TextField txtFieldChat;
-    public ScrollPane scrollPaneChat;
     public Button btnAttatchment;
+    public AnchorPane paneBackground;
 
 
     private double xOffset;
@@ -179,7 +180,7 @@ public class ClientControl implements Initializable
         txtFieldChat.setOnAction(e -> {
 
             //TODO:
-            // Hier muss ich jetzt eigentlich die Nachricht and den Server senden, aber ich brauchen den ajktuellen USer
+            // Hier muss ich jetzt eigentlich die Nachricht and den Server senden, aber ich brauchen den aktuellen User
 
 /*            //TODO:
             // Aktuell nur Temporär, der Funktionsaufruf muss dann ins Protokoll kommen, wo man eine Nachricht erhält.
@@ -196,7 +197,9 @@ public class ClientControl implements Initializable
                         createRecievedMessage(txtFieldChat.getText());
                 }
             }*/
+            //TODO: Temporär, bis das Protokoll gefixt wird.
             createSentMessage(txtFieldChat.getText());
+
             sendeNachricht(getActiveChatroom().getId());
             txtFieldChat.setText("");
         });
@@ -210,6 +213,9 @@ public class ClientControl implements Initializable
             fc.getExtensionFilters().add(jpg);
             fc.getExtensionFilters().add(gif);
             File img = fc.showOpenDialog(friendList.getScene().getWindow());
+
+            //TODO: Bild muss erst an den Server gesendet werden. -> Chatroom / Joshua muss sich drum kümmern.
+            createSentImage(img);
         });
     }
 
@@ -384,9 +390,8 @@ public class ClientControl implements Initializable
         ImageView i = new ImageView("file:" + c.getImage().getAbsolutePath());
         i.setFitWidth(50);
         i.setFitHeight(50);
-
-
-
+        i.setSmooth(true);
+        i.setPreserveRatio(false);
         Pane p = new Pane();
         p.setMinSize(350, 50);
         p.setPrefSize(350, 50);
@@ -462,11 +467,13 @@ public class ClientControl implements Initializable
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        ImageView i = new ImageView("file:C:/Schule/wichtig.jpg");
+        ImageView i = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
         i.setFitWidth(50);
         i.setFitHeight(50);
         i.setX(5);
         i.setY(5);
+        i.setSmooth(true);
+        i.setPreserveRatio(false);
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -496,11 +503,13 @@ public class ClientControl implements Initializable
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        ImageView i = new ImageView("file:C:/Schule/wichtig.jpg");
+        ImageView i = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
         i.setFitWidth(50);
         i.setFitHeight(50);
         i.setX(745);
         i.setY(5);
+        i.setSmooth(true);
+        i.setPreserveRatio(false);
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -519,6 +528,63 @@ public class ClientControl implements Initializable
 
         p.getChildren().add(txtPane);
         p.getChildren().add(i);
+
+
+        Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
+    }
+
+    private void createSentImage(File imgFile) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
+    {
+        Pane p = new Pane();
+        //TODO: Auf User-Klasse warten...
+        ImageView sender = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
+        sender.setFitWidth(50);
+        sender.setFitHeight(50);
+        sender.setX(745);
+        sender.setY(5);
+        sender.setSmooth(true);
+        sender.setPreserveRatio(false);
+
+
+        ImageView img = new ImageView("file:" + imgFile.getAbsolutePath());
+        img.setFitWidth(225);
+        img.setFitHeight(225);
+        img.setSmooth(true);
+        img.setPreserveRatio(true);
+        img.setOnMouseClicked(e -> {
+            Pane bigImagePane = new Pane();
+            ImageView bigImg = new ImageView("file:"+ imgFile.getAbsolutePath());
+            bigImg.setSmooth(true);
+            bigImg.setPreserveRatio(true);
+            //TODO: Entweder so, dass das komplette Programm ausgefüllt wird, oder in Originalgröße (Kann zu groß sein.)
+            // oder mit einen extra neuen Fenster.
+            // evtl. auch noch ein Übergang... wenn ich noch Zeit habe.
+            bigImg.setFitWidth(1200);
+            bigImg.setFitHeight(800);
+
+            bigImagePane.getChildren().add(bigImg);
+
+
+
+            bigImagePane.setOnMouseClicked(event -> {
+                paneBackground.getChildren().remove(bigImagePane);
+            });
+
+            paneBackground.getChildren().add(bigImagePane);
+        });
+
+        Pane imgPane = new Pane();
+        imgPane.setPrefWidth(275);
+        imgPane.setLayoutX(500);
+        imgPane.setLayoutY(25);
+        imgPane.getStyleClass().add("MessageSent");
+        imgPane.getStyleClass().add("DropShadow");
+        imgPane.getChildren().add(img);
+        imgPane.setPadding(new Insets(0, 0, 15, 0));
+
+
+        p.getChildren().add(imgPane);
+        p.getChildren().add(sender);
 
 
         Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
