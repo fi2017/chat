@@ -23,25 +23,25 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="279" column="113" selection-start-line="279" selection-start-column="113" selection-end-line="279" selection-end-column="113" />
+            <state relative-caret-position="272">
+              <caret line="345" column="59" selection-start-line="345" selection-start-column="59" selection-end-line="345" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1222#1232#0" expanded="true" />
                 <element signature="e#1813#1814#0" expanded="true" />
                 <element signature="e#1839#1840#0" expanded="true" />
-                <element signature="e#8785#8786#0" expanded="true" />
-                <element signature="e#8865#8866#0" expanded="true" />
-                <element signature="e#8934#8935#0" expanded="true" />
-                <element signature="e#8989#8990#0" expanded="true" />
-                <element signature="e#9076#9077#0" expanded="true" />
-                <element signature="e#9136#9137#0" expanded="true" />
-                <element signature="e#9225#9226#0" expanded="true" />
-                <element signature="e#9428#9429#0" expanded="true" />
-                <element signature="e#9518#9519#0" expanded="true" />
-                <element signature="e#9582#9583#0" expanded="true" />
-                <element signature="e#9668#9669#0" expanded="true" />
-                <element signature="e#9838#9839#0" expanded="true" />
+                <element signature="e#9152#9153#0" expanded="true" />
+                <element signature="e#9232#9233#0" expanded="true" />
+                <element signature="e#9301#9302#0" expanded="true" />
+                <element signature="e#9356#9357#0" expanded="true" />
+                <element signature="e#9443#9444#0" expanded="true" />
+                <element signature="e#9503#9504#0" expanded="true" />
+                <element signature="e#9592#9593#0" expanded="true" />
+                <element signature="e#9795#9796#0" expanded="true" />
+                <element signature="e#9885#9886#0" expanded="true" />
+                <element signature="e#9949#9950#0" expanded="true" />
+                <element signature="e#10035#10036#0" expanded="true" />
+                <element signature="e#10205#10206#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -492,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556711984884</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="bug fixes">
+      <created>1556718720858</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1556718720858</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -610,7 +617,8 @@
     <MESSAGE value="lots of bug fixes lots of them!!!" />
     <MESSAGE value="other stuff added" />
     <MESSAGE value="clientproxy kenn nun den user" />
-    <option name="LAST_COMMIT_MESSAGE" value="clientproxy kenn nun den user" />
+    <MESSAGE value="bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chatFPAUebung$Main__3_.ic" NAME="Main (3) Coverage Results" MODIFIED="1556465260282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -978,25 +986,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="279" column="113" selection-start-line="279" selection-start-column="113" selection-end-line="279" selection-end-column="113" />
+        <state relative-caret-position="272">
+          <caret line="345" column="59" selection-start-line="345" selection-start-column="59" selection-end-line="345" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1222#1232#0" expanded="true" />
             <element signature="e#1813#1814#0" expanded="true" />
             <element signature="e#1839#1840#0" expanded="true" />
-            <element signature="e#8785#8786#0" expanded="true" />
-            <element signature="e#8865#8866#0" expanded="true" />
-            <element signature="e#8934#8935#0" expanded="true" />
-            <element signature="e#8989#8990#0" expanded="true" />
-            <element signature="e#9076#9077#0" expanded="true" />
-            <element signature="e#9136#9137#0" expanded="true" />
-            <element signature="e#9225#9226#0" expanded="true" />
-            <element signature="e#9428#9429#0" expanded="true" />
-            <element signature="e#9518#9519#0" expanded="true" />
-            <element signature="e#9582#9583#0" expanded="true" />
-            <element signature="e#9668#9669#0" expanded="true" />
-            <element signature="e#9838#9839#0" expanded="true" />
+            <element signature="e#9152#9153#0" expanded="true" />
+            <element signature="e#9232#9233#0" expanded="true" />
+            <element signature="e#9301#9302#0" expanded="true" />
+            <element signature="e#9356#9357#0" expanded="true" />
+            <element signature="e#9443#9444#0" expanded="true" />
+            <element signature="e#9503#9504#0" expanded="true" />
+            <element signature="e#9592#9593#0" expanded="true" />
+            <element signature="e#9795#9796#0" expanded="true" />
+            <element signature="e#9885#9886#0" expanded="true" />
+            <element signature="e#9949#9950#0" expanded="true" />
+            <element signature="e#10035#10036#0" expanded="true" />
+            <element signature="e#10205#10206#0" expanded="true" />
           </folding>
         </state>
       </provider>

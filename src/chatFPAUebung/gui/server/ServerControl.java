@@ -339,10 +339,36 @@ public class ServerControl implements ServerRemoteControl
 
 	public void broadcasteNachricht(Nachricht nachricht, int ziel)
 	{
-		for (ClientProxy aktClient : chatrooms[ziel].getTeilnehmer())
+		if(ziel==-1)
 		{
-			sendeNachrichtAnClient(new Uebertragung(2, ziel, nachricht), aktClient);
+			for (Chatroom value :chatrooms)
+			{
+				broadcasteNachricht(nachricht,value.getId());
+			}
 		}
+		else
+		{
+			Chatroom chatroom = getChatroom(ziel);
+			if (chatroom != null)
+			{
+				for (ClientProxy aktClient : getChatroom(ziel).getTeilnehmer())
+				{
+					sendeNachrichtAnClient(new Uebertragung(2, ziel, nachricht), aktClient);
+				}
+			}
+		}
+	}
+
+	public Chatroom getChatroom(int id)
+	{
+		for (Chatroom value : chatrooms)
+		{
+			if(value.getId()==id)
+			{
+				return value;
+			}
+		}
+		return null;
 	}
 
 	public void sendeNachrichtAnClient(Uebertragung uebertragung, ClientProxy client)
