@@ -300,6 +300,19 @@ public class ServerControl implements ServerRemoteControl
 						}
 						break;
 
+                    case 5:
+
+                        Chatroom chatroom = getChatroom(uebertragungObjekt.getZiel());
+                        if (chatroom != null)
+                        {
+                            if(chatroom.getMaxTeilnehmer()>chatroom.getTeilnehmer().size())
+                            {
+                                chatroom.hinzufuegen(client);
+                            }
+
+                        }
+                        break;
+
 					default:
 						//
 						break;
