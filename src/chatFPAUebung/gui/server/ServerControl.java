@@ -31,7 +31,6 @@ public class ServerControl
 	private ArrayList<Nachricht> nachrichten;
 
 	private ArrayList<Ban> bans;
-
 	// Konstruktor
 	public ServerControl()
 	{
@@ -175,7 +174,7 @@ public class ServerControl
 	{
 		try
 		{
-			con  = DriverManager.getConnection("jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017");
+			con  = DriverManager.getConnection("jdbc:mariadb://localhost/fi2017_chatdb?user=root");
 			//String for database connection
 			Statement stmt=con.createStatement();
 			ResultSet rs=stmt.executeQuery("select u.* from user u");
@@ -215,7 +214,7 @@ public class ServerControl
 	{
 		try
 		{
-			con  = DriverManager.getConnection("jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017");
+			con  = DriverManager.getConnection("jdbc:mariadb://localhost/fi2017_chatdb?user=root");
 			String query = "INSERT INTO user (Username, Password, Role, AccountStatus) " +
 					"VALUES (?,?,?,?)";
 			preparedStmt = con.prepareStatement(query);
@@ -361,6 +360,11 @@ public class ServerControl
 
 					case 3:
 						sendeNachrichtAnClient(new Uebertragung(0, null), client);
+
+						//TODO: Hier fehlt case 4: indem der erstellte Chatroom einer liste hinzugefügt wird.
+						// Diese Liste wird einen neuen Benutzer beim einloggen dann gegeben, damit der den Chatrooms auch beitreten kann
+						// Oder der Client sendet seine Eingabe (Name vom Chatroom) an den Server, der dann alles erledigt und nur den einen
+						// zurück gibt.
 
 					default:
 						//

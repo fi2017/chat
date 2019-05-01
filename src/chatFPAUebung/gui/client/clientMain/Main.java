@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("clientGUI.fxml"));
         Scene s = new Scene(root);
         s.getStylesheets().add("http://fonts.googleapis.com/css?family=Gafata");
         primaryStage.setTitle("Chat");

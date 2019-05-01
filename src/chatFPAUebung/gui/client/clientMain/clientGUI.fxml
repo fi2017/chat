@@ -20,12 +20,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="700.0" maxWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.clientMain.ClientControl">
+<AnchorPane fx:id="paneBackground" maxHeight="700.0" maxWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.clientMain.ClientControl">
    <children>
       <AnchorPane fx:id="paneChat" layoutX="350.0" layoutY="50.0" prefHeight="650.0" prefWidth="850.0" styleClass="Chat">
          <children>
             <TextField fx:id="txtFieldChat" layoutX="75.0" layoutY="605.0" maxHeight="40.0" maxWidth="500.0" prefHeight="40.0" prefWidth="500.0" style="-fx-background-radius: 100; -fx-border-style: none; -fx-background-color: #00000010;" styleClass="ChatInput" />
             <ScrollPane hbarPolicy="NEVER" prefHeight="600.0" prefWidth="850.0" styleClass="Remove-Border" vbarPolicy="NEVER" vvalue="1.0" />
+            <Button fx:id="btnAttatchment" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="600.0" layoutY="602.0" maxHeight="47.0" maxWidth="47.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="47.0" style="-fx-background-color: #00000010; -fx-background-radius: 100;" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/attachment.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children></AnchorPane>
       <VBox fx:id="friendList" layoutY="50.0" maxWidth="350.0" prefHeight="650.0" prefWidth="350.0" styleClass="Friendlist" visible="false">
          <children>
@@ -43,7 +55,7 @@
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@add.png" />
+                              <Image url="@images/add.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -77,7 +89,7 @@
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@add.png" />
+                              <Image url="@images/add.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -105,10 +117,10 @@
       </VBox>
       <ImageView fx:id="addRoomBackground" fitHeight="650.0" fitWidth="350.0" layoutX="850.0" layoutY="50.0" mouseTransparent="true" opacity="0.25" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@room.png" />
+            <Image url="@images/room.png" />
          </image>
       </ImageView>
-      <VBox fx:id="addRoom" layoutX="850.0" layoutY="50.0" maxWidth="350.0" prefHeight="650.0" prefWidth="350.0" styleClass="AddRoom">
+      <VBox fx:id="addRoom" layoutX="850.0" layoutY="50.0" maxWidth="350.0" prefHeight="650.0" prefWidth="350.0" styleClass="AddRoom" visible="false">
          <children>
             <Label fx:id="labelAddRoomName" style="-fx-font-size: 15;" text="GRUPPENNAME" textFill="WHITE">
                <VBox.margin>
@@ -174,7 +186,7 @@
                  <graphic>
                      <ImageView fitHeight="15.0" fitWidth="15.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                          <image>
-                             <Image url="@min.png" />
+                             <Image url="@images/min.png" />
                          </image>
                   </ImageView>
                  </graphic>
@@ -186,7 +198,7 @@
                  <graphic>
                      <ImageView fitHeight="15.0" fitWidth="15.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                          <image>
-                             <Image url="@close.png" />
+                             <Image url="@images/close.png" />
                          </image>
                   </ImageView>
                  </graphic>
@@ -239,7 +251,7 @@
                <graphic>
                   <ImageView fx:id="returnArrow" fitHeight="34.0" fitWidth="34.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@return.png" />
+                        <Image url="@images/return.png" />
                      </image>
                   </ImageView>
                </graphic>
