@@ -95,7 +95,7 @@ public class ServerControl
 		try
 		{
 			con = DriverManager.getConnection(dbURL);
-			//String for database connection  
+			//String for database connection
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("select u.* from user u");
 			while (rs.next())
