@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.loginMenu.settingsStage.ControllerSettings">
+<Pane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.loginMenu.settingsStage.ControllerSettings">
    <children>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="body">
         <columnConstraints>
@@ -33,7 +33,7 @@
          <children>
             <FlowPane fx:id="menuBar" alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="200.0" styleClass="MenuBar" GridPane.columnSpan="2147483647">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="28.0" text="Confirm" styleClass="confirmButton"/>
+                  <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="28.0" styleClass="confirmButton" text="Confirm" />
                   <Button fx:id="minimizeButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="40.0" styleClass="MenuBarButton">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -54,7 +54,7 @@
                   </Button>
                </children>
             </FlowPane>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="BottomPane" GridPane.rowIndex="1">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="BottomPane" translateY="8.0" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="generalSettings" mnemonicParsing="false" styleClass="leftSetting">
                      <graphic>
@@ -86,10 +86,10 @@
                   </Button>
                </children>
             </VBox>
-            <Pane fx:id="generalPane" prefHeight="200.0" prefWidth="200.0" styleClass="rightPane" translateX="610.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Pane fx:id="generalPane" prefHeight="200.0" prefWidth="200.0" styleClass="rightPane" translateX="610.0" translateY="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
 
             </Pane>
-            <Pane fx:id="uiPane" prefHeight="200.0" prefWidth="200.0" styleClass="rightPane" translateX="610.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Pane fx:id="uiPane" prefHeight="200.0" prefWidth="200.0" styleClass="rightPane" translateX="610.0" translateY="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <Label layoutX="14.0" layoutY="37.0" styleClass="rightLabel" text="Theme:" />
                <ComboBox fx:id="themeComboBox" layoutX="87.0" layoutY="30.0" prefHeight="44.0" prefWidth="200.0" />
             </Pane>
