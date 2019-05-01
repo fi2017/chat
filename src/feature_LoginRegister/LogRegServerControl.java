@@ -24,11 +24,8 @@ public class LogRegServerControl extends Thread
 	private ArrayList<ClientProxy> clients;
 	private ArrayList<AdminProxy> adminProxies = new ArrayList<>();
 
-
-
 	public LogRegServerControl(ServerControl control, ArrayList<ClientProxy> clients)
 	{
-
 		setControl(control);
 		setClients(clients);
 

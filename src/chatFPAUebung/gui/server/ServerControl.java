@@ -302,7 +302,7 @@ public class ServerControl implements ServerRemoteControl
 
                     case 5:
 
-                        Chatroom chatroom = getChatroom(uebertragungObjekt.getZiel());
+                        Chatroom chatroom = getChatroom(((Uebertragung) uebertragungObjekt).getZiel());
                         if (chatroom != null)
                         {
                             if(chatroom.getMaxTeilnehmer()>chatroom.getTeilnehmer().size())

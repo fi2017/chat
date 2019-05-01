@@ -4,6 +4,7 @@ package chatFPAUebung.gui.client.clientMain;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.rmi.activation.ActivationGroup_Stub;
 import java.time.LocalDateTime;
@@ -82,8 +83,8 @@ public class ClientControl implements Initializable
     private ObjectOutputStream outToServer;
     private ObjectInputStream inFromServer;
     private ClientReadingThread clientReadingThread;
-    private ArrayList<Chatroom> chatrooms = new ArrayList<Chatroom>();
-    private ArrayList<DefaultListModel> listmodels = new ArrayList<DefaultListModel>();
+    private ArrayList<Chatroom> chatrooms = new ArrayList<>();
+    private ArrayList<DefaultListModel> listmodels = new ArrayList<>();
 
 
     int i = 0;
@@ -311,7 +312,7 @@ public class ClientControl implements Initializable
                 outToServer.writeObject(neuerchatroom);
                 outToServer.flush();
                 chatrooms.add(chat);
-                createRoom(chat);
+
             }
             catch(Exception e)
             {
@@ -320,12 +321,7 @@ public class ClientControl implements Initializable
         }
     }
 
-    //Listmodel wechseln in Gui
-    //TODO: Bin mir nicht sicher, was ich hier machen soll :D bzw. wofür die Methode ist^^
-    public void switchModel()
-    {
 
-    }
 
     //Chatrooms Ende
 
@@ -334,9 +330,15 @@ public class ClientControl implements Initializable
         (new ClientWritingThread(uebertragung, getOutToServer())).run();
     }
 
-    public void createAllChatrooms(ArrayList<Chatroom> c)
+    public void createAllChatrooms(ArrayList<Chatroom> chat)
     {
+        this.chatrooms = chat;
 
+        for(Chatroom c : chatrooms)
+        {
+            vBoxRoom.getChildren().removeAll();
+            createRoom(c);
+        }
     }
 
     public void createAllMessages(ArrayList<Uebertragung> uebertragungen)
@@ -396,6 +398,7 @@ public class ClientControl implements Initializable
 
         b.setOnMouseClicked(e -> {
             //TODO: Hier dann eine Übertragung an den Server senden, in der man den Chatroom beitritt?
+            beitrittChatroom(c.getId());
             openChatroom(e.getSource());
         });
 
@@ -446,9 +449,17 @@ public class ClientControl implements Initializable
     }
     public void beitrittChatroom(int chatroomID)
     {
-        Uebertragung beitrittsversuch = new Uebertragung(5, chatroomID,null);
-        outToServer.writeObject(beitrittsversuch);
-        outToServer.flush();
+        try
+        {
+            Uebertragung beitrittsversuch = new Uebertragung(5, chatroomID,null);
+            outToServer.writeObject(beitrittsversuch);
+            outToServer.flush();
+            System.err.println("In funktion betrittChatroom");
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
