@@ -96,7 +96,7 @@
   </rowConstraints>
    <children>
       <FlowPane fx:id="menuBar" alignment="TOP_RIGHT" prefHeight="113.0" prefWidth="400.0" styleClass="MenuBar">
-          <!--<Button fx:id="settingsButton" prefHeight="24.0" prefWidth="30.0" styleClass="MenuBarButton">
+          <Button fx:id="settingsButton" prefHeight="24.0" prefWidth="30.0" styleClass="MenuBarButton">
               <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                       <image>
@@ -104,7 +104,7 @@
                       </image>
                   </ImageView>
               </graphic>
-          </Button>-->
+          </Button>
           <Button fx:id="minimizeButton" prefHeight="24.0" prefWidth="30.0" styleClass="MenuBarButton">
             <graphic>
                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">

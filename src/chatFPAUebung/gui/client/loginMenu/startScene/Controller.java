@@ -151,7 +151,6 @@ public class Controller implements Initializable
             ((Stage)closeButton.getScene().getWindow()).setIconified(true);
         });
 
-
         settingsButton.setOnAction(e -> {
             try
             {
@@ -169,7 +168,6 @@ public class Controller implements Initializable
                 ex.printStackTrace();
             }
         });
-
 
         menuBar.setOnMousePressed(e -> {
             offsetx = e.getSceneX();
