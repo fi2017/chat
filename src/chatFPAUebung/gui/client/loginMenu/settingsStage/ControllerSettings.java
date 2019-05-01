@@ -14,7 +14,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -93,6 +98,17 @@ public class ControllerSettings implements Initializable {
 
         confirmButton.setOnAction(e -> {
             Theme theme = (Theme)themeComboBox.getValue();
+
+            Path neu = Paths.get(theme.getDateiname());
+            Path original = Paths.get("../");
+
+            try
+            {
+                Files.copy(neu, original, StandardCopyOption.REPLACE_EXISTING);
+            }
+            catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 

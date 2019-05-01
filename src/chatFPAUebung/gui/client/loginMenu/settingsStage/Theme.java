@@ -17,6 +17,11 @@ public class Theme
         this.dateiname = dateiname;
     }
 
+    @Override
+    public String toString() {
+        return bezeichnung;
+    }
+
     public String getBezeichnung() {
         return bezeichnung;
     }

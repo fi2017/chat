@@ -33,7 +33,7 @@
          <children>
             <FlowPane fx:id="menuBar" alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="200.0" styleClass="MenuBar" GridPane.columnSpan="2147483647">
                <children>
-                  <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="28.0" styleClass="confirmButton" text="Confirm" />
+                  <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="28.0" styleClass="confirmButton" text="Confirm" translateY="1.0" />
                   <Button fx:id="minimizeButton" mnemonicParsing="false" prefHeight="28.0" prefWidth="40.0" styleClass="MenuBarButton">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -54,7 +54,7 @@
                   </Button>
                </children>
             </FlowPane>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="BottomPane" translateY="8.0" GridPane.rowIndex="1">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="BottomPane" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="generalSettings" mnemonicParsing="false" styleClass="leftSetting">
                      <graphic>
