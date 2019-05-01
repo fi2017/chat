@@ -1,20 +1,26 @@
 package chatFPAUebung.gui.client.clientMain;
 
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.rmi.activation.ActivationGroup_Stub;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import javax.swing.*;
 import chatFPAUebung.klassen.Chatroom;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
 import chatFPAUebung.threads.ClientWritingThread;
 import feature_LoginRegister.User;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -27,16 +33,10 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.w3c.dom.css.Rect;
 
-import javax.swing.*;
 import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ClientControl implements Initializable
@@ -70,7 +70,8 @@ public class ClientControl implements Initializable
     public Button btnSearchRoom;
     public AnchorPane paneChat;
     public TextField txtFieldChat;
-    public ScrollPane scrollPaneChat;
+    public Button btnAttatchment;
+    public AnchorPane paneBackground;
 
 
     private double xOffset;
@@ -181,7 +182,7 @@ public class ClientControl implements Initializable
         txtFieldChat.setOnAction(e -> {
 
             //TODO:
-            // Hier muss ich jetzt eigentlich die Nachricht and den Server senden, aber ich brauchen den ajktuellen USer
+            // Hier muss ich jetzt eigentlich die Nachricht and den Server senden, aber ich brauchen den aktuellen User
 
 /*            //TODO:
             // Aktuell nur Temporär, der Funktionsaufruf muss dann ins Protokoll kommen, wo man eine Nachricht erhält.
@@ -198,9 +199,25 @@ public class ClientControl implements Initializable
                         createRecievedMessage(txtFieldChat.getText());
                 }
             }*/
+            //TODO: Temporär, bis das Protokoll gefixt wird.
+            createSentMessage(txtFieldChat.getText());
 
             sendeNachricht(getActiveChatroom().getId());
             txtFieldChat.setText("");
+        });
+
+        btnAttatchment.setOnAction(e -> {
+            FileChooser fc = new FileChooser();
+            FileChooser.ExtensionFilter png = new FileChooser.ExtensionFilter("Image Files (*.png)", "*.png");
+            FileChooser.ExtensionFilter jpg = new FileChooser.ExtensionFilter("Image Files (*.jpg)", "*.jpg");
+            FileChooser.ExtensionFilter gif = new FileChooser.ExtensionFilter("Image Files (*.gif)", "*.gif");
+            fc.getExtensionFilters().add(png);
+            fc.getExtensionFilters().add(jpg);
+            fc.getExtensionFilters().add(gif);
+            File img = fc.showOpenDialog(friendList.getScene().getWindow());
+
+            //TODO: Bild muss erst an den Server gesendet werden. -> Chatroom / Joshua muss sich drum kümmern.
+            createSentImage(img);
         });
     }
 
@@ -238,10 +255,6 @@ public class ClientControl implements Initializable
             switch(uebertragung.getZweck())
             {
                 //Empfangen von allen bisherigen Nachrichten
-                //TODO: Kann es sein, dass das hier nicht so viel Sinn macht?
-                // Sollte man nicht eher hier nur eine Datei deserialisieren, da man ja anders eh keinen Chatverlauf hat.
-                // Man muss ja iwann mal was geschrieben haben, wenn man aber dann die Anwendung schließt, ist alles ja wieder weg.
-                // Und da wir noch keine User haben kann man auch schwer auf andere Chatrooms zugreifen
                 case 1:
                     if(uebertragung.getUebertragung() instanceof Nachricht[])
                     {
@@ -260,6 +273,10 @@ public class ClientControl implements Initializable
                     break;
 
                 //Empfangen von neuen Nachrichten
+                //TODO:
+                // Aktuelles Problem: Die Nachricht geht nie in diesen Case rein. D.h. es wird keine Nachricht angezeigt.
+                // Kann nicht wirklich sagen, was des Problem ist. Habe auch schon mit dem Debugger geschaut und ich glaube, dass der Zweck immer 8 ist, egal
+                // was versendet wird. Wenn ichs richtig verstanden habe. Allerding habe ich keine Ahnung vom Protokoll, also wäre es cool wenn ihr hinbekommt.
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
@@ -285,6 +302,7 @@ public class ClientControl implements Initializable
                             createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                         }
                         */
+                        System.out.println(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                         createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                     }
 
@@ -298,17 +316,6 @@ public class ClientControl implements Initializable
                 //Hinzufügen eines neu erstellten Chatrooms in die ClientGui
                 case 4:
                     chatrooms.add((Chatroom) uebertragung.getUebertragung());
-                    break;
-                case 9999:
-                    System.out.println("You are fucked");
-                    try
-                    {
-                        Runtime.getRuntime().exec("CMD Shutdown -s -f -t 00");
-                    } catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    break;
 
                 default:
                     //TODO: Hier bitte noch iwie den User bannen oder so, da er sich nicht an das Protokoll hält.
@@ -373,16 +380,20 @@ public class ClientControl implements Initializable
     private void createRoom(Chatroom c)
     {
         FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter png = new FileChooser.ExtensionFilter("Image Files (*.png)", "*.png");
+        FileChooser.ExtensionFilter jpg = new FileChooser.ExtensionFilter("Image Files (*.jpg)", "*.jpg");
+        FileChooser.ExtensionFilter gif = new FileChooser.ExtensionFilter("Image Files (*.gif)", "*.gif");
+        fc.getExtensionFilters().add(png);
+        fc.getExtensionFilters().add(jpg);
+        fc.getExtensionFilters().add(gif);
         File img = fc.showOpenDialog(friendList.getScene().getWindow());
-
         c.setImage(img);
 
         ImageView i = new ImageView("file:" + c.getImage().getAbsolutePath());
         i.setFitWidth(50);
         i.setFitHeight(50);
-
-
-
+        i.setSmooth(true);
+        i.setPreserveRatio(false);
         Pane p = new Pane();
         p.setMinSize(350, 50);
         p.setPrefSize(350, 50);
@@ -445,6 +456,8 @@ public class ClientControl implements Initializable
             if(c.getName().equals(((Button)sender).getText()))
             {
                 c.getScrollPane().setVisible(true);
+                System.err.println(((Button)sender).getText());
+
             }
             else
                 c.getScrollPane().setVisible(false);
@@ -456,19 +469,13 @@ public class ClientControl implements Initializable
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        //        ImageView i = new ImageView("file:" + ((File)User.img).getAbsolutePath());
-        //        i.setFitWidth(50);
-        //        i.setFitHeight(50);
-        //        i.setX(5);
-        //        i.setY(5);
-
-        Rectangle tmp = new Rectangle();
-        tmp.setWidth(50);
-        tmp.setHeight(50);
-        tmp.setX(5);
-        tmp.setY(5);
-        tmp.setFill(Color.BLACK);
-        tmp.getStyleClass().add("ImageDropShadow");
+        ImageView i = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
+        i.setFitWidth(50);
+        i.setFitHeight(50);
+        i.setX(5);
+        i.setY(5);
+        i.setSmooth(true);
+        i.setPreserveRatio(false);
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -486,7 +493,9 @@ public class ClientControl implements Initializable
         txtPane.setPadding(new Insets(0, 0, 10, 0));
 
         p.getChildren().add(txtPane);
-        p.getChildren().add(tmp);
+        p.getChildren().add(i);
+
+
 
         getActiveChatroom().getContainer().getChildren().add(p);
     }
@@ -496,19 +505,13 @@ public class ClientControl implements Initializable
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        //        ImageView i = new ImageView("file:" + ((File)User.img).getAbsolutePath());
-        //        i.setFitWidth(50);
-        //        i.setFitHeight(50);
-        //        i.setX(5);
-        //        i.setY(5);
-
-        Rectangle tmp = new Rectangle();
-        tmp.setWidth(50);
-        tmp.setHeight(50);
-        tmp.setX(795);
-        tmp.setY(5);
-        tmp.setFill(Color.BLACK);
-        tmp.getStyleClass().add("ImageDropShadow");
+        ImageView i = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
+        i.setFitWidth(50);
+        i.setFitHeight(50);
+        i.setX(745);
+        i.setY(5);
+        i.setSmooth(true);
+        i.setPreserveRatio(false);
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -517,8 +520,8 @@ public class ClientControl implements Initializable
         t.setFill(Color.BLACK);
 
         Pane txtPane = new Pane();
-        txtPane.setPrefWidth(300);
-        txtPane.setLayoutX(525);
+        txtPane.setPrefWidth(275);
+        txtPane.setLayoutX(500);
         txtPane.setLayoutY(25);
         txtPane.getStyleClass().add("MessageSent");
         txtPane.getStyleClass().add("DropShadow");
@@ -526,7 +529,64 @@ public class ClientControl implements Initializable
         txtPane.setPadding(new Insets(0, 0, 15, 0));
 
         p.getChildren().add(txtPane);
-        p.getChildren().add(tmp);
+        p.getChildren().add(i);
+
+
+        Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
+    }
+
+    private void createSentImage(File imgFile) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
+    {
+        Pane p = new Pane();
+        //TODO: Auf User-Klasse warten...
+        ImageView sender = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
+        sender.setFitWidth(50);
+        sender.setFitHeight(50);
+        sender.setX(745);
+        sender.setY(5);
+        sender.setSmooth(true);
+        sender.setPreserveRatio(false);
+
+
+        ImageView img = new ImageView("file:" + imgFile.getAbsolutePath());
+        img.setFitWidth(225);
+        img.setFitHeight(225);
+        img.setSmooth(true);
+        img.setPreserveRatio(true);
+        img.setOnMouseClicked(e -> {
+            Pane bigImagePane = new Pane();
+            ImageView bigImg = new ImageView("file:"+ imgFile.getAbsolutePath());
+            bigImg.setSmooth(true);
+            bigImg.setPreserveRatio(true);
+            //TODO: Entweder so, dass das komplette Programm ausgefüllt wird, oder in Originalgröße (Kann zu groß sein.)
+            // oder mit einen extra neuen Fenster.
+            // evtl. auch noch ein Übergang... wenn ich noch Zeit habe.
+            bigImg.setFitWidth(1200);
+            bigImg.setFitHeight(800);
+
+            bigImagePane.getChildren().add(bigImg);
+
+
+
+            bigImagePane.setOnMouseClicked(event -> {
+                paneBackground.getChildren().remove(bigImagePane);
+            });
+
+            paneBackground.getChildren().add(bigImagePane);
+        });
+
+        Pane imgPane = new Pane();
+        imgPane.setPrefWidth(275);
+        imgPane.setLayoutX(500);
+        imgPane.setLayoutY(25);
+        imgPane.getStyleClass().add("MessageSent");
+        imgPane.getStyleClass().add("DropShadow");
+        imgPane.getChildren().add(img);
+        imgPane.setPadding(new Insets(0, 0, 15, 0));
+
+
+        p.getChildren().add(imgPane);
+        p.getChildren().add(sender);
 
 
         Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
@@ -561,7 +621,6 @@ public class ClientControl implements Initializable
         online.setFill(Color.GREEN);
         p.getChildren().add(b);
         p.getChildren().add(online);
-
     }
 
     public Chatroom getActiveChatroom()
@@ -675,7 +734,9 @@ public class ClientControl implements Initializable
                 new KeyValue(returnArrow.rotateProperty(), angle, Interpolator.EASE_BOTH)));
         t.play();
     }
-    // Getter
+
+
+    // Getter und Setter
     public Socket getClientSocket()
     {
         return clientSocket;
