@@ -277,7 +277,7 @@ public class ServerControl implements ServerRemoteControl
 						if (uebertragung.getUebertragung() instanceof Nachricht)
 						{
 							getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel);
+							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel());
 						}
 
 						break;
