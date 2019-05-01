@@ -1,5 +1,6 @@
 package feature_LoginRegister;
 
+import java.io.File;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class User
 	private LocalDate banned = LocalDate.now();
 	private boolean online=false;
 	private boolean neu = false;
+	private File profilbild;
 
 	private Instant timeout = null;
 
@@ -128,5 +130,15 @@ public class User
 			}
 		}
 		return true;
+	}
+
+	public File getProfilbild()
+	{
+		return profilbild;
+	}
+
+	public void setProfilbild(File profilbild)
+	{
+		this.profilbild = profilbild;
 	}
 }
