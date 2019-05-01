@@ -151,7 +151,7 @@ public class Controller implements Initializable
             ((Stage)closeButton.getScene().getWindow()).setIconified(true);
         });
 
-        /*
+
         settingsButton.setOnAction(e -> {
             try
             {
@@ -169,7 +169,7 @@ public class Controller implements Initializable
                 ex.printStackTrace();
             }
         });
-        */
+
 
         menuBar.setOnMousePressed(e -> {
             offsetx = e.getSceneX();
@@ -219,34 +219,11 @@ public class Controller implements Initializable
 					control.setOutToServer(outToServer);
 					control.setClientReadingThread(new ClientReadingThread(control));
 					control.getClientReadingThread().start();*/
-
+                    Platform.runLater(
+                            ()-> ((Stage)closeButton.getScene().getWindow()).close()
+                    );
                     ReadingThread.interrupt();
                     ReadingThread = null;
-
-                    Platform.runLater( () -> {
-
-                        ((Stage) closeButton.getScene().getWindow()).close();
-                        try
-                        {
-                            Stage primaryStage = new Stage();
-                            Parent root = FXMLLoader.load(getClass().getResource("../../clientMain/clientGUI.fxml"));
-                            Scene s = new Scene(root);
-                            s.getStylesheets().add("http://fonts.googleapis.com/css?family=Gafata");
-                            primaryStage.setTitle("Chat");
-                            System.setProperty("prism.lcdtext", "false");
-                            primaryStage.setScene(s);
-                            primaryStage.initStyle(StageStyle.TRANSPARENT);
-                            primaryStage.show();
-
-                        }
-                        catch (IOException ex)
-                        {
-                            ex.printStackTrace();
-                        }
-                    });
-
-
-
 
                     break;
 
