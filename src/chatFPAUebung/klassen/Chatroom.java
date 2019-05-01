@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
-public class Chatroom implements interfaces.BlackListInterface, Serializable //Ihr habt vergessen des einzubinden, hoffe des ist okay wenn ich's mach :D
+public class Chatroom implements chatFPAUebung.interfaces.BlackListInterface, Serializable //Ihr habt vergessen des einzubinden, hoffe des ist okay wenn ich's mach :D
 {
     private String name;
     private static int idNew = 0;
@@ -72,6 +72,11 @@ public class Chatroom implements interfaces.BlackListInterface, Serializable //I
     public void removeUserFromBlackList(String username)
     {
         blacklist.remove(username);
+    }
+
+    @Override
+    public boolean canUserJoint(String username) {
+        return false;
     }
 
     //Konstruktor
