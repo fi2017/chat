@@ -22,7 +22,7 @@ public class LogRegServerControl extends Thread
 	private ServerReadingThread readingThread;
 	private ServerListenThread listenThread;
 	private ArrayList<ClientProxy> clients;
-
+	private User crtUser;
 
 
 	public LogRegServerControl(ServerControl control, ArrayList<ClientProxy> clients)
@@ -59,7 +59,7 @@ public class LogRegServerControl extends Thread
 				case 10: //Loginversuch
 					switch(loginUser((LogRegNachricht)uebertragung.getUebertragung()))
 					{
-						case 1: sendeNachrichtAnClient(new Uebertragung(1,""),client);
+						case 1: sendeNachrichtAnClient(new Uebertragung(1,"","",this.crtUser),client);
 							client.getServerReadingThread().setControl(control);
 							client.getServerReadingThread().setLoginControl(null);
 							break;
@@ -148,6 +148,7 @@ public class LogRegServerControl extends Thread
 							returnValue=1;
 							u.setOnline(true);
 							u.setNeu(true);
+							this.crtUser = u;
 							break;
 						}
 						else
