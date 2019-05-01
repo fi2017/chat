@@ -61,6 +61,15 @@ public class LogRegServerControl extends Thread
 						case 1: sendeNachrichtAnClient(new Uebertragung(1,""),client);
 							client.getServerReadingThread().setControl(control);
 							client.getServerReadingThread().setLoginControl(null);
+							for (User value : control.getUserList())
+							{
+								if(value.getUsername().equals(((LogRegNachricht) uebertragung.getUebertragung()).getUsername()))
+								{
+									client.setUser(value);
+									break;
+								}
+							}
+
 							break;
 						case 2: sendeNachrichtAnClient(new Uebertragung(2,""),client);
 							break;

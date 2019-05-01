@@ -265,7 +265,10 @@ public class ServerControl implements ServerRemoteControl
 				switch (((Uebertragung) uebertragungObjekt).getZweck())
 				{
 					case 1:
-						sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
+						if(!client.getUser().isInTimeout())
+						{
+							sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
+						}
 
 						break;
 

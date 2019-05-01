@@ -9,6 +9,7 @@ import chatFPAUebung.ddosProtection.Security;
 import chatFPAUebung.gui.server.ServerControl;
 import chatFPAUebung.threads.ServerReadingThread;
 import feature_LoginRegister.LogRegServerControl;
+import feature_LoginRegister.User;
 
 public class ClientProxy
 {
@@ -19,6 +20,8 @@ public class ClientProxy
 
 	private ServerReadingThread serverReadingThread;
 	private Security clientSecurity;
+
+	private User user;
 
 	public ClientProxy(LogRegServerControl control, Socket clientSocket)
 	{
@@ -76,5 +79,15 @@ public class ClientProxy
 	public Security getClientSecurity()
 	{
 		return this.clientSecurity;
+	}
+
+	public User getUser()
+	{
+		return user;
+	}
+
+	public void setUser(User user)
+	{
+		this.user = user;
 	}
 }

@@ -1,6 +1,7 @@
 package feature_LoginRegister;
 
 import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDate;
 
 public class User
@@ -13,6 +14,8 @@ public class User
 	private LocalDate banned = LocalDate.now();
 	private boolean online=false;
 	private boolean neu = false;
+
+	private Instant timeout = null;
 
 	public User()
 	{
@@ -107,5 +110,23 @@ public class User
 		{
 			return "offline";
 		}
+	}
+
+	public boolean isInTimeout()
+	{
+
+		if(timeout==null)
+		{
+			return false;
+		}
+		else
+		{
+			if(timeout.compareTo(Instant.now())<=0)
+			{
+				timeout = null;
+				return false;
+			}
+		}
+		return true;
 	}
 }
