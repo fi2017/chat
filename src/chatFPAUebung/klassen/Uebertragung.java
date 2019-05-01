@@ -1,5 +1,7 @@
 package chatFPAUebung.klassen;
 
+import feature_LoginRegister.User;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -9,7 +11,7 @@ public class Uebertragung implements Serializable
 	private static final long serialVersionUID = 1L;
 	private int zweck;
 	private int ziel;
-	private Object sender;
+	private User sender;
 	private Object uebertragung;
 	private LocalDateTime uebertragungszeitpunkt;
 
@@ -21,7 +23,7 @@ public class Uebertragung implements Serializable
 
 
 	// Konstruktor (Ziel == Chatroom welcher die Nachrichte erhalten soll)
-	public Uebertragung(int zweck, int ziel, Object uebertragung, Object send)
+	public Uebertragung(int zweck, int ziel, Object uebertragung, User send)
 	{
 		this.sender = send;
 		this.zweck = zweck;
@@ -66,6 +68,16 @@ public class Uebertragung implements Serializable
 	public LocalDateTime getUebertragungszeitpunkt()
 	{
 		return this.uebertragungszeitpunkt;
+	}
+
+	public User getSender()
+	{
+		return sender;
+	}
+
+	public void setSender(User sender)
+	{
+		this.sender = sender;
 	}
 
 	/*

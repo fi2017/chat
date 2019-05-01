@@ -76,7 +76,7 @@ public class ClientControl implements Initializable
 
     private double xOffset;
     private double yOffset;
-    private User user;
+    private User user = new User("Peter", "123", 0, 0);
     private DefaultListModel<Nachricht> listModel;
     private Socket clientSocket;
     private ObjectOutputStream outToServer;
@@ -107,7 +107,7 @@ public class ClientControl implements Initializable
     {
         //Anwendung in "startform" geben
         vBoxRoom.setSpacing(5);
-        this.listModel = new DefaultListModel<Nachricht>();
+        this.listModel = new DefaultListModel<>();
         listmodels.add(listModel);
         toggleNewRoom(1200, false);
         erstelleVerbindung();
@@ -180,28 +180,6 @@ public class ClientControl implements Initializable
         });
 
         txtFieldChat.setOnAction(e -> {
-
-            //TODO:
-            // Hier muss ich jetzt eigentlich die Nachricht and den Server senden, aber ich brauchen den aktuellen User
-
-/*            //TODO:
-            // Aktuell nur Temporär, der Funktionsaufruf muss dann ins Protokoll kommen, wo man eine Nachricht erhält.
-            for(Chatroom c : chatrooms)
-            {
-
-                if(c.getScrollPane().isVisible())
-                {
-                    sendeNachricht(c.getId());
-                    i++;
-                    if(i % 2 == 0)
-                        createSentMessage(txtFieldChat.getText());
-                    else
-                        createRecievedMessage(txtFieldChat.getText());
-                }
-            }*/
-            //TODO: Temporär, bis das Protokoll gefixt wird.
-            createSentMessage(txtFieldChat.getText());
-
             sendeNachricht(getActiveChatroom().getId());
             txtFieldChat.setText("");
         });
@@ -273,22 +251,12 @@ public class ClientControl implements Initializable
                     break;
 
                 //Empfangen von neuen Nachrichten
-                //TODO:
-                // Aktuelles Problem: Die Nachricht geht nie in diesen Case rein. D.h. es wird keine Nachricht angezeigt.
-                // Kann nicht wirklich sagen, was des Problem ist. Habe auch schon mit dem Debugger geschaut und ich glaube, dass der Zweck immer 8 ist, egal
-                // was versendet wird. Wenn ichs richtig verstanden habe. Allerding habe ich keine Ahnung vom Protokoll, also wäre es cool wenn ihr hinbekommt.
+                //TODO: Es geht nie in den Case 2 rein, weil die Nachricht nicht an den ServerControl gesendet wird, sondern in die LogRegServerControl,
+                // die die Nachricht in einen Case 8 mit keinen Inhalt macht und dann hier her sendet.
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
-                        //TODO:
-                        // Ich muss hier noch wissen, von wem die Nachricht kommt.
-                        // Bitte im Protokoll noch hinzufügen.
-
-                        //User user = new User();
-                        //user.setUsername("Michael");
-                        //user.setId(1);
-                        /*
-                        if(((Nachricht) uebertragung.getUebertragung()).getSender() != user)
+                        if(uebertragung.getSender() != user)
                         {
                             createRecievedMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                         }
@@ -296,9 +264,6 @@ public class ClientControl implements Initializable
                         {
                             createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                         }
-                        */
-                        System.out.println(((Nachricht) uebertragung.getUebertragung()).getNachricht());
-                        createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
                     }
 
                     break;
@@ -325,7 +290,7 @@ public class ClientControl implements Initializable
         if(txtFieldChat.getText() != null)
         {
             //2 normale senden der Nachrichten
-            sendeNachrichtAnServer(new Uebertragung(2, i, new Nachricht(txtFieldChat.getText(), LocalDateTime.now())));
+            sendeNachrichtAnServer(new Uebertragung(2, i, new Nachricht(txtFieldChat.getText(), LocalDateTime.now()), user));
         }
     }
 
@@ -369,6 +334,26 @@ public class ClientControl implements Initializable
         (new ClientWritingThread(uebertragung, getOutToServer())).run();
     }
 
+    public void createAllChatrooms(ArrayList<Chatroom> c)
+    {
+
+    }
+
+    public void createAllMessages(ArrayList<Uebertragung> uebertragungen)
+    {
+        for(Uebertragung u : uebertragungen)
+        {
+            if(u.getSender() != user)
+            {
+                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht());
+            }
+            else
+            {
+                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht());
+            }
+        }
+    }
+
     //Methode wird aufgerufen, wenn man auf den Button "Erstellen" einer neuen Gruppe drückt.
     //Sie erzeugt eine neue Gruppe in der Sidebar Gruppen.
     //Ein Neues Gruppenobjekt wird angelegt.
@@ -410,6 +395,7 @@ public class ClientControl implements Initializable
         p.getChildren().add(b);
 
         b.setOnMouseClicked(e -> {
+            //TODO: Hier dann eine Übertragung an den Server senden, in der man den Chatroom beitritt?
             openChatroom(e.getSource());
         });
 
