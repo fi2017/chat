@@ -1,5 +1,10 @@
 package chatFPAUebung.gui.server;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.sql.*;
+
 import chatFPAUebung.fileHandler.FileHandlerBans;
 import chatFPAUebung.klassen.Ban;
 import chatFPAUebung.klassen.ClientProxy;
@@ -9,11 +14,6 @@ import chatFPAUebung.threads.ServerListenThread;
 import chatFPAUebung.threads.ServerWritingThread;
 import feature_LoginRegister.LogRegServerControl;
 import feature_LoginRegister.User;
-
-import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ServerControl
 {
@@ -39,7 +39,7 @@ public class ServerControl
 	// Konstruktor
 	public ServerControl()
 	{
-		this.clients = new ArrayList<ClientProxy>();
+		this.clients = new ArrayList<>();
 		this.userList = new ArrayList<>();
 		this.gui = new ServerGui();
 		try
@@ -50,8 +50,8 @@ public class ServerControl
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.nachrichten = new ArrayList<Nachricht>();
-		this.bans = new ArrayList<Ban>(Arrays.asList((new FileHandlerBans()).readBans()));
+		this.nachrichten = new ArrayList<>();
+		this.bans = new ArrayList<>(Arrays.asList((new FileHandlerBans()).readBans()));
 
 		setzeListener();
 		getGui().setVisible(true);

@@ -1,16 +1,12 @@
 package feature_LoginRegister;
 
+import chatFPAUebung.klassen.Uebertragung;
+import chatFPAUebung.threads.ClientWritingThread;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.time.LocalDateTime;
-
-import chatFPAUebung.gui.client.clientMain.ClientControl;
-import chatFPAUebung.klassen.Nachricht;
-import chatFPAUebung.klassen.Uebertragung;
-import chatFPAUebung.threads.ClientReadingThread;
-import chatFPAUebung.threads.ClientWritingThread;
 
 public class LogRegControl
 {
@@ -44,7 +40,7 @@ public class LogRegControl
 			setOutToServer(new ObjectOutputStream(getClientSocket().getOutputStream()));
 			setInFromServer(new ObjectInputStream(getClientSocket().getInputStream()));
 
-			setReadingThread(new LogRegReadingThread(this));
+			//setReadingThread(new LogRegReadingThread(this));
 			getReadingThread().start();
 		} catch (IOException e)
 		{
@@ -66,7 +62,6 @@ public class LogRegControl
 			{
 				case 1://wenn login erfolgreich
 /*					ClientControl control= new ClientControl(this);
- * 					control.setUser(((User)((Uebertragung)uebertragungObjekt).getUser()));
 					control.setClientSocket(clientSocket);
 					control.setInFromServer(inFromServer);
 					control.setOutToServer(outToServer);
