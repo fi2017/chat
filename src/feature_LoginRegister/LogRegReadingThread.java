@@ -44,6 +44,6 @@ public class LogRegReadingThread extends Thread
 		{
 			return this.control;
 		}
-	
- 
+
+
 }
