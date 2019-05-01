@@ -16,7 +16,7 @@ import feature_LoginRegister.User;
 public class ServerControl implements ServerRemoteControl
 {
 	//private static final String dbURL = "jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017";
-	private static final String dbURL = "jdbc:mariadb://localhost:3306/chat_pr?user=root&password=";
+	private static final String dbURL = "jdbc:mariadb://localhost/chat_pr?user=root";
 
 
 	// Attribute
