@@ -123,8 +123,8 @@
         -fx-text-fill: #f6f7f7;
         -fx-border-weight: 0;
         -fx-background-radius: 5;
-        -fx-padding: 4;
-        -fx-font-size: 18;
+        -fx-padding: 5;
+        -fx-font-size: 15;
 }
 
 .confirmButton:hover {

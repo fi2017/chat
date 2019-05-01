@@ -100,11 +100,14 @@ public class ControllerSettings implements Initializable {
             Theme theme = (Theme)themeComboBox.getValue();
 
             Path neu = Paths.get(theme.getDateiname());
-            Path original = Paths.get("../");
+            neu = neu.toAbsolutePath();
+            System.out.println(neu);
+            Path original = Paths.get("D:/GitHub_Clones/chat/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css");
 
             try
             {
-                Files.copy(neu, original, StandardCopyOption.REPLACE_EXISTING);
+                Files.delete(Paths.get("D:/GitHub_Clones/chat/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css"));
+                Files.copy(neu, original);
             }
             catch (IOException ex) {
                 ex.printStackTrace();
@@ -114,7 +117,7 @@ public class ControllerSettings implements Initializable {
 
     private void themeInitialize()
     {
-        themeComboBox.getItems().add(new Theme("Dark Theme (Standard)", "../themes/darktheme/stylesheet.css"));
-        themeComboBox.getItems().add(new Theme("Light Theme", "../themes/lighttheme/stylesheet.css"));
+        themeComboBox.getItems().add(new Theme("Dark Theme (Standard)", "D:/GitHub_Clones/chat/src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/stylesheet.css"));
+        themeComboBox.getItems().add(new Theme("Light Theme", "D:/GitHub_Clones/chat/src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/stylesheet.css"));
     }
 }
