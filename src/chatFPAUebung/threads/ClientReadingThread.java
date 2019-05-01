@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.SocketException;
 
 import chatFPAUebung.gui.client.clientMain.ClientControl;
-import chatFPAUebung.klassen.Nachricht;
 
 public class ClientReadingThread extends Thread
 {

@@ -103,10 +103,6 @@
     -fx-effect: dropshadow(three-pass-box, #00000059, 40, 0, 0, 0);
 }
 
-
-.Rounded {
-    -fx-background-radius: 100;
-    -fx-border-style: solid;
-    -fx-border-width: 5px;
-    -fx-border-color: #f3f3f3;
+.ImageDropShadow {
+    -fx-effect: dropshadow(three-pass-box, #000000, 15, 0, 0, 0);
 }

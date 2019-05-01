@@ -44,7 +44,7 @@ public class LogRegControl
 			setOutToServer(new ObjectOutputStream(getClientSocket().getOutputStream()));
 			setInFromServer(new ObjectInputStream(getClientSocket().getInputStream()));
 
-			//setReadingThread(new LogRegReadingThread(this));
+			setReadingThread(new LogRegReadingThread(this));
 			getReadingThread().start();
 		} catch (IOException e)
 		{

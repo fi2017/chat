@@ -5,17 +5,16 @@ import java.io.IOException;
 import java.net.SocketException;
 
 import chatFPAUebung.gui.client.clientMain.ClientControl;
-import chatFPAUebung.gui.client.loginMenu.startScene.Controller;
 import chatFPAUebung.threads.ClientReadingThread;
 
 public class LogRegReadingThread extends Thread
 {
 
 	// Attribute
-		private Controller control;
+		private LogRegControl control;
 
 		// Main
-		public LogRegReadingThread(Controller control)
+		public LogRegReadingThread(LogRegControl control)
 		{
 			this.control = control;
 
@@ -48,7 +47,7 @@ public class LogRegReadingThread extends Thread
 		}
 
 		// Getter
-		public Controller getControl()
+		public LogRegControl getControl()
 		{
 			return this.control;
 		}
