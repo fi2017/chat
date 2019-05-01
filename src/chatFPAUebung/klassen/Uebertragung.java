@@ -9,17 +9,26 @@ public class Uebertragung implements Serializable
 	private static final long serialVersionUID = 1L;
 	private int zweck;
 	private int ziel;
+	private Object sender;
 	private Object uebertragung;
 	private LocalDateTime uebertragungszeitpunkt;
 
 	/*
-	*
-	*	Zwecke:
-	*	1: Bisher
-	* */
+	 *
+	 *	Zwecke:
+	 *	1: Bisher
+	 * */
 
 
 	// Konstruktor (Ziel == Chatroom welcher die Nachrichte erhalten soll)
+	public Uebertragung(int zweck, int ziel, Object uebertragung, Object send)
+	{
+		this.sender = send;
+		this.zweck = zweck;
+		this.ziel = ziel;
+		this.uebertragung = uebertragung;
+	}
+
 	public Uebertragung(int zweck, int ziel, Object uebertragung)
 	{
 		this.zweck = zweck;
@@ -57,5 +66,10 @@ public class Uebertragung implements Serializable
 	public LocalDateTime getUebertragungszeitpunkt()
 	{
 		return this.uebertragungszeitpunkt;
+	}
+
+	public Object getSender()
+	{
+		return sender;
 	}
 }
