@@ -1,26 +1,20 @@
 package chatFPAUebung.gui.client.clientMain;
 
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.rmi.activation.ActivationGroup_Stub;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import javax.swing.*;
 import chatFPAUebung.klassen.Chatroom;
-import chatFPAUebung.feature_LoginRegister.User;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
 import chatFPAUebung.threads.ClientWritingThread;
-import javafx.animation.*;
+import feature_LoginRegister.User;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -33,10 +27,16 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.w3c.dom.css.Rect;
 
+import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ClientControl implements Initializable
@@ -806,14 +806,14 @@ public class ClientControl implements Initializable
     {
         this.listmodels = listmodels;
     }
-    
+
     public void setUser(User user)
     {
-    	this.user = user;
+        this.user = user;
     }
-    
+
     public User getUser()
     {
-    	return this.user;
+        return this.user;
     }
 }

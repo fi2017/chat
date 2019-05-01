@@ -1,12 +1,10 @@
 package feature_LoginRegister;
 
+import chatFPAUebung.gui.client.loginMenu.startScene.Controller;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.SocketException;
-
-import chatFPAUebung.gui.client.clientMain.ClientControl;
-import chatFPAUebung.gui.client.loginMenu.startScene.Controller;
-import chatFPAUebung.threads.ClientReadingThread;
 
 public class LogRegReadingThread extends Thread
 {
@@ -31,16 +29,10 @@ public class LogRegReadingThread extends Thread
 				{
 					Object input = getControl().getInFromServer().readObject();
 					getControl().empfangeNachrichtVonServer(input);
-				} catch (EOFException e)
+				} catch (EOFException | SocketException e)
 				{
 					this.interrupt();
-				} catch (ClassNotFoundException e)
-				{
-					e.printStackTrace();
-				} catch (SocketException e)
-				{
-					this.interrupt();
-				} catch (IOException e)
+				} catch (ClassNotFoundException | IOException e)
 				{
 					e.printStackTrace();
 				}

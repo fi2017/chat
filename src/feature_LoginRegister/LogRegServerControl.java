@@ -1,15 +1,14 @@
 package feature_LoginRegister;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 import chatFPAUebung.gui.server.ServerControl;
 import chatFPAUebung.klassen.ClientProxy;
-import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ServerListenThread;
 import chatFPAUebung.threads.ServerReadingThread;
 import chatFPAUebung.threads.ServerWritingThread;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class LogRegServerControl extends Thread
 {
@@ -22,7 +21,6 @@ public class LogRegServerControl extends Thread
 	private ServerReadingThread readingThread;
 	private ServerListenThread listenThread;
 	private ArrayList<ClientProxy> clients;
-	private User crtUser;
 
 
 
@@ -60,7 +58,7 @@ public class LogRegServerControl extends Thread
 				case 10: //Loginversuch
 					switch(loginUser((LogRegNachricht)uebertragung.getUebertragung()))
 					{
-						case 1: sendeNachrichtAnClient(new Uebertragung(1,"","",this.crtUser),client);
+						case 1: sendeNachrichtAnClient(new Uebertragung(1,""),client);
 							client.getServerReadingThread().setControl(control);
 							client.getServerReadingThread().setLoginControl(null);
 							break;
@@ -149,7 +147,6 @@ public class LogRegServerControl extends Thread
 							returnValue=1;
 							u.setOnline(true);
 							u.setNeu(true);
-							this.crtUser = u;
 							break;
 						}
 						else

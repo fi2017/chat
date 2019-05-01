@@ -13,11 +13,7 @@ public class User
 	private LocalDate banned = LocalDate.now();
 	private boolean online=false;
 	private boolean neu = false;
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> branch 'master' of https://github.com/fi2017/chat.git
 	public User()
 	{
 
@@ -100,11 +96,4 @@ public class User
 	{
 		this.neu = neu;
 	}
-<<<<<<< HEAD
-	
-	
-=======
-
-
->>>>>>> branch 'master' of https://github.com/fi2017/chat.git
 }
