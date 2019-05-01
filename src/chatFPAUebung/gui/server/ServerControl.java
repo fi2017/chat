@@ -32,6 +32,7 @@ public class ServerControl implements ServerRemoteControl
 	private ServerListenThread serverListenThread;
 
 	private ArrayList<Nachricht> nachrichten;
+	private ArrayList<Chatroom> chatrooms = new ArrayList<Chatroom>();
 
 	private ArrayList<Ban> bans;
 
@@ -288,6 +289,16 @@ public class ServerControl implements ServerRemoteControl
 						// Diese Liste wird einen neuen Benutzer beim einloggen dann gegeben, damit der den Chatrooms auch beitreten kann
 						// Oder der Client sendet seine Eingabe (Name vom Chatroom) an den Server, der dann alles erledigt und nur den einen
 						// zurück gibt.
+						break;
+
+						//Chatroom hinzufügen
+					case 4:
+						chatrooms.add((Chatroom) ((Uebertragung) uebertragungObjekt).getUebertragung());
+						for(ClientProxy aktClient : getClients())
+						{
+							sendeNachrichtAnClient((Uebertragung) uebertragungObjekt, aktClient);
+						}
+						break;
 
 					default:
 						//
