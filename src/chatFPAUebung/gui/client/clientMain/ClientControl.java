@@ -217,7 +217,7 @@ public class ClientControl implements Initializable
             File img = fc.showOpenDialog(friendList.getScene().getWindow());
 
             //TODO: Bild muss erst an den Server gesendet werden. -> Chatroom / Joshua muss sich drum kümmern.
-            createSentImage(img);
+            createRecievedImage(img);
         });
     }
 
@@ -280,11 +280,6 @@ public class ClientControl implements Initializable
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
-/*
-                        DefaultListModel aktuellesModel=listmodels.get(((Uebertragung) uebertragungObjekt).getZiel());
-                        aktuellesModel.addElement(uebertragung.getUebertragung());
-*/
-
                         //TODO:
                         // Ich muss hier noch wissen, von wem die Nachricht kommt.
                         // Bitte im Protokoll noch hinzufügen.
@@ -558,9 +553,6 @@ public class ClientControl implements Initializable
             ImageView bigImg = new ImageView("file:"+ imgFile.getAbsolutePath());
             bigImg.setSmooth(true);
             bigImg.setPreserveRatio(true);
-            //TODO: Entweder so, dass das komplette Programm ausgefüllt wird, oder in Originalgröße (Kann zu groß sein.)
-            // oder mit einen extra neuen Fenster.
-            // evtl. auch noch ein Übergang... wenn ich noch Zeit habe.
             bigImg.setFitWidth(1200);
             bigImg.setFitHeight(800);
 
@@ -583,6 +575,63 @@ public class ClientControl implements Initializable
         imgPane.getStyleClass().add("DropShadow");
         imgPane.getChildren().add(img);
         imgPane.setPadding(new Insets(0, 0, 15, 0));
+
+
+        p.getChildren().add(imgPane);
+        p.getChildren().add(sender);
+
+
+        Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
+    }
+
+    private void createRecievedImage(File imgFile) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
+    {
+        Pane p = new Pane();
+        //TODO: Auf User-Klasse warten...
+        ImageView sender = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
+        sender.setFitWidth(50);
+        sender.setFitHeight(50);
+        sender.setX(5);
+        sender.setY(5);
+        sender.setSmooth(true);
+        sender.setPreserveRatio(false);
+
+
+
+        ImageView img = new ImageView("file:" + imgFile.getAbsolutePath());
+        img.setFitWidth(225);
+        img.setFitHeight(225);
+        img.setX(35);
+        img.setY(25);
+        img.setSmooth(true);
+        img.setPreserveRatio(true);
+        img.setOnMouseClicked(e -> {
+            Pane bigImagePane = new Pane();
+            ImageView bigImg = new ImageView("file:"+ imgFile.getAbsolutePath());
+            bigImg.setSmooth(true);
+            bigImg.setPreserveRatio(true);
+            bigImg.setFitWidth(1200);
+            bigImg.setFitHeight(800);
+
+            bigImagePane.getChildren().add(bigImg);
+
+
+
+            bigImagePane.setOnMouseClicked(event -> {
+                paneBackground.getChildren().remove(bigImagePane);
+            });
+
+            paneBackground.getChildren().add(bigImagePane);
+        });
+
+        Pane imgPane = new Pane();
+        imgPane.setPrefWidth(275);
+        imgPane.setLayoutX(25);
+        imgPane.setLayoutY(25);
+        imgPane.getStyleClass().add("MessageRecieved");
+        imgPane.getStyleClass().add("DropShadow");
+        imgPane.getChildren().add(img);
+        imgPane.setPadding(new Insets(0, 0, 10, 0));
 
 
         p.getChildren().add(imgPane);
