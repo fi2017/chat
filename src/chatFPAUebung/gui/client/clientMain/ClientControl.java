@@ -14,6 +14,7 @@ import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
 import chatFPAUebung.threads.ClientWritingThread;
+import feature_LoginRegister.User;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
@@ -75,6 +76,7 @@ public class ClientControl implements Initializable
 
     private double xOffset;
     private double yOffset;
+    private User user;
     private DefaultListModel<Nachricht> listModel;
     private Socket clientSocket;
     private ObjectOutputStream outToServer;
@@ -803,5 +805,15 @@ public class ClientControl implements Initializable
     public void setListmodels(ArrayList<DefaultListModel> listmodels)
     {
         this.listmodels = listmodels;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public User getUser()
+    {
+        return this.user;
     }
 }
