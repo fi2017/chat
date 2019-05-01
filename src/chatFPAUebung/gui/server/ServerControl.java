@@ -277,7 +277,7 @@ public class ServerControl implements ServerRemoteControl
 						if (uebertragung.getUebertragung() instanceof Nachricht)
 						{
 							getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-							broadcasteNachricht((Nachricht) uebertragung.getUebertragung());
+							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel);
 						}
 
 						break;
@@ -337,11 +337,11 @@ public class ServerControl implements ServerRemoteControl
 		}
 	}
 
-	public void broadcasteNachricht(Nachricht nachricht)
+	public void broadcasteNachricht(Nachricht nachricht, int ziel)
 	{
-		for (ClientProxy aktClient : getClients())
+		for (ClientProxy aktClient : chatrooms[ziel].getTeilnehmer())
 		{
-			sendeNachrichtAnClient(new Uebertragung(2, nachricht), aktClient);
+			sendeNachrichtAnClient(new Uebertragung(2, ziel, nachricht), aktClient);
 		}
 	}
 
