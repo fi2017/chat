@@ -444,6 +444,12 @@ public class ClientControl implements Initializable
                 c.getScrollPane().setVisible(false);
         }
     }
+    public void beitrittChatroom(int chatroomID)
+    {
+        Uebertragung beitrittsversuch = new Uebertragung(5, chatroomID,null);
+        outToServer.writeObject(beitrittsversuch);
+        outToServer.flush();
+    }
 
     //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
     private void createRecievedMessage(String msg) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
