@@ -1,4 +1,4 @@
-package interfaces;
+package chatFPAUebung.interfaces;
 
 /*
 	Autor: Philipp Hägerich
@@ -10,4 +10,5 @@ public interface BlackListInterface
 {
 	void addUserToBlackList(String username);
 	void removeUserFromBlackList(String username);
+	boolean canUserJoint(String username);
 }

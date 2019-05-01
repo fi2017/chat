@@ -96,4 +96,16 @@ public class User
 	{
 		this.neu = neu;
 	}
+
+	public String getStatus()
+	{
+		if(online)
+		{
+			return "online";
+		}
+		else
+		{
+			return "offline";
+		}
+	}
 }

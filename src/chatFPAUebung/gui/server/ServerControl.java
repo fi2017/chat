@@ -6,16 +6,14 @@ import java.util.Arrays;
 import java.sql.*;
 
 import chatFPAUebung.fileHandler.FileHandlerBans;
-import chatFPAUebung.klassen.Ban;
-import chatFPAUebung.klassen.ClientProxy;
-import chatFPAUebung.klassen.Nachricht;
-import chatFPAUebung.klassen.Uebertragung;
+import chatFPAUebung.interfaces.ServerRemoteControl;
+import chatFPAUebung.klassen.*;
 import chatFPAUebung.threads.ServerListenThread;
 import chatFPAUebung.threads.ServerWritingThread;
 import feature_LoginRegister.LogRegServerControl;
 import feature_LoginRegister.User;
 
-public class ServerControl
+public class ServerControl implements ServerRemoteControl
 {
 	//private static final String dbURL = "jdbc:mariadb://172.16.5.55:3306/fi2017_chatdb_grp1?user=fi2017javaprojekt&password=fi2017";
 	private static final String dbURL = "jdbc:mariadb://localhost:3306/chat_pr?user=root&password=";
@@ -27,6 +25,7 @@ public class ServerControl
 
 	private Connection con;
 	private PreparedStatement preparedStmt;
+	@SuppressWarnings("FieldCanBeLocal")
 	private String myDriver = "org.mariadb.jdbc.Driver";
 	private ArrayList<ClientProxy> clients;
 	private ArrayList<User> userList;
@@ -334,7 +333,6 @@ public class ServerControl
 
 	public void sendeNachrichtAnClient(Uebertragung uebertragung, ClientProxy client)
 	{
-		System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 		new ServerWritingThread(uebertragung, client, this).start();
 	}
 
@@ -397,5 +395,45 @@ public class ServerControl
 	public void setUserList(ArrayList<User> userList)
 	{
 		this.userList = userList;
+	}
+
+	@Override
+	public void shutdownServerNow()
+	{
+
+	}
+
+	@Override
+	public void removeAdmin(AdminProxy adminProxy)
+	{
+		loginServer.getAdminProxies().remove(adminProxy);
+	}
+
+	@Override
+	public void refreshUser(AdminProxy admin)
+	{
+		ArrayList<UserDisplay> userDisplays = new ArrayList<>();
+		for (User value : userList)
+		{
+			userDisplays.add(new UserDisplay(value.getUsername(),value.getStatus()));
+		}
+	}
+
+	@Override
+	public void setTimeout(TimeoutData data)
+	{
+
+	}
+
+	@Override
+	public void addAdmin(AdminProxy admin)
+	{
+
+	}
+
+	@Override
+	public void addMessage(String message)
+	{
+
 	}
 }

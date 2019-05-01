@@ -1,6 +1,7 @@
 package feature_LoginRegister;
 
 import chatFPAUebung.gui.server.ServerControl;
+import chatFPAUebung.klassen.AdminProxy;
 import chatFPAUebung.klassen.ClientProxy;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ServerListenThread;
@@ -21,6 +22,7 @@ public class LogRegServerControl extends Thread
 	private ServerReadingThread readingThread;
 	private ServerListenThread listenThread;
 	private ArrayList<ClientProxy> clients;
+	private ArrayList<AdminProxy> adminProxies = new ArrayList<>();
 
 
 
@@ -32,8 +34,6 @@ public class LogRegServerControl extends Thread
 
 		setListenThread(new ServerListenThread(this));
 		getListenThread().start();
-
-
 	}
 
 
@@ -86,6 +86,12 @@ public class LogRegServerControl extends Thread
 						sendeNachrichtAnClient(new Uebertragung(6,""),client);
 					}
 
+					break;
+				case 5503789: //login from admin
+					getClients().remove(client);
+					AdminProxy tempAdmin = new AdminProxy(client.getClientSocket(),client.getInFromClient(), client.getOutToClient(), control);
+					tempAdmin.start();
+					adminProxies.add(tempAdmin);
 					break;
 
 
@@ -220,6 +226,8 @@ public class LogRegServerControl extends Thread
 	}
 
 
-
-
+	public ArrayList<AdminProxy> getAdminProxies()
+	{
+		return adminProxies;
+	}
 }
