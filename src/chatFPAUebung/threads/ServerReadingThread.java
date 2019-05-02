@@ -5,6 +5,7 @@ import java.net.SocketException;
 
 import chatFPAUebung.gui.server.ServerControl;
 import chatFPAUebung.klassen.ClientProxy;
+import chatFPAUebung.klassen.Uebertragung;
 import feature_LoginRegister.LogRegServerControl;
 
 public class ServerReadingThread extends Thread
@@ -34,6 +35,10 @@ public class ServerReadingThread extends Thread
 				if(loginControl!=null)
 				{
 					getLoginControl().empfangeNachrichtVonClient(input, getClient());
+					if(((Uebertragung) input).getZweck()==5503789)
+					{
+						interrupt();
+					}
 				}
 				if(control!=null)
 				{

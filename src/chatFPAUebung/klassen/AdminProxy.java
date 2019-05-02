@@ -59,7 +59,6 @@ public class AdminProxy extends Thread
 			}
 			catch (InterruptedIOException | SocketException e)
 			{
-				Platform.runLater(() -> controller.addMessage("Interrupted : " + socket.getLocalSocketAddress()));
 				interrupt();
 			}
 			catch (IOException | ClassNotFoundException e)
