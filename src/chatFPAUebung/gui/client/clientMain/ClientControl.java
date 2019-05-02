@@ -160,7 +160,10 @@ public class ClientControl implements Initializable
         });
 
         //Menüleisten fürs Schließen und minimieren
-        btnClose.setOnAction(e -> ((Stage)btnClose.getScene().getWindow()).close());
+        btnClose.setOnAction(e -> {
+        	sendeNachrichtAnServer(new Uebertragung(6,null));
+        	((Stage)btnClose.getScene().getWindow()).close();
+        });
 
         btnMin.setOnAction(e -> ((Stage)btnMin.getScene().getWindow()).setIconified(true));
         //Settingsmenü wieder zurück in die Hauptanwendung
