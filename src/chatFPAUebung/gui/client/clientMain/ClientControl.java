@@ -161,7 +161,14 @@ public class ClientControl implements Initializable
 
         //Menüleisten fürs Schließen und minimieren
         btnClose.setOnAction(e -> {
-        	sendeNachrichtAnServer(new Uebertragung(6,null));
+        	try
+        	{
+        		sendeNachrichtAnServer(new Uebertragung(6,null));
+        	}
+        	catch(Exception e1)
+        	{
+        		System.out.println("Kann keine Nachricht vor schliessen an Server schicken");
+        	}
         	((Stage)btnClose.getScene().getWindow()).close();
         });
 
