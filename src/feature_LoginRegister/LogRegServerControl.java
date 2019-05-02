@@ -111,7 +111,7 @@ public class LogRegServerControl extends Thread
 
 	private boolean registerUser(LogRegNachricht uebertragung)
 	{
-		boolean userSchonVergeben=false;
+		boolean userSchonVergeben = false;
 
 		for(User u : control.getUserList())
 		{

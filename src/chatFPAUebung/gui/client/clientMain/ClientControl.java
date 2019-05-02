@@ -10,6 +10,8 @@ import java.rmi.activation.ActivationGroup_Stub;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.plaf.metal.DefaultMetalTheme;
+
 import chatFPAUebung.klassen.Chatroom;
 import chatFPAUebung.klassen.Nachricht;
 import chatFPAUebung.klassen.Uebertragung;
@@ -29,6 +31,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
@@ -77,7 +80,7 @@ public class ClientControl implements Initializable
 
     private double xOffset;
     private double yOffset;
-    private User user = new User("Peter", "123", 0, 0);
+    private User user;
     private DefaultListModel<Nachricht> listModel;
     private Socket clientSocket;
     private ObjectOutputStream outToServer;
@@ -113,6 +116,7 @@ public class ClientControl implements Initializable
         toggleNewRoom(1200, false);
         erstelleVerbindung();
         hideLists();
+
 
         //Menüleiste Buttons
         btnFriends.setOnAction(e -> {
@@ -181,6 +185,8 @@ public class ClientControl implements Initializable
         });
 
         txtFieldChat.setOnAction(e -> {
+            createRecievedMessage(txtFieldChat.getText(), user);
+            createSentMessage(txtFieldChat.getText(), user);
             sendeNachricht(getActiveChatroom().getId());
             txtFieldChat.setText("");
         });
@@ -196,8 +202,28 @@ public class ClientControl implements Initializable
             File img = fc.showOpenDialog(friendList.getScene().getWindow());
 
             //TODO: Bild muss erst an den Server gesendet werden. -> Chatroom / Joshua muss sich drum kümmern.
-            createRecievedImage(img);
+            createSentImage(img, user);
         });
+
+        //TODO: Temp;
+        createTestUser();
+    }
+
+    private void createTestUser()
+    {
+        Platform.runLater(() -> {
+            FileChooser fc = new FileChooser();
+            FileChooser.ExtensionFilter png = new FileChooser.ExtensionFilter("Image Files (*.png)", "*.png");
+            FileChooser.ExtensionFilter jpg = new FileChooser.ExtensionFilter("Image Files (*.jpg)", "*.jpg");
+            FileChooser.ExtensionFilter gif = new FileChooser.ExtensionFilter("Image Files (*.gif)", "*.gif");
+            fc.getExtensionFilters().add(png);
+            fc.getExtensionFilters().add(jpg);
+            fc.getExtensionFilters().add(gif);
+            File img = fc.showOpenDialog(friendList.getScene().getWindow());
+            user = new User("Peter", "123", 0, 0);
+            user.setProfilbild(img);
+        });
+
     }
 
     //Erstellt Verbindung zum Server
@@ -259,11 +285,11 @@ public class ClientControl implements Initializable
                     {
                         if(uebertragung.getSender() != user)
                         {
-                            createRecievedMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
+                            createRecievedMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht(), uebertragung.getSender());
                         }
                         else
                         {
-                            createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
+                            createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht(), uebertragung.getSender());
                         }
                     }
 
@@ -312,7 +338,7 @@ public class ClientControl implements Initializable
                 outToServer.writeObject(neuerchatroom);
                 outToServer.flush();
                 chatrooms.add(chat);
-
+                createRoom(chat);
             }
             catch(Exception e)
             {
@@ -347,11 +373,11 @@ public class ClientControl implements Initializable
         {
             if(u.getSender() != user)
             {
-                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht());
+                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht(), u.getSender());
             }
             else
             {
-                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht());
+                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht(), u.getSender());
             }
         }
     }
@@ -463,17 +489,23 @@ public class ClientControl implements Initializable
     }
 
     //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
-    private void createRecievedMessage(String msg) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
+    private void createRecievedMessage(String msg, User sender) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        ImageView i = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
-        i.setFitWidth(50);
-        i.setFitHeight(50);
-        i.setX(5);
-        i.setY(5);
-        i.setSmooth(true);
-        i.setPreserveRatio(false);
+        ImageView profilbild = new ImageView("file:" + sender.getProfilbild().getAbsolutePath());
+        profilbild.setFitWidth(50);
+        profilbild.setFitHeight(50);
+        profilbild.setX(5);
+        profilbild.setY(5);
+        profilbild.setSmooth(true);
+        profilbild.setPreserveRatio(false);
+
+        Label name = new Label(sender.getUsername());
+        name.setLayoutX(60);
+        name.setLayoutY(25);
+        name.setFont(new Font(17));
+        name.setTextFill(Color.WHITE);
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -491,25 +523,30 @@ public class ClientControl implements Initializable
         txtPane.setPadding(new Insets(0, 0, 10, 0));
 
         p.getChildren().add(txtPane);
-        p.getChildren().add(i);
-
-
+        p.getChildren().add(profilbild);
+        p.getChildren().add(name);
 
         getActiveChatroom().getContainer().getChildren().add(p);
     }
 
     //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
-    private void createSentMessage(String msg) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
+    private void createSentMessage(String msg, User sender) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        ImageView i = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
-        i.setFitWidth(50);
-        i.setFitHeight(50);
-        i.setX(745);
-        i.setY(5);
-        i.setSmooth(true);
-        i.setPreserveRatio(false);
+        ImageView profilbild = new ImageView("file:" + sender.getProfilbild().getAbsolutePath());
+        profilbild.setFitWidth(50);
+        profilbild.setFitHeight(50);
+        profilbild.setX(745);
+        profilbild.setY(35);
+        profilbild.setSmooth(true);
+        profilbild.setPreserveRatio(false);
+
+        Label name = new Label(sender.getUsername());
+        name.setLayoutX(505);
+        name.setLayoutY(60);
+        name.setFont(new Font(17));
+        name.setTextFill(Color.BLACK);
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -520,30 +557,36 @@ public class ClientControl implements Initializable
         Pane txtPane = new Pane();
         txtPane.setPrefWidth(275);
         txtPane.setLayoutX(500);
-        txtPane.setLayoutY(25);
+        txtPane.setLayoutY(60);
         txtPane.getStyleClass().add("MessageSent");
         txtPane.getStyleClass().add("DropShadow");
         txtPane.getChildren().add(t);
         txtPane.setPadding(new Insets(0, 0, 15, 0));
 
         p.getChildren().add(txtPane);
-        p.getChildren().add(i);
-
+        p.getChildren().add(profilbild);
+        p.getChildren().add(name);
 
         Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
     }
 
-    private void createSentImage(File imgFile) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
+    private void createSentImage(File imgFile, User sender) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        ImageView sender = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
-        sender.setFitWidth(50);
-        sender.setFitHeight(50);
-        sender.setX(745);
-        sender.setY(5);
-        sender.setSmooth(true);
-        sender.setPreserveRatio(false);
+        ImageView profilbild = new ImageView("file:" + sender.getProfilbild().getAbsolutePath());
+        profilbild.setFitWidth(50);
+        profilbild.setFitHeight(50);
+        profilbild.setX(745);
+        profilbild.setY(35);
+        profilbild.setSmooth(true);
+        profilbild.setPreserveRatio(false);
+
+        Label name = new Label(sender.getUsername());
+        name.setLayoutX(505);
+        name.setLayoutY(60);
+        name.setFont(new Font(17));
+        name.setTextFill(Color.BLACK);
 
 
         ImageView img = new ImageView("file:" + imgFile.getAbsolutePath());
@@ -561,8 +604,6 @@ public class ClientControl implements Initializable
 
             bigImagePane.getChildren().add(bigImg);
 
-
-
             bigImagePane.setOnMouseClicked(event -> {
                 paneBackground.getChildren().remove(bigImagePane);
             });
@@ -579,26 +620,29 @@ public class ClientControl implements Initializable
         imgPane.getChildren().add(img);
         imgPane.setPadding(new Insets(0, 0, 15, 0));
 
-
         p.getChildren().add(imgPane);
-        p.getChildren().add(sender);
-
-
+        p.getChildren().add(profilbild);
+        p.getChildren().add(name);
         Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
     }
 
-    private void createRecievedImage(File imgFile) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
+    private void createRecievedImage(File imgFile, User sender) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
     {
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-        ImageView sender = new ImageView("file:C:/Users/micha/OneDrive/Desktop/Profilbild.png");
-        sender.setFitWidth(50);
-        sender.setFitHeight(50);
-        sender.setX(5);
-        sender.setY(5);
-        sender.setSmooth(true);
-        sender.setPreserveRatio(false);
+        ImageView profilbild = new ImageView("file:" + sender.getProfilbild().getAbsolutePath());
+        profilbild.setFitWidth(50);
+        profilbild.setFitHeight(50);
+        profilbild.setX(5);
+        profilbild.setY(5);
+        profilbild.setSmooth(true);
+        profilbild.setPreserveRatio(false);
 
+        Label name = new Label(sender.getUsername());
+        name.setLayoutX(60);
+        name.setLayoutY(25);
+        name.setFont(new Font(17));
+        name.setTextFill(Color.WHITE);
 
 
         ImageView img = new ImageView("file:" + imgFile.getAbsolutePath());
@@ -618,8 +662,6 @@ public class ClientControl implements Initializable
 
             bigImagePane.getChildren().add(bigImg);
 
-
-
             bigImagePane.setOnMouseClicked(event -> {
                 paneBackground.getChildren().remove(bigImagePane);
             });
@@ -636,10 +678,9 @@ public class ClientControl implements Initializable
         imgPane.getChildren().add(img);
         imgPane.setPadding(new Insets(0, 0, 10, 0));
 
-
         p.getChildren().add(imgPane);
-        p.getChildren().add(sender);
-
+        p.getChildren().add(profilbild);
+        p.getChildren().add(name);
 
         Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
     }
