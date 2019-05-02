@@ -470,6 +470,17 @@ public class ServerControl implements ServerRemoteControl
 		{
 			userDisplays.add(new UserDisplay(value.getUsername(),value.getStatus()));
 		}
+
+		try
+		{
+			admin.getOut().writeObject(userDisplays);
+			admin.getOut().flush();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
