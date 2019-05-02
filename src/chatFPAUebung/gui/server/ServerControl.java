@@ -277,7 +277,7 @@ public class ServerControl implements ServerRemoteControl
 						if (uebertragung.getUebertragung() instanceof Nachricht)
 						{
 							getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel());
+							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel(),uebertragung.getSender());
 						}
 
 						break;
@@ -304,12 +304,8 @@ public class ServerControl implements ServerRemoteControl
 
                         Chatroom chatroom = getChatroom(((Uebertragung) uebertragungObjekt).getZiel());
                         if (chatroom != null)
-                        {
-                            if(chatroom.getMaxTeilnehmer()>chatroom.getTeilnehmer().size())
-                            {
-                                chatroom.hinzufuegen(client);
-                            }
-
+						{
+                        	chatroom.hinzufuegen(client);
                         }
                         break;
 
@@ -359,7 +355,7 @@ public class ServerControl implements ServerRemoteControl
 		}
 	}
 
-	public void broadcasteNachricht(Nachricht nachricht, int ziel)
+	public void broadcasteNachricht(Nachricht nachricht, int ziel, User user)
 	{
 		if(ziel==-1)
 		{
@@ -375,7 +371,7 @@ public class ServerControl implements ServerRemoteControl
 			{
 				for (ClientProxy aktClient : getChatroom(ziel).getTeilnehmer())
 				{
-					sendeNachrichtAnClient(new Uebertragung(2, ziel, nachricht), aktClient);
+					sendeNachrichtAnClient(new Uebertragung(2, ziel, (Object)nachricht, user), aktClient);
 				}
 			}
 		}
