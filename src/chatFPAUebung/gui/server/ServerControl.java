@@ -364,9 +364,10 @@ public class ServerControl implements ServerRemoteControl
 	{
 		if(ziel==-1)
 		{
-			for (Chatroom value :chatrooms)
+			User u = new User();
+			for (Chatroom value : chatrooms)
 			{
-				broadcasteNachricht(nachricht,value.getId());
+				broadcasteNachricht(nachricht,value.getId(), u);
 			}
 		}
 		else
