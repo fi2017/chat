@@ -317,7 +317,16 @@ public class ServerControl implements ServerRemoteControl
 								userList.remove(u);
 							}	
                     	}
-                    	
+                    	break;
+					case 7:
+
+						Chatroom aktuellerchatroom = getChatroom(((Uebertragung) uebertragungObjekt).getZiel());
+						if (aktuellerchatroom != null)
+						{
+							aktuellerchatroom.verlassen(client);
+						}
+
+						break;
 					default:
 						//
 						break;

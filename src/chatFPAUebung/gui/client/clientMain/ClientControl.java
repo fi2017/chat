@@ -500,6 +500,21 @@ public class ClientControl implements Initializable
         }
     }
 
+    public void verlasseChatroom(int chatroomID)
+    {
+        try
+        {
+            Uebertragung leave = new Uebertragung(7, chatroomID,null);
+            outToServer.writeObject(leave);
+            outToServer.flush();
+            System.err.println("In funktion verlasseChatroom");
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
     private void createRecievedMessage(String msg, User sender) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
     {

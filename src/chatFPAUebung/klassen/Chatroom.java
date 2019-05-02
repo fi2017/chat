@@ -55,6 +55,10 @@ public class Chatroom implements chatFPAUebung.interfaces.BlackListInterface, Se
 
         return grund;
     }
+    public void verlassen(ClientProxy c)
+    {
+        teilnehmer.remove(c);
+    }
 
     //Austreten eines Clients aus dem Chatroom
     public void entfernen(ClientProxy c)
