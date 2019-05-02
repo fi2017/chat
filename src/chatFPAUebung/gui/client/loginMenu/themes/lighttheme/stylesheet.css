@@ -134,3 +134,7 @@
 .confirmButton:pressed {
     -fx-background-color: #4a588e;
 }
+
+.labelNeustart {
+    -fx-text-fill: #ed4444;	
+}

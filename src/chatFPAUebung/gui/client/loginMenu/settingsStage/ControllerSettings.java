@@ -9,11 +9,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -33,6 +35,7 @@ public class ControllerSettings implements Initializable {
     public FlowPane menuBar;
     public Pane generalPane;
     public Pane uiPane;
+    public Label labelNeustart;
 
     public ComboBox themeComboBox;
 
@@ -102,22 +105,26 @@ public class ControllerSettings implements Initializable {
             Path neu = Paths.get(theme.getDateiname());
             neu = neu.toAbsolutePath();
             System.out.println(neu);
-            Path original = Paths.get("D:/GitHub_Clones/chat/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css");
+            Path original = Paths.get("src/chatFPAUebung/gui/client/loginMenu/stylesheet.css");
 
             try
             {
-                Files.delete(Paths.get("D:/GitHub_Clones/chat/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css"));
+                Files.delete(Paths.get("src/chatFPAUebung/gui/client/loginMenu/stylesheet.css"));
                 Files.copy(neu, original);
             }
             catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
+
+        themeComboBox.setOnAction(e -> {
+            labelNeustart.setVisible(true);
+        });
     }
 
     private void themeInitialize()
     {
-        themeComboBox.getItems().add(new Theme("Dark Theme (Standard)", "D:/GitHub_Clones/chat/src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/stylesheet.css"));
-        themeComboBox.getItems().add(new Theme("Light Theme", "D:/GitHub_Clones/chat/src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/stylesheet.css"));
+        themeComboBox.getItems().add(new Theme("Dark Theme (Standard)", "src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/stylesheet.css"));
+        themeComboBox.getItems().add(new Theme("Light Theme", "src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/stylesheet.css"));
     }
 }
