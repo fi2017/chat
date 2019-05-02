@@ -164,6 +164,8 @@ public class ClientControl implements Initializable
         	try
         	{
         		sendeNachrichtAnServer(new Uebertragung(6,null));
+        		Thread.currentThread().join();
+        		Thread.currentThread().wait(100);
         	}
         	catch(Exception e1)
         	{
