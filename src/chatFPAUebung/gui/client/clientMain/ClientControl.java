@@ -114,7 +114,7 @@ public class ClientControl implements Initializable
         this.listModel = new DefaultListModel<>();
         listmodels.add(listModel);
         toggleNewRoom(1200, false);
-        erstelleVerbindung();
+        //erstelleVerbindung(); blödsinn
         hideLists();
 
 
@@ -226,29 +226,29 @@ public class ClientControl implements Initializable
 
     }
 
-    //Erstellt Verbindung zum Server
-    public void erstelleVerbindung()
-    {
-        try
-        {
-            setClientSocket(new Socket("localhost", 8008));
-            setOutToServer(new ObjectOutputStream(getClientSocket().getOutputStream()));
-            setInFromServer(new ObjectInputStream(getClientSocket().getInputStream()));
-
-            setClientReadingThread(new ClientReadingThread(this));
-            getClientReadingThread().start();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        sendeNachrichtAnServer(new Uebertragung(1, 0,null));
-    }
+//    //Erstellt Verbindung zum Server
+//    public void erstelleVerbindung()
+//    {
+//        try
+//        {
+//            setClientSocket(new Socket("localhost", 8008));
+//            setOutToServer(new ObjectOutputStream(getClientSocket().getOutputStream()));
+//            setInFromServer(new ObjectInputStream(getClientSocket().getInputStream()));
+//
+//            setClientReadingThread(new ClientReadingThread(this));
+//            getClientReadingThread().start();
+//        }
+//        catch(IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        catch(Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//
+//        sendeNachrichtAnServer(new Uebertragung(1, 0,null));
+//    }
 
     //Protokoll fÃ¼r das Empfangen von Nachrichten
     public void empfangeNachrichtVonServer(Object uebertragungObjekt)
