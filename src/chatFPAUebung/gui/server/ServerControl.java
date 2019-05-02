@@ -316,7 +316,7 @@ public class ServerControl implements ServerRemoteControl
                     case 6:
                     	for(User u : userList)
                     	{
-                    		if(u.equals(((Uebertragung) uebertragungObjekt).getSender()))
+                    		if(u.equals(((Uebertragung) uebertragungObjekt).getSender()) || u.equals(((Uebertragung) uebertragungObjekt).getUebertragung()))
 							{
 								userList.remove(u);
 							}	

@@ -163,7 +163,7 @@ public class ClientControl implements Initializable
         btnClose.setOnAction(e -> {
         	try
         	{
-        		sendeNachrichtAnServer(new Uebertragung(6,null));
+        		sendeNachrichtAnServer(new Uebertragung(6,this.user));
         		Thread.currentThread().join();
         		Thread.currentThread().wait(100);
         	}
