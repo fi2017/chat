@@ -176,8 +176,12 @@ public class ClientControl implements Initializable
         txtFieldRoomName.setOnAction(e -> erstelleChatroom(txtFieldRoomName.getText(), 15, txtFieldRoomPw.getText()));
         txtFieldRoomPw.setOnAction(e -> erstelleChatroom(txtFieldRoomName.getText(), 15, txtFieldRoomPw.getText()));
 
+        //Chatroom hinzufügen
+        btnSearchRoom.setOnAction(e -> {
+
+        });
+
         //Im Chatroom drinnen (Beim anzeigen, der Nachrichten)
-        //TODO: Evtl. Schauen welcher Chat grade geöffnet ist, und dementsprechend die friendlist bzw. die roomlist öffnen. (Generics mit Wildcards)
         paneChat.setOnMouseClicked(e -> {
             if(addRoom.isVisible())
             {
@@ -205,6 +209,8 @@ public class ClientControl implements Initializable
             File img = fc.showOpenDialog(friendList.getScene().getWindow());
 
             //TODO: Bild muss erst an den Server gesendet werden. -> Chatroom / Joshua muss sich drum kümmern.
+            // theoretisch sowas wie:
+            //          sendeNachrichtAnServer(new Uebertragung(6, getActiveChatroom(), new Nachricht(img, LocalDateTime.now()), user)); Oder whatever
             createSentImage(img, user);
         });
 
@@ -276,8 +282,6 @@ public class ClientControl implements Initializable
                     break;
 
                 //Empfangen von neuen Nachrichten
-                //TODO: Es geht nie in den Case 2 rein, weil die Nachricht nicht an den ServerControl gesendet wird, sondern in die LogRegServerControl,
-                // die die Nachricht in einen Case 8 mit keinen Inhalt macht und dann hier her sendet.
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
@@ -290,7 +294,6 @@ public class ClientControl implements Initializable
                             createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht(), uebertragung.getSender());
                         }
                     }
-
                     break;
 
                 //Schließen der ListModels wenn Verbindung durchtrennt
@@ -303,10 +306,7 @@ public class ClientControl implements Initializable
                     chatrooms.add((Chatroom) uebertragung.getUebertragung());
                     beitrittChatroom(((Chatroom) uebertragung.getUebertragung()).getId());
                     Platform.runLater(() -> createAllChatrooms(chatrooms));
-                    for(Chatroom c : chatrooms)
-                    {
-                        System.err.println(c.getName());
-                    }
+
 
 
                 default:
@@ -322,6 +322,8 @@ public class ClientControl implements Initializable
         if(txtFieldChat.getText() != null)
         {
             //2 normale senden der Nachrichten
+            System.out.println(user.getUsername());
+            System.out.println(user);
             sendeNachrichtAnServer(new Uebertragung(2, i, new Nachricht(txtFieldChat.getText(), LocalDateTime.now()), user));
         }
     }
@@ -371,10 +373,10 @@ public class ClientControl implements Initializable
     public void createAllChatrooms(ArrayList<Chatroom> chat)
     {
         this.chatrooms = chat;
+        vBoxRoom.getChildren().clear();
 
         for(Chatroom c : chatrooms)
         {
-            vBoxRoom.getChildren().removeAll();
             createRoom(c);
         }
     }
@@ -425,7 +427,6 @@ public class ClientControl implements Initializable
         p.getChildren().add(b);
 
         b.setOnMouseClicked(e -> {
-            //TODO: Hier dann eine Übertragung an den Server senden, in der man den Chatroom beitritt?
             beitrittChatroom(c.getId());
             openChatroom(e.getSource());
         });
@@ -464,15 +465,15 @@ public class ClientControl implements Initializable
     {
         for(Chatroom c : chatrooms)
         {
+
             //Wüsste gerade nicht, wie ich die ID von dem Room, den ich angeklick habe bekommen sollte.
             if(c.getName().equals(((Button)sender).getText()))
             {
                 c.getScrollPane().setVisible(true);
-                System.err.println(((Button)sender).getText());
-
             }
             else
                 c.getScrollPane().setVisible(false);
+            System.out.println(c.getName() + " " + c.getId() + " " + c.getScrollPane().isVisible());
         }
     }
     public void beitrittChatroom(int chatroomID)
@@ -482,7 +483,6 @@ public class ClientControl implements Initializable
             Uebertragung beitrittsversuch = new Uebertragung(5, chatroomID,null);
             outToServer.writeObject(beitrittsversuch);
             outToServer.flush();
-            System.err.println("In funktion betrittChatroom");
         }
         catch(IOException e)
         {
@@ -508,21 +508,26 @@ public class ClientControl implements Initializable
     //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
     private void createRecievedMessage(String msg, User sender) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
     {
+
         Pane p = new Pane();
         //TODO: Auf User-Klasse warten...
-/*        ImageView profilbild = new ImageView("file:" + sender.getProfilbild().getAbsolutePath());
+/*
+        ImageView profilbild = new ImageView("file:" + sender.getProfilbild().getAbsolutePath());
         profilbild.setFitWidth(50);
         profilbild.setFitHeight(50);
         profilbild.setX(5);
         profilbild.setY(5);
         profilbild.setSmooth(true);
-        profilbild.setPreserveRatio(false);*/
+        profilbild.setPreserveRatio(false);
+*/
 
-/*        Label name = new Label(sender.getUsername());
+/*
+        Label name = new Label(sender.getUsername());
         name.setLayoutX(60);
         name.setLayoutY(25);
         name.setFont(new Font(17));
-        name.setTextFill(Color.WHITE);*/
+        name.setTextFill(Color.WHITE);
+*/
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);

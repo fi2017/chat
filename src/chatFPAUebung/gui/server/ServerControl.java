@@ -279,7 +279,6 @@ public class ServerControl implements ServerRemoteControl
 							getNachrichten().add((Nachricht) uebertragung.getUebertragung());
 							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel(),uebertragung.getSender());
 						}
-
 						break;
 
 					case 3:
@@ -364,10 +363,9 @@ public class ServerControl implements ServerRemoteControl
 	{
 		if(ziel==-1)
 		{
-			User u = new User();
 			for (Chatroom value : chatrooms)
 			{
-				broadcasteNachricht(nachricht,value.getId(), u);
+				broadcasteNachricht(nachricht,value.getId(), user);
 			}
 		}
 		else
@@ -377,7 +375,7 @@ public class ServerControl implements ServerRemoteControl
 			{
 				for (ClientProxy aktClient : getChatroom(ziel).getTeilnehmer())
 				{
-					sendeNachrichtAnClient(new Uebertragung(2, ziel, (Object)nachricht, user), aktClient);
+					sendeNachrichtAnClient(new Uebertragung(2, ziel, nachricht, user), aktClient);
 				}
 			}
 		}
