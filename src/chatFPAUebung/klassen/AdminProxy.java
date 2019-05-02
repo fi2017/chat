@@ -68,7 +68,6 @@ public class AdminProxy extends Thread
 			}
 		}
 
-		Platform.runLater(() -> controller.addMessage("Connection to Admin Lost: " + socket.getLocalSocketAddress()));
 		controller.removeAdmin(this);
 
 		try
@@ -82,7 +81,7 @@ public class AdminProxy extends Thread
 
 	}
 
-	ObjectOutputStream getOut()
+	public ObjectOutputStream getOut()
 	{
 		return out;
 	}

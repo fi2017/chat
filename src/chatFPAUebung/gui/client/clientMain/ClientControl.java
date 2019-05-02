@@ -152,7 +152,19 @@ public class ClientControl implements Initializable
         });
 
         //Menüleisten fürs Schließen und minimieren
-        btnClose.setOnAction(e -> ((Stage)btnClose.getScene().getWindow()).close());
+        btnClose.setOnAction(e -> {
+        	try
+        	{
+        		sendeNachrichtAnServer(new Uebertragung(6,this.user));
+        		Thread.currentThread().join();
+        		Thread.currentThread().wait(100);
+        	}
+        	catch(Exception e1)
+        	{
+        		System.out.println("Kann keine Nachricht vor schliessen an Server schicken");
+        	}
+        	((Stage)btnClose.getScene().getWindow()).close();
+        });
 
         btnMin.setOnAction(e -> ((Stage)btnMin.getScene().getWindow()).setIconified(true));
         //Settingsmenü wieder zurück in die Hauptanwendung
@@ -471,6 +483,21 @@ public class ClientControl implements Initializable
             outToServer.writeObject(beitrittsversuch);
             outToServer.flush();
             System.err.println("In funktion betrittChatroom");
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void verlasseChatroom(int chatroomID)
+    {
+        try
+        {
+            Uebertragung leave = new Uebertragung(7, chatroomID,null);
+            outToServer.writeObject(leave);
+            outToServer.flush();
+            System.err.println("In funktion verlasseChatroom");
         }
         catch(IOException e)
         {
