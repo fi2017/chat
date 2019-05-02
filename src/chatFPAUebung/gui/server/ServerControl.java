@@ -313,6 +313,15 @@ public class ServerControl implements ServerRemoteControl
                         }
                         break;
 
+                    case 6:
+                    	for(User u : userList)
+                    	{
+                    		if(u.equals(((Uebertragung) uebertragungObjekt).getSender()))
+							{
+								userList.remove(u);
+							}	
+                    	}
+                    	
 					default:
 						//
 						break;
