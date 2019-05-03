@@ -287,7 +287,7 @@ public class ClientControl implements Initializable
                     {
                         if(uebertragung.getSender() != user)
                         {
-                            createRecievedMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht(), uebertragung.getSender());
+                            createRecievedMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht(), uebertragung.getSender(), getChatroomById(uebertragung.getZiel()));
                         }
                         else
                         {
@@ -306,8 +306,10 @@ public class ClientControl implements Initializable
                     chatrooms.add((Chatroom) uebertragung.getUebertragung());
                     beitrittChatroom(((Chatroom) uebertragung.getUebertragung()).getId());
                     Platform.runLater(() -> createAllChatrooms(chatrooms));
-
-
+                    break;
+                case 5:
+                    Platform.runLater(() -> createAllChatrooms((ArrayList<Chatroom>)uebertragung.getUebertragung()));
+                    break;
 
                 default:
                     //TODO: Hier bitte noch iwie den User bannen oder so, da er sich nicht an das Protokoll hält.
@@ -387,11 +389,11 @@ public class ClientControl implements Initializable
         {
             if(u.getSender() != user)
             {
-                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht(), u.getSender());
+                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht(), u.getSender(), getChatroomById(u.getZiel()));
             }
             else
             {
-                createRecievedMessage(((Nachricht)u.getUebertragung()).getNachricht(), u.getSender());
+                createSentMessage(((Nachricht)u.getUebertragung()).getNachricht(), u.getSender());
             }
         }
     }
@@ -470,12 +472,19 @@ public class ClientControl implements Initializable
             if(c.getName().equals(((Button)sender).getText()))
             {
                 c.getScrollPane().setVisible(true);
+                c.getContainer().setVisible(true);
             }
             else
+            {
                 c.getScrollPane().setVisible(false);
+                c.getContainer().setVisible(true);
+            }
+
+
             System.out.println(c.getName() + " " + c.getId() + " " + c.getScrollPane().isVisible());
         }
     }
+
     public void beitrittChatroom(int chatroomID)
     {
         try
@@ -506,7 +515,7 @@ public class ClientControl implements Initializable
     }
 
     //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
-    private void createRecievedMessage(String msg, User sender) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
+    private void createRecievedMessage(String msg, User sender, Chatroom c) //Theoretisch brauche ich auch noch Sender, also der User und auch das Sendedatum + Zeit
     {
 
         Pane p = new Pane();
@@ -521,13 +530,11 @@ public class ClientControl implements Initializable
         profilbild.setPreserveRatio(false);
 */
 
-/*
-        Label name = new Label(sender.getUsername());
+/*        Label name = new Label(sender.getUsername());
         name.setLayoutX(60);
         name.setLayoutY(25);
         name.setFont(new Font(17));
-        name.setTextFill(Color.WHITE);
-*/
+        name.setTextFill(Color.WHITE);*/
 
         Text t = new Text(msg);
         t.setWrappingWidth(250);
@@ -548,7 +555,7 @@ public class ClientControl implements Initializable
         //p.getChildren().add(profilbild);
         //p.getChildren().add(name);
 
-        Platform.runLater(() -> getActiveChatroom().getContainer().getChildren().add(p));
+        Platform.runLater(() -> getChatroomById(c.getId()).getContainer().getChildren().add(p));
     }
 
     //Die Methode erstellt eine Instanz einer erhaltenen Nachricht, die von einen Anderen Nutzer, nicht man selbst, versendet wurde
@@ -756,6 +763,21 @@ public class ClientControl implements Initializable
         }
 
         return chatroom;
+    }
+
+    public Chatroom getChatroomById(int id)
+    {
+        Chatroom chat = null;
+
+        for(Chatroom c : chatrooms)
+        {
+            if(c.getId() == id)
+            {
+                chat = c;
+            }
+        }
+
+        return chat;
     }
 
     //Animationen und Übergänge
