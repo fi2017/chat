@@ -40,7 +40,7 @@ public class ServerReadingThread extends Thread
 						interrupt();
 					}
 				}
-				if(control!=null)
+				else if(control!=null)
 				{
 					getControl().empfangeNachrichtVonClient(input, getClient());
 				}

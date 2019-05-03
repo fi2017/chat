@@ -477,12 +477,12 @@ public class ServerControl implements ServerRemoteControl
 		ArrayList<UserDisplay> userDisplays = new ArrayList<>();
 		for (User value : userList)
 		{
-			userDisplays.add(new UserDisplay(value.getUsername(),value.getStatus()));
+			userDisplays.add(new UserDisplay(value.getStatus(),value.getUsername()));
 		}
 
 		try
 		{
-			admin.getOut().writeObject(userDisplays);
+			admin.getOut().writeObject(new Uebertragung(1,userDisplays));
 			admin.getOut().flush();
 		}
 		catch (IOException e)

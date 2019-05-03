@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="08dfe628-3e19-4ebb-ad94-9a21b52702dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chatFPAUebung/klassen/AdminProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatFPAUebung/klassen/AdminProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chatFPAUebung/AdminClient/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatFPAUebung/AdminClient/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chatFPAUebung/threads/ServerReadingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatFPAUebung/threads/ServerReadingThread.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,42 +27,16 @@
             <state relative-caret-position="-1006">
               <caret line="484" column="32" selection-start-line="484" selection-start-column="32" selection-end-line="484" selection-end-column="32" />
               <folding>
-                <element signature="e#27309#27310#0" expanded="true" />
-                <element signature="e#27344#27345#0" expanded="true" />
-                <element signature="e#27398#27399#0" expanded="true" />
-                <element signature="e#27432#27433#0" expanded="true" />
-                <element signature="e#27486#27487#0" expanded="true" />
-                <element signature="e#27521#27522#0" expanded="true" />
-                <element signature="e#27581#27582#0" expanded="true" />
-                <element signature="e#27629#27630#0" expanded="true" />
-                <element signature="e#27699#27700#0" expanded="true" />
-                <element signature="e#27745#27746#0" expanded="true" />
-                <element signature="e#27816#27817#0" expanded="true" />
-                <element signature="e#27864#27865#0" expanded="true" />
-                <element signature="e#27927#27928#0" expanded="true" />
-                <element signature="e#27969#27970#0" expanded="true" />
-                <element signature="e#28179#28180#0" expanded="true" />
-                <element signature="e#28216#28217#0" expanded="true" />
-                <element signature="e#28285#28286#0" expanded="true" />
-                <element signature="e#28330#28331#0" expanded="true" />
-                <element signature="e#28383#28384#0" expanded="true" />
-                <element signature="e#28415#28416#0" expanded="true" />
-                <element signature="e#28482#28483#0" expanded="true" />
-                <element signature="e#28524#28525#0" expanded="true" />
-                <element signature="e#28586#28587#0" expanded="true" />
-                <element signature="e#28619#28620#0" expanded="true" />
-                <element signature="e#28696#28697#0" expanded="true" />
-                <element signature="e#28740#28741#0" expanded="true" />
-                <element signature="e#28782#28783#0" expanded="true" />
-                <element signature="e#28814#28815#0" expanded="true" />
-                <element signature="e#28847#28848#0" expanded="true" />
-                <element signature="e#28879#28880#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1813#1814#0" expanded="true" />
+                <element signature="e#1839#1840#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+
         <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/klassen/Uebertragung.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="224">
@@ -101,6 +75,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -132,13 +111,10 @@
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/ChatRoomDisplay.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/ServerRemoteControl.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/interfaces/ServerRemoteControl.java" />
-        <option value="$PROJECT_DIR$/src/chatFPAUebung/AdminClient/Controller.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/ClientProxy.java" />
-        <option value="$PROJECT_DIR$/src/feature_LoginRegister/User.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/sample.fxml" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css" />
         <option value="$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java" />
-        <option value="$PROJECT_DIR$/src/chatFPAUebung/threads/ServerReadingThread.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/AdminProxy.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java" />
@@ -152,10 +128,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1937" />
-    <option name="height" value="1067" />
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="981" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -237,17 +213,18 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554671673942" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/chatFPAUebung/interfaces" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/chatFPAUebung/fxPopup" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Lutz\IdeaProjects\chatFI2017\src\chatFPAUebung\gui\client\loginMenu\startScene" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="chatFPAUebung.klassen" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\meinp\IdeaProjects\chat2017\src\chatFPAUebung\fxPopup" />
       <recent name="C:\Users\Lutz\IdeaProjects\chatFI2017\src\chatFPAUebung\interfaces" />
       <recent name="C:\Users\Lutz\IdeaProjects\chatFI2017\src\chatFPAUebung" />
       <recent name="C:\Users\Lutz\IdeaProjects\chatFI2017\src\chatFPAUebung\klassen" />
@@ -259,8 +236,8 @@
       <recent name="chatFPAUebung.gui.client.loginMenu.startScene" />
       <recent name="chatFPAUebung.gui.client.clientMain" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="chatFPAUebung.klassen" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Lutz\IdeaProjects\chatFI2017\src\chatFPAUebung\gui\client\loginMenu\startScene" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -275,6 +252,7 @@
       </list>
     </option>
   </component>
+
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="chatFPAUebung.gui.client.clientMain.Main" />
@@ -355,11 +333,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
       <item itemvalue="Application.Main (1)" />
+      <item itemvalue="Application.MainAdmin" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="Application.ServerControl" />
       <item itemvalue="Application.ServerGui" />
-      <item itemvalue="Application.MainAdmin" />
     </list>
     <recent_temporary>
       <list>
@@ -431,7 +409,21 @@
       <option name="project" value="LOCAL" />
       <updated>1556788950179</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="refrech user added for admin">
+      <created>1556789140172</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1556789140172</updated>
+    </task>
+    <task id="LOCAL-00009" summary="new popup added">
+      <created>1556790991862</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1556790991862</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -447,6 +439,7 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
+
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17537314" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
@@ -476,7 +469,7 @@
       <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32995737" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1757085" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.1757085" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -551,7 +544,9 @@
     <MESSAGE value="clientproxy kenn nun den user" />
     <MESSAGE value="bug fixes" />
     <MESSAGE value="bug fixed where adminproxy and serverreadinthread try to read from adminclient at the same time" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixed where adminproxy and serverreadinthread try to read from adminclient at the same time" />
+    <MESSAGE value="refrech user added for admin" />
+    <MESSAGE value="new popup added" />
+    <option name="LAST_COMMIT_MESSAGE" value="new popup added" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chatFPAUebung$Main__3_.ic" NAME="Main (3) Coverage Results" MODIFIED="1556465260282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -710,6 +705,7 @@
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/klassen/ShutdownData.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/Confirm.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -749,45 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/AdminClient/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="201" column="20" selection-start-line="201" selection-start-column="13" selection-end-line="201" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5202#5203#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/interfaces/ServerRemoteControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/klassen/ClientProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1363#1364#0" expanded="true" />
-            <element signature="e#1401#1402#0" expanded="true" />
-            <element signature="e#1740#1741#0" expanded="true" />
-            <element signature="e#1773#1774#0" expanded="true" />
-            <element signature="e#1856#1857#0" expanded="true" />
-            <element signature="e#1874#1875#0" expanded="true" />
-            <element signature="e#1910#1911#0" expanded="true" />
-            <element signature="e#1933#1934#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -869,6 +826,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/Input.java">
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
@@ -882,8 +840,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/AdminClient/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3791">
+          <caret line="226" column="20" selection-start-line="226" selection-start-column="20" selection-end-line="226" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/Confirm.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/Custom.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/FxPopup.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/Info.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
       <provider selected="true" editor-type-id="text-editor">
+
         <state relative-caret-position="410">
           <caret line="363" selection-start-line="363" selection-end-line="363" />
           <folding>
@@ -894,6 +875,7 @@
         </state>
       </provider>
     </entry>
+
     <entry file="file://$PROJECT_DIR$/src/feature_LoginRegister/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1539">
@@ -917,6 +899,7 @@
         </state>
       </provider>
     </entry>
+
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/threads/ClientReadingThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
