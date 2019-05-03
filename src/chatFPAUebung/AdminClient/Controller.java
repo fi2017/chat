@@ -195,7 +195,6 @@ public class Controller implements Initializable
 	}
 
 	//sends a password
-	//TODO ask password form user
 	private void login()
 	{
 		send(5503789);
@@ -226,7 +225,6 @@ public class Controller implements Initializable
 	}
 
 	// ends the Listener for a clean exit
-	// TODO inform the server of closing
 	void exit()
 	{
 		if (listenerThread != null)
