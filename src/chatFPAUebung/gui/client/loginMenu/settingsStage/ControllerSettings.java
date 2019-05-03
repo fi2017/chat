@@ -151,7 +151,7 @@ public class ControllerSettings implements Initializable {
     {
         locale = new Locale(lang);
 
-        bundle = ResourceBundle.getBundle("lang", locale);
+        bundle = ResourceBundle.getBundle("chatFPAUebung/gui/client/loginMenu/settingsStage/lang", locale);
 
         labelNeustart.setText(bundle.getString("labelNeustart"));
         btnLangDE.setText(bundle.getString("btnLangDE"));
