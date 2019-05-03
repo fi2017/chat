@@ -7,7 +7,6 @@ package chatFPAUebung.AdminClient;
  */
 
 import chatFPAUebung.fxPopup.Confirm;
-import chatFPAUebung.fxPopup.GetFxPopup;
 import chatFPAUebung.fxPopup.Input;
 import chatFPAUebung.klassen.*;
 import javafx.application.Platform;
@@ -91,7 +90,7 @@ public class Controller implements Initializable
 			{
 				case 2:
 					send = false;
-					Input popupInput = GetFxPopup.INPUT();
+					Input popupInput = new Input();
 					popupInput.setInfo("Timeout time (min):");
 					popupInput.getBtnOk().setOnAction(e ->
 					{
@@ -138,7 +137,7 @@ public class Controller implements Initializable
 
 	private void configShutdown()
 	{
-		Confirm popup = GetFxPopup.CONFIRM();
+		Confirm popup = new Confirm();
 		popup.getBtnOk().setOnAction(e ->
 		{
 			try
@@ -196,7 +195,6 @@ public class Controller implements Initializable
 	}
 
 	//sends a password
-	//TODO ask password form user
 	private void login()
 	{
 		send(5503789);
@@ -227,7 +225,6 @@ public class Controller implements Initializable
 	}
 
 	// ends the Listener for a clean exit
-	// TODO inform the server of closing
 	void exit()
 	{
 		if (listenerThread != null)

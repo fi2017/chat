@@ -1,7 +1,5 @@
 package chatFPAUebung.fxPopup;
 
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,26 +11,20 @@ public class Input extends FxPopup
 	private Button btnCancel = new Button("Cancel");
 	private TextField input = new TextField();
 
-	Input()
+	public Input()
 	{
 		title = "Input";
 
-		centerPane.getChildren().add(lblInfo);
-		centerPane.getChildren().add(input);
+		addContent(lblInfo);
+		addContent(input);
 		input.setOnAction(e->btnOk.requestFocus());
-
-		centerPane.setPadding(new Insets(10));
-		borderPane.setCenter(centerPane);
-		borderPane.setBottom(buttonBar);
 
 		btnOk.setOnAction(event -> close());
 		btnCancel.setOnAction(event -> close());
 
-		buttonBar.getChildren().add(btnOk);
-		buttonBar.getChildren().add(btnCancel);
-		buttonBar.setPadding(new Insets(20));
+		addButton(btnOk);
+		addButton(btnCancel);
 
-		scene = new Scene(borderPane);
 	}
 
 	public Button getBtnOk()

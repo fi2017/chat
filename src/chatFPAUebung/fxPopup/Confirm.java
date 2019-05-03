@@ -1,7 +1,5 @@
 package chatFPAUebung.fxPopup;
 
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -11,23 +9,19 @@ public class Confirm extends FxPopup
 	private Button btnOk = new Button("OK");
 	private Button btnCancel = new Button("Cancel");
 
-	Confirm()
+	public Confirm()
 	{
+		super();
 		title = "Confirm";
-
-		centerPane.getChildren().add(lblInfo);
-		centerPane.setPadding(new Insets(10));
-		borderPane.setCenter(centerPane);
-		borderPane.setBottom(buttonBar);
+		addContent(lblInfo);
 
 		btnOk.setOnAction(event -> close());
 		btnCancel.setOnAction(event -> close());
 
-		buttonBar.getChildren().add(btnOk);
-		buttonBar.getChildren().add(btnCancel);
-		buttonBar.setPadding(new Insets(20));
+		addButton(btnOk);
+		addButton(btnCancel);
 
-		scene = new Scene(borderPane);
+
 	}
 
 	public Button getBtnOk()

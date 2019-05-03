@@ -1,5 +1,6 @@
 package chatFPAUebung.gui.client.loginMenu.startScene;
 
+import chatFPAUebung.gui.client.clientMain.ClientControl;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientWritingThread;
 import feature_LoginRegister.LogRegNachricht;
@@ -24,6 +25,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -223,13 +225,15 @@ public class Controller implements Initializable
                     ReadingThread.interrupt();
                     ReadingThread = null;
 
+
                     Platform.runLater( () -> {
 
                         ((Stage) closeButton.getScene().getWindow()).close();
                         try
                         {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../clientMain/clientGUI.fxml"));
                             Stage primaryStage = new Stage();
-                            Parent root = FXMLLoader.load(getClass().getResource("../../clientMain/clientGUI.fxml"));
+                            Parent root = loader.load();
                             Scene s = new Scene(root);
                             s.getStylesheets().add("http://fonts.googleapis.com/css?family=Gafata");
                             primaryStage.setTitle("Chat");
@@ -237,7 +241,8 @@ public class Controller implements Initializable
                             primaryStage.setScene(s);
                             primaryStage.initStyle(StageStyle.TRANSPARENT);
                             primaryStage.show();
-
+                            ClientControl control = loader.getController();
+                            control.erstelleVerbindung(clientSocket, inFromServer, outToServer);
                         }
                         catch (IOException ex)
                         {

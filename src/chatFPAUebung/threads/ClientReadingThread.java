@@ -31,8 +31,7 @@ public class ClientReadingThread extends Thread
 				getControl().empfangeNachrichtVonServer(input);
 			} catch (EOFException e)
 			{
-				e.printStackTrace();
-				this.interrupt();
+
 			} catch (ClassNotFoundException e)
 			{
 				e.printStackTrace();
