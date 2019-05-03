@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.loginMenu.settingsStage.ControllerSettings">
+<Pane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.loginMenu.settingsStage.ControllerSettings">
    <children>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="body">
         <columnConstraints>
@@ -65,12 +65,12 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label styleClass="SettingLabel" text="General">
+                  <Label fx:id="labelGeneral" styleClass="SettingLabel" text="General">
                      <VBox.margin>
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </Label>
-                  <Label styleClass="SettingLabel" text="UI">
+                  <Label fx:id="labelUI" styleClass="SettingLabel" text="UI">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
@@ -87,12 +87,15 @@
                </children>
             </VBox>
             <Pane fx:id="generalPane" prefHeight="200.0" prefWidth="200.0" styleClass="rightPane" translateX="610.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-
-            </Pane>
+               <children>
+                  <Label fx:id="labelLang" layoutX="38.0" layoutY="33.0" text="Sprachen:" styleClass="rightSetting"/>
+                  <Button fx:id="btnLangDE" layoutX="204.0" layoutY="26.0" mnemonicParsing="false" text="Deutsch" />
+                  <Button fx:id="btnLangEN" layoutX="315.0" layoutY="26.0" mnemonicParsing="false" text="English" />
+               </children></Pane>
             <Pane fx:id="uiPane" prefHeight="200.0" prefWidth="200.0" styleClass="rightPane" translateX="610.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <Label layoutX="14.0" layoutY="37.0" styleClass="rightLabel" text="Theme:" />
+               <Label fx:id="labelTheme" layoutX="14.0" layoutY="37.0" styleClass="rightLabel" text="Theme:" />
                <ComboBox fx:id="themeComboBox" layoutX="87.0" layoutY="30.0" prefHeight="44.0" prefWidth="200.0" />
-               <Label fx:id="labelNeustart" layoutX="303.0" layoutY="37.0" text="Neustart erforderlich!" visible="false" styleClass="labelNeustart"/>
+               <Label fx:id="labelNeustart" layoutX="303.0" layoutY="37.0" styleClass="labelNeustart" text="Neustart erforderlich!" visible="false" />
             </Pane>
          </children>
       </GridPane>

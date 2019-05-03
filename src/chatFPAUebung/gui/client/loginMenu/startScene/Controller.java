@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -63,6 +64,14 @@ public class Controller implements Initializable
     private ObjectInputStream inFromServer;
     private LogRegReadingThread ReadingThread;
 
+    // Label für Sprachen
+    public Label labelUsernameLogin;
+    public Label labelPasswordLogin;
+    public Label labelUsernameRegister;
+    public Label labelPasswordRegister;
+    public Label labelTitle;
+    public Label labelDesc1;
+    public Label labelDesc2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

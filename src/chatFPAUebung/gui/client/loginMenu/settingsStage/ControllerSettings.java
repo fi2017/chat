@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ControllerSettings implements Initializable {
@@ -35,12 +36,22 @@ public class ControllerSettings implements Initializable {
     public FlowPane menuBar;
     public Pane generalPane;
     public Pane uiPane;
-    public Label labelNeustart;
 
     public ComboBox themeComboBox;
 
     public double offsetx;
     public double offsety;
+
+    // Label für Sprachen
+    public Label labelNeustart;
+    public Button btnLangDE;
+    public Button btnLangEN;
+    public Label labelTheme;
+    public Label labelUI;
+    public Label labelGeneral;
+
+    public ResourceBundle bundle;
+    public Locale locale;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -120,11 +131,33 @@ public class ControllerSettings implements Initializable {
         themeComboBox.setOnAction(e -> {
             labelNeustart.setVisible(true);
         });
+
+        btnLangDE.setOnAction(e -> {
+            loadLang("de");
+        });
+
+        btnLangEN.setOnAction(e -> {
+            loadLang("en");
+        });
     }
 
     private void themeInitialize()
     {
         themeComboBox.getItems().add(new Theme("Dark Theme (Standard)", "src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/stylesheet.css"));
         themeComboBox.getItems().add(new Theme("Light Theme", "src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/stylesheet.css"));
+    }
+
+    public void loadLang(String lang)
+    {
+        locale = new Locale(lang);
+
+        bundle = ResourceBundle.getBundle("lang", locale);
+
+        labelNeustart.setText(bundle.getString("labelNeustart"));
+        btnLangDE.setText(bundle.getString("btnLangDE"));
+        btnLangEN.setText(bundle.getString("btnLangEN"));
+        labelTheme.setText(bundle.getString("labelTheme"));
+        labelUI.setText(bundle.getString("labelUI"));
+        labelGeneral.setText(bundle.getString("labelGeneral"));
     }
 }
