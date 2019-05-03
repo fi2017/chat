@@ -349,11 +349,17 @@ public class ServerControl implements ServerRemoteControl
 
 	private void refreshChatroom()
 	{
+
+
+		ArrayList<ChatRoomDisplay> chatRoomDisplays = new ArrayList<>();
+
+		chatrooms.forEach(v -> chatRoomDisplays.add(new ChatRoomDisplay(v.getId(), v.getName(), v.getImage())));
+
 		for (ClientProxy value : clients)
 		{
 			try
 			{
-				value.getOutToClient().writeObject(new Uebertragung(5, chatrooms));
+				value.getOutToClient().writeObject(new Uebertragung(5, chatRoomDisplays));
 				value.getOutToClient().flush();
 			}
 			catch (IOException e)
@@ -361,10 +367,6 @@ public class ServerControl implements ServerRemoteControl
 				e.printStackTrace();
 			}
 		}
-
-		ArrayList<ChatRoomDisplay> chatRoomDisplays = new ArrayList<>();
-
-		chatrooms.forEach(v -> chatRoomDisplays.add(new ChatRoomDisplay(v.getId(), v.getName())));
 
 		for (AdminProxy admin : adminProxies)
 		{
@@ -384,7 +386,11 @@ public class ServerControl implements ServerRemoteControl
 
 	public void refreshChatroom(ClientProxy client) throws IOException
 	{
-		client.getOutToClient().writeObject(new Uebertragung(5, chatrooms));
+		ArrayList<ChatRoomDisplay> chatRoomDisplays = new ArrayList<>();
+
+		chatrooms.forEach(v -> chatRoomDisplays.add(new ChatRoomDisplay(v.getId(), v.getName(), v.getImage())));
+
+		client.getOutToClient().writeObject(new Uebertragung(5, chatRoomDisplays));
 		client.getOutToClient().flush();
 
 	}

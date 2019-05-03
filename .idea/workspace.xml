@@ -4,7 +4,7 @@
     <list default="true" id="08dfe628-3e19-4ebb-ad94-9a21b52702dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chatFPAUebung/klassen/ChatRoomDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatFPAUebung/klassen/ChatRoomDisplay.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="499" column="59" selection-start-line="499" selection-start-column="59" selection-end-line="499" selection-end-column="59" />
+            <state>
+              <caret line="783" selection-start-line="783" selection-end-line="783" />
             </state>
           </provider>
         </entry>
@@ -33,35 +33,41 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/klassen/ChatRoomDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+            <state relative-caret-position="276">
+              <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#702#703#0" expanded="true" />
+                <element signature="e#729#730#0" expanded="true" />
+                <element signature="e#747#748#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="386" column="37" lean-forward="true" selection-start-line="386" selection-start-column="37" selection-end-line="386" selection-end-column="37" />
+            <state relative-caret-position="310">
+              <caret line="392" column="80" selection-start-line="392" selection-start-column="80" selection-end-line="392" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1222#1232#0" expanded="true" />
                 <element signature="e#1813#1814#0" expanded="true" />
                 <element signature="e#1839#1840#0" expanded="true" />
-                <element signature="e#10343#10344#0" expanded="true" />
-                <element signature="e#10423#10424#0" expanded="true" />
-                <element signature="e#10492#10493#0" expanded="true" />
-                <element signature="e#10547#10548#0" expanded="true" />
-                <element signature="e#10634#10635#0" expanded="true" />
-                <element signature="e#10694#10695#0" expanded="true" />
-                <element signature="e#10783#10784#0" expanded="true" />
-                <element signature="e#10986#10987#0" expanded="true" />
-                <element signature="e#11076#11077#0" expanded="true" />
-                <element signature="e#11140#11141#0" expanded="true" />
-                <element signature="e#11226#11227#0" expanded="true" />
-                <element signature="e#11295#11296#0" expanded="true" />
-                <element signature="e#11413#11414#0" expanded="true" />
+                <element signature="e#10542#10543#0" expanded="true" />
+                <element signature="e#10622#10623#0" expanded="true" />
+                <element signature="e#10691#10692#0" expanded="true" />
+                <element signature="e#10746#10747#0" expanded="true" />
+                <element signature="e#10833#10834#0" expanded="true" />
+                <element signature="e#10893#10894#0" expanded="true" />
+                <element signature="e#10982#10983#0" expanded="true" />
+                <element signature="e#11185#11186#0" expanded="true" />
+                <element signature="e#11275#11276#0" expanded="true" />
+                <element signature="e#11339#11340#0" expanded="true" />
+                <element signature="e#11425#11426#0" expanded="true" />
+                <element signature="e#11494#11495#0" expanded="true" />
+                <element signature="e#11612#11613#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -88,7 +94,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="392">
@@ -169,7 +175,6 @@
         <option value="$PROJECT_DIR$/src/chatFPAUebung/fxPopup/FxPopup.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/AdminClient/Listener.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/AdminClient/guiAdmin.fxml" />
-        <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/ChatRoomDisplay.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/ServerRemoteControl.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/interfaces/ServerRemoteControl.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/ClientProxy.java" />
@@ -177,8 +182,9 @@
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/AdminProxy.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java" />
-        <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" />
         <option value="$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java" />
+        <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/ChatRoomDisplay.java" />
+        <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" />
       </list>
     </option>
   </component>
@@ -232,6 +238,19 @@
               <item name="chatFPAUebung" type="462c0819:PsiDirectoryNode" />
               <item name="AdminClient" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="chatFPAUebung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chat2017" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="chatFPAUebung" type="462c0819:PsiDirectoryNode" />
+              <item name="klassen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chatFPAUebung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chat2017" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="feature_LoginRegister" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -280,7 +299,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ServerControl">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="chatFPAUebung.gui.client.clientMain.Main" />
       <module name="chatFPAUebung" />
@@ -368,9 +387,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerControl" />
-        <item itemvalue="Application.MainAdmin" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MainAdmin" />
+        <item itemvalue="Application.ServerControl" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.ServerGui" />
       </list>
@@ -457,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556867976465</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="chatrooms will now be displayed to newly login users">
+      <created>1556868372258</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1556868372258</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -482,14 +508,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27331188" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.36412078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3290461" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3285968" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32690248" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -511,14 +537,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27331188" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.36412078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3290461" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3285968" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32690248" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -580,7 +606,8 @@
     <MESSAGE value="refrech user added for admin" />
     <MESSAGE value="new popup added" />
     <MESSAGE value="chatrooms are now shownt to the users and the admins" />
-    <option name="LAST_COMMIT_MESSAGE" value="chatrooms are now shownt to the users and the admins" />
+    <MESSAGE value="chatrooms will now be displayed to newly login users" />
+    <option name="LAST_COMMIT_MESSAGE" value="chatrooms will now be displayed to newly login users" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chatFPAUebung$Main__3_.ic" NAME="Main (3) Coverage Results" MODIFIED="1556465260282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -887,20 +914,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="499" column="59" selection-start-line="499" selection-start-column="59" selection-end-line="499" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/klassen/ChatRoomDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/threads/ServerReadingThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -908,36 +921,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="783" selection-start-line="783" selection-end-line="783" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/klassen/ChatRoomDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#729#730#0" expanded="true" />
+            <element signature="e#747#748#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="386" column="37" lean-forward="true" selection-start-line="386" selection-start-column="37" selection-end-line="386" selection-end-column="37" />
+        <state relative-caret-position="310">
+          <caret line="392" column="80" selection-start-line="392" selection-start-column="80" selection-end-line="392" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1222#1232#0" expanded="true" />
             <element signature="e#1813#1814#0" expanded="true" />
             <element signature="e#1839#1840#0" expanded="true" />
-            <element signature="e#10343#10344#0" expanded="true" />
-            <element signature="e#10423#10424#0" expanded="true" />
-            <element signature="e#10492#10493#0" expanded="true" />
-            <element signature="e#10547#10548#0" expanded="true" />
-            <element signature="e#10634#10635#0" expanded="true" />
-            <element signature="e#10694#10695#0" expanded="true" />
-            <element signature="e#10783#10784#0" expanded="true" />
-            <element signature="e#10986#10987#0" expanded="true" />
-            <element signature="e#11076#11077#0" expanded="true" />
-            <element signature="e#11140#11141#0" expanded="true" />
-            <element signature="e#11226#11227#0" expanded="true" />
-            <element signature="e#11295#11296#0" expanded="true" />
-            <element signature="e#11413#11414#0" expanded="true" />
+            <element signature="e#10542#10543#0" expanded="true" />
+            <element signature="e#10622#10623#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
+            <element signature="e#10746#10747#0" expanded="true" />
+            <element signature="e#10833#10834#0" expanded="true" />
+            <element signature="e#10893#10894#0" expanded="true" />
+            <element signature="e#10982#10983#0" expanded="true" />
+            <element signature="e#11185#11186#0" expanded="true" />
+            <element signature="e#11275#11276#0" expanded="true" />
+            <element signature="e#11339#11340#0" expanded="true" />
+            <element signature="e#11425#11426#0" expanded="true" />
+            <element signature="e#11494#11495#0" expanded="true" />
+            <element signature="e#11612#11613#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
         </state>
       </provider>
     </entry>
