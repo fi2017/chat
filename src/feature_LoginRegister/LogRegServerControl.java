@@ -8,6 +8,7 @@ import chatFPAUebung.threads.ServerListenThread;
 import chatFPAUebung.threads.ServerReadingThread;
 import chatFPAUebung.threads.ServerWritingThread;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -65,6 +66,15 @@ public class LogRegServerControl extends Thread
 									client.setUser(value);
 									break;
 								}
+							}
+
+							try
+							{
+								control.refreshChatroom(client);
+							}
+							catch (IOException e)
+							{
+								e.printStackTrace();
 							}
 
 							break;
