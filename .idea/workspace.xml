@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08dfe628-3e19-4ebb-ad94-9a21b52702dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/meinp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,42 +39,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="548" column="70" selection-start-line="548" selection-start-column="70" selection-end-line="548" selection-end-column="70" />
+            <state relative-caret-position="73">
+              <caret line="386" column="37" lean-forward="true" selection-start-line="386" selection-start-column="37" selection-end-line="386" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1222#1232#0" expanded="true" />
                 <element signature="e#1813#1814#0" expanded="true" />
                 <element signature="e#1839#1840#0" expanded="true" />
-                <element signature="e#9693#9694#0" expanded="true" />
-                <element signature="e#9715#9716#0" expanded="true" />
-                <element signature="e#9765#9766#0" expanded="true" />
-                <element signature="e#9795#9796#0" expanded="true" />
-                <element signature="e#9843#9844#0" expanded="true" />
-                <element signature="e#9864#9865#0" expanded="true" />
-                <element signature="e#9901#9902#0" expanded="true" />
-                <element signature="e#9919#9920#0" expanded="true" />
-                <element signature="e#9974#9975#0" expanded="true" />
-                <element signature="e#10006#10007#0" expanded="true" />
-                <element signature="e#10045#10046#0" expanded="true" />
-                <element signature="e#10066#10067#0" expanded="true" />
-                <element signature="e#10126#10127#0" expanded="true" />
-                <element signature="e#10155#10156#0" expanded="true" />
-                <element signature="e#10333#10334#0" expanded="true" />
-                <element signature="e#10358#10359#0" expanded="true" />
-                <element signature="e#10417#10418#0" expanded="true" />
-                <element signature="e#10448#10449#0" expanded="true" />
-                <element signature="e#10490#10491#0" expanded="true" />
-                <element signature="e#10512#10513#0" expanded="true" />
-                <element signature="e#10567#10568#0" expanded="true" />
-                <element signature="e#10598#10599#0" expanded="true" />
-                <element signature="e#10646#10647#0" expanded="true" />
-                <element signature="e#10667#10668#0" expanded="true" />
-                <element signature="e#10713#10714#0" expanded="true" />
-                <element signature="e#10768#10769#0" expanded="true" />
+                <element signature="e#10343#10344#0" expanded="true" />
+                <element signature="e#10423#10424#0" expanded="true" />
+                <element signature="e#10492#10493#0" expanded="true" />
+                <element signature="e#10547#10548#0" expanded="true" />
+                <element signature="e#10634#10635#0" expanded="true" />
+                <element signature="e#10694#10695#0" expanded="true" />
+                <element signature="e#10783#10784#0" expanded="true" />
+                <element signature="e#10986#10987#0" expanded="true" />
+                <element signature="e#11076#11077#0" expanded="true" />
+                <element signature="e#11140#11141#0" expanded="true" />
+                <element signature="e#11226#11227#0" expanded="true" />
+                <element signature="e#11295#11296#0" expanded="true" />
+                <element signature="e#11413#11414#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/threads/ServerReadingThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="87" selection-start-line="87" selection-end-line="87" />
+            <state relative-caret-position="459">
+              <caret line="36" column="52" lean-forward="true" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -101,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="89" column="24" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+            <state relative-caret-position="392">
+              <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -188,10 +175,10 @@
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/ClientProxy.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/sample.fxml" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css" />
-        <option value="$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/klassen/AdminProxy.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java" />
+        <option value="$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java" />
       </list>
     </option>
   </component>
@@ -463,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556790991862</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="chatrooms are now shownt to the users and the admins">
+      <created>1556867976465</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1556867976465</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -585,7 +579,8 @@
     <MESSAGE value="bug fixed where adminproxy and serverreadinthread try to read from adminclient at the same time" />
     <MESSAGE value="refrech user added for admin" />
     <MESSAGE value="new popup added" />
-    <option name="LAST_COMMIT_MESSAGE" value="new popup added" />
+    <MESSAGE value="chatrooms are now shownt to the users and the admins" />
+    <option name="LAST_COMMIT_MESSAGE" value="chatrooms are now shownt to the users and the admins" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chatFPAUebung$Main__3_.ic" NAME="Main (3) Coverage Results" MODIFIED="1556465260282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -892,10 +887,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java">
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="89" column="24" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+        <state relative-caret-position="481">
+          <caret line="499" column="59" selection-start-line="499" selection-start-column="59" selection-end-line="499" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -906,56 +901,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="499" column="59" selection-start-line="499" selection-start-column="59" selection-end-line="499" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/threads/ServerReadingThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="459">
+          <caret line="36" column="52" lean-forward="true" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="548" column="70" selection-start-line="548" selection-start-column="70" selection-end-line="548" selection-end-column="70" />
+        <state relative-caret-position="73">
+          <caret line="386" column="37" lean-forward="true" selection-start-line="386" selection-start-column="37" selection-end-line="386" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1222#1232#0" expanded="true" />
             <element signature="e#1813#1814#0" expanded="true" />
             <element signature="e#1839#1840#0" expanded="true" />
-            <element signature="e#9693#9694#0" expanded="true" />
-            <element signature="e#9715#9716#0" expanded="true" />
-            <element signature="e#9765#9766#0" expanded="true" />
-            <element signature="e#9795#9796#0" expanded="true" />
-            <element signature="e#9843#9844#0" expanded="true" />
-            <element signature="e#9864#9865#0" expanded="true" />
-            <element signature="e#9901#9902#0" expanded="true" />
-            <element signature="e#9919#9920#0" expanded="true" />
-            <element signature="e#9974#9975#0" expanded="true" />
-            <element signature="e#10006#10007#0" expanded="true" />
-            <element signature="e#10045#10046#0" expanded="true" />
-            <element signature="e#10066#10067#0" expanded="true" />
-            <element signature="e#10126#10127#0" expanded="true" />
-            <element signature="e#10155#10156#0" expanded="true" />
-            <element signature="e#10333#10334#0" expanded="true" />
-            <element signature="e#10358#10359#0" expanded="true" />
-            <element signature="e#10417#10418#0" expanded="true" />
-            <element signature="e#10448#10449#0" expanded="true" />
-            <element signature="e#10490#10491#0" expanded="true" />
-            <element signature="e#10512#10513#0" expanded="true" />
-            <element signature="e#10567#10568#0" expanded="true" />
-            <element signature="e#10598#10599#0" expanded="true" />
-            <element signature="e#10646#10647#0" expanded="true" />
-            <element signature="e#10667#10668#0" expanded="true" />
-            <element signature="e#10713#10714#0" expanded="true" />
-            <element signature="e#10768#10769#0" expanded="true" />
+            <element signature="e#10343#10344#0" expanded="true" />
+            <element signature="e#10423#10424#0" expanded="true" />
+            <element signature="e#10492#10493#0" expanded="true" />
+            <element signature="e#10547#10548#0" expanded="true" />
+            <element signature="e#10634#10635#0" expanded="true" />
+            <element signature="e#10694#10695#0" expanded="true" />
+            <element signature="e#10783#10784#0" expanded="true" />
+            <element signature="e#10986#10987#0" expanded="true" />
+            <element signature="e#11076#11077#0" expanded="true" />
+            <element signature="e#11140#11141#0" expanded="true" />
+            <element signature="e#11226#11227#0" expanded="true" />
+            <element signature="e#11295#11296#0" expanded="true" />
+            <element signature="e#11413#11414#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/feature_LoginRegister/LogRegServerControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
         </state>
       </provider>
     </entry>

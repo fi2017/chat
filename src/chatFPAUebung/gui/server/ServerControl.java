@@ -382,6 +382,13 @@ public class ServerControl implements ServerRemoteControl
 
 	}
 
+	public void refreshChatroom(ClientProxy client) throws IOException
+	{
+		client.getOutToClient().writeObject(new Uebertragung(5, chatrooms));
+		client.getOutToClient().flush();
+
+	}
+
 	public void removeUser(ClientProxy client)
 	{
 		System.err.println("\nDer Client mit der IP " + client.getClientSocket().getInetAddress() + " wurde entfernt!");
