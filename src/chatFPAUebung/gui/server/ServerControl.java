@@ -34,6 +34,8 @@ public class ServerControl implements ServerRemoteControl
 	private ArrayList<Nachricht> nachrichten;
 	private ArrayList<Chatroom> chatrooms = new ArrayList<Chatroom>();
 
+	private ArrayList<AdminProxy> adminProxies = new ArrayList<>();
+
 	private ArrayList<Ban> bans;
 
 	// Konstruktor
@@ -45,7 +47,8 @@ public class ServerControl implements ServerRemoteControl
 		try
 		{
 			Class.forName(myDriver);
-		} catch (ClassNotFoundException e)
+		}
+		catch (ClassNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,7 +106,8 @@ public class ServerControl implements ServerRemoteControl
 				mkUser(rs);
 			}
 			con.close();
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			System.out.println("Fehler beim Verbinden mit der Datenbank / Datenbank Fehler");
@@ -120,7 +124,8 @@ public class ServerControl implements ServerRemoteControl
 			user.setPassword(rs.getString(3));
 			user.setGlobalRollenNummer(rs.getInt(4));
 			user.setBanned(rs.getDate(5).toLocalDate());
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,11 +156,13 @@ public class ServerControl implements ServerRemoteControl
 			}
 
 
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally
+		}
+		finally
 		{
 
 			if (preparedStmt != null)
@@ -178,7 +185,8 @@ public class ServerControl implements ServerRemoteControl
 			try
 			{
 				writeToDatabase();
-			} catch (SQLException e1)
+			}
+			catch (SQLException e1)
 			{
 				System.out.println("Error beim Schreiben in Datenbank");
 				e1.printStackTrace();
@@ -195,7 +203,8 @@ public class ServerControl implements ServerRemoteControl
 					aktClient.getInFromClient().close();
 					aktClient.getOutToClient().close();
 					aktClient.getClientSocket().close();
-				} catch (IOException e)
+				}
+				catch (IOException e)
 				{
 					e.printStackTrace();
 				}
@@ -234,7 +243,8 @@ public class ServerControl implements ServerRemoteControl
 						neuerClient.getInFromClient().close();
 						neuerClient.getOutToClient().close();
 						neuerClient.getClientSocket().close();
-					} catch (IOException e)
+					}
+					catch (IOException e)
 					{
 						e.printStackTrace();
 					}
@@ -266,7 +276,7 @@ public class ServerControl implements ServerRemoteControl
 				switch (((Uebertragung) uebertragungObjekt).getZweck())
 				{
 					case 1:
-						if(!client.getUser().isInTimeout())
+						if (!client.getUser().isInTimeout())
 						{
 							sendeNachrichtAnClient(new Uebertragung(1, getNachrichten().toArray(new Nachricht[0])), client);
 						}
@@ -277,7 +287,7 @@ public class ServerControl implements ServerRemoteControl
 						if (uebertragung.getUebertragung() instanceof Nachricht)
 						{
 							getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel(),uebertragung.getSender());
+							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(), uebertragung.getZiel(), uebertragung.getSender());
 						}
 						break;
 
@@ -286,33 +296,30 @@ public class ServerControl implements ServerRemoteControl
 
 						break;
 
-						//Chatroom hinzufügen
+					//Chatroom hinzufügen
 					case 4:
 						chatrooms.add((Chatroom) ((Uebertragung) uebertragungObjekt).getUebertragung());
-						for(ClientProxy aktClient : getClients())
+						refreshChatroom();
+						break;
+
+					case 5:
+
+						Chatroom chatroom = getChatroom(((Uebertragung) uebertragungObjekt).getZiel());
+						if (chatroom != null)
 						{
-							sendeNachrichtAnClient((Uebertragung) uebertragungObjekt, aktClient);
+							chatroom.hinzufuegen(client);
 						}
 						break;
 
-                    case 5:
-
-                        Chatroom chatroom = getChatroom(((Uebertragung) uebertragungObjekt).getZiel());
-                        if (chatroom != null)
+					case 6:
+						for (User u : userList)
 						{
-                        	chatroom.hinzufuegen(client);
-                        }
-                        break;
-
-                    case 6:
-                    	for(User u : userList)
-                    	{
-                    		if(u.equals(((Uebertragung) uebertragungObjekt).getSender()) || u.equals(((Uebertragung) uebertragungObjekt).getUebertragung()))
+							if (u.equals(((Uebertragung) uebertragungObjekt).getSender()) || u.equals(((Uebertragung) uebertragungObjekt).getUebertragung()))
 							{
 								userList.remove(u);
-							}	
-                    	}
-                    	break;
+							}
+						}
+						break;
 					case 7:
 
 						Chatroom aktuellerchatroom = getChatroom(((Uebertragung) uebertragungObjekt).getZiel());
@@ -340,6 +347,41 @@ public class ServerControl implements ServerRemoteControl
 		}
 	}
 
+	private void refreshChatroom()
+	{
+		for (ClientProxy value : clients)
+		{
+			try
+			{
+				value.getOutToClient().writeObject(new Uebertragung(5, chatrooms));
+				value.getOutToClient().flush();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		ArrayList<ChatRoomDisplay> chatRoomDisplays = new ArrayList<>();
+
+		chatrooms.forEach(v -> chatRoomDisplays.add(new ChatRoomDisplay(v.getId(), v.getName())));
+
+		for (AdminProxy admin : adminProxies)
+		{
+			try
+			{
+				admin.getOut().writeObject(new Uebertragung(2, chatRoomDisplays));
+				admin.getOut().flush();
+
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	public void removeUser(ClientProxy client)
 	{
 		System.err.println("\nDer Client mit der IP " + client.getClientSocket().getInetAddress() + " wurde entfernt!");
@@ -353,7 +395,8 @@ public class ServerControl implements ServerRemoteControl
 
 			getClients().remove(client);
 
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			getClients().remove(client);
 		}
@@ -361,11 +404,11 @@ public class ServerControl implements ServerRemoteControl
 
 	public void broadcasteNachricht(Nachricht nachricht, int ziel, User user)
 	{
-		if(ziel==-1)
+		if (ziel == -1)
 		{
 			for (Chatroom value : chatrooms)
 			{
-				broadcasteNachricht(nachricht,value.getId(), user);
+				broadcasteNachricht(nachricht, value.getId(), user);
 			}
 		}
 		else
@@ -385,7 +428,7 @@ public class ServerControl implements ServerRemoteControl
 	{
 		for (Chatroom value : chatrooms)
 		{
-			if(value.getId()==id)
+			if (value.getId() == id)
 			{
 				return value;
 			}
@@ -462,7 +505,7 @@ public class ServerControl implements ServerRemoteControl
 	@Override
 	public void shutdownServerNow()
 	{
-
+		stoppeServer();
 	}
 
 	@Override
@@ -477,12 +520,12 @@ public class ServerControl implements ServerRemoteControl
 		ArrayList<UserDisplay> userDisplays = new ArrayList<>();
 		for (User value : userList)
 		{
-			userDisplays.add(new UserDisplay(value.getStatus(),value.getUsername()));
+			userDisplays.add(new UserDisplay(value.getStatus(), value.getUsername()));
 		}
 
 		try
 		{
-			admin.getOut().writeObject(new Uebertragung(1,userDisplays));
+			admin.getOut().writeObject(new Uebertragung(1, userDisplays));
 			admin.getOut().flush();
 		}
 		catch (IOException e)
@@ -501,7 +544,21 @@ public class ServerControl implements ServerRemoteControl
 	@Override
 	public void addAdmin(AdminProxy admin)
 	{
+		adminProxies.add(admin);
 
+		ArrayList<ChatRoomDisplay> chatRoomDisplays = new ArrayList<>();
+		chatrooms.forEach(v -> chatRoomDisplays.add(new ChatRoomDisplay(v.getId(), v.getName())));
+
+		try
+		{
+			admin.getOut().writeObject(new Uebertragung(2, chatRoomDisplays));
+			admin.getOut().flush();
+
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
