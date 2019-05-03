@@ -12,6 +12,11 @@ public class Nachricht implements Serializable
 	private String nachricht;
 	private LocalDateTime sendezeitpunkt;
 
+	public Nachricht()
+	{
+
+	}
+
 	// Konstruktor
 	public Nachricht(String nachricht, LocalDateTime sendezeitpunkt)
 	{

@@ -12,6 +12,7 @@ import javax.swing.plaf.metal.DefaultMetalTheme;
 
 import chatFPAUebung.klassen.Chatroom;
 import chatFPAUebung.klassen.Nachricht;
+import chatFPAUebung.klassen.NachrichtBild;
 import chatFPAUebung.klassen.Uebertragung;
 import chatFPAUebung.threads.ClientReadingThread;
 import chatFPAUebung.threads.ClientWritingThread;
@@ -212,6 +213,7 @@ public class ClientControl implements Initializable
             // theoretisch sowas wie:
             //          sendeNachrichtAnServer(new Uebertragung(6, getActiveChatroom(), new Nachricht(img, LocalDateTime.now()), user)); Oder whatever
             createSentImage(img, user);
+            sendeNachrichtAnServer(new Uebertragung(2, i, new NachrichtBild(img), user));
         });
 
         //TODO: Temp;
@@ -283,7 +285,13 @@ public class ClientControl implements Initializable
 
                 //Empfangen von neuen Nachrichten
                 case 2:
-                    if(uebertragung.getUebertragung() instanceof Nachricht)
+                    if(uebertragung.getUebertragung() instanceof NachrichtBild)
+                    {
+                        if(uebertragung.getSender() != user)
+                        {
+//                            createRecievedImage((NachrichtBild));
+                        }
+                    }else if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
                         if(uebertragung.getSender() != user)
                         {
@@ -294,6 +302,8 @@ public class ClientControl implements Initializable
                             createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht(), uebertragung.getSender());
                         }
                     }
+
+
                     break;
 
                 //Schließen der ListModels wenn Verbindung durchtrennt
