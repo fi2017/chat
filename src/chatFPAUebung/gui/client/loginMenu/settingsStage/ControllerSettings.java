@@ -57,6 +57,7 @@ public class ControllerSettings implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         themeInitialize();
+        themeComboBox.getSelectionModel().selectFirst();
 
         closeButton.setOnAction(e -> {
             ((Stage)closeButton.getScene().getWindow()).close();
