@@ -347,6 +347,11 @@ public class ServerControl implements ServerRemoteControl
 		}
 	}
 
+	public void sendLastMessages(ClientProxy clientProxy, Chatroom chatroom)
+	{
+		//TODO maybe mak it work
+	}
+
 	private void refreshChatroom()
 	{
 
