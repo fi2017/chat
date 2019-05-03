@@ -264,6 +264,6 @@
    </children>
 
     <stylesheets>
-        <URL value="@style.css" />
+        <URL value="@Style.css" />
     </stylesheets>
 </AnchorPane>

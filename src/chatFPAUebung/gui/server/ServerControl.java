@@ -277,18 +277,13 @@ public class ServerControl implements ServerRemoteControl
 						if (uebertragung.getUebertragung() instanceof Nachricht)
 						{
 							getNachrichten().add((Nachricht) uebertragung.getUebertragung());
-							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel());
+							broadcasteNachricht((Nachricht) uebertragung.getUebertragung(),uebertragung.getZiel(),uebertragung.getSender());
 						}
-
 						break;
 
 					case 3:
 						sendeNachrichtAnClient(new Uebertragung(0, null), client);
 
-						//TODO: Hier fehlt case 4: indem der erstellte Chatroom einer liste hinzugefügt wird.
-						// Diese Liste wird einen neuen Benutzer beim einloggen dann gegeben, damit der den Chatrooms auch beitreten kann
-						// Oder der Client sendet seine Eingabe (Name vom Chatroom) an den Server, der dann alles erledigt und nur den einen
-						// zurück gibt.
 						break;
 
 						//Chatroom hinzufügen
@@ -304,15 +299,29 @@ public class ServerControl implements ServerRemoteControl
 
                         Chatroom chatroom = getChatroom(((Uebertragung) uebertragungObjekt).getZiel());
                         if (chatroom != null)
-                        {
-                            if(chatroom.getMaxTeilnehmer()>chatroom.getTeilnehmer().size())
-                            {
-                                chatroom.hinzufuegen(client);
-                            }
-
+						{
+                        	chatroom.hinzufuegen(client);
                         }
                         break;
 
+                    case 6:
+                    	for(User u : userList)
+                    	{
+                    		if(u.equals(((Uebertragung) uebertragungObjekt).getSender()) || u.equals(((Uebertragung) uebertragungObjekt).getUebertragung()))
+							{
+								userList.remove(u);
+							}	
+                    	}
+                    	break;
+					case 7:
+
+						Chatroom aktuellerchatroom = getChatroom(((Uebertragung) uebertragungObjekt).getZiel());
+						if (aktuellerchatroom != null)
+						{
+							aktuellerchatroom.verlassen(client);
+						}
+
+						break;
 					default:
 						//
 						break;
@@ -350,13 +359,13 @@ public class ServerControl implements ServerRemoteControl
 		}
 	}
 
-	public void broadcasteNachricht(Nachricht nachricht, int ziel)
+	public void broadcasteNachricht(Nachricht nachricht, int ziel, User user)
 	{
 		if(ziel==-1)
 		{
-			for (Chatroom value :chatrooms)
+			for (Chatroom value : chatrooms)
 			{
-				broadcasteNachricht(nachricht,value.getId());
+				broadcasteNachricht(nachricht,value.getId(), user);
 			}
 		}
 		else
@@ -366,7 +375,7 @@ public class ServerControl implements ServerRemoteControl
 			{
 				for (ClientProxy aktClient : getChatroom(ziel).getTeilnehmer())
 				{
-					sendeNachrichtAnClient(new Uebertragung(2, ziel, nachricht), aktClient);
+					sendeNachrichtAnClient(new Uebertragung(2, ziel, nachricht, user), aktClient);
 				}
 			}
 		}
