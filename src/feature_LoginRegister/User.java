@@ -1,5 +1,7 @@
 package feature_LoginRegister;
 
+import javax.swing.*;
+import java.io.File;
 import java.sql.Date;
 
 public class User
@@ -12,6 +14,7 @@ public class User
 	private Date banned = new Date(0);
 	private boolean online=false;
 	private boolean neu = false;
+	private File image;
 
 	public User()
 	{
@@ -97,4 +100,13 @@ public class User
 	}
 
 
+	public File getImage()
+	{
+		return image;
+	}
+
+	public void setImage(File image)
+	{
+		this.image = image;
+	}
 }

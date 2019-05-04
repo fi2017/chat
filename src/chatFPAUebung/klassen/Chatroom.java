@@ -56,6 +56,12 @@ public class Chatroom implements interfaces.BlackListInterface, Serializable //I
         return grund;
     }
 
+    public Chatroom()
+    {
+
+    }
+
+
     //Austreten eines Clients aus dem Chatroom
     public void entfernen(ClientProxy c)
     {

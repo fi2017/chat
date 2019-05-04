@@ -1,5 +1,6 @@
 package chatFPAUebung.threads;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -39,6 +40,9 @@ public class ServerReadingThread extends Thread
 				{
 					getControl().empfangeNachrichtVonClient(input, getClient());
 				}
+			} catch (EOFException e)
+			{
+
 			} catch (ClassNotFoundException e)
 			{
 				e.printStackTrace();
