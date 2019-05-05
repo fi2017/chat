@@ -81,6 +81,7 @@ public class Controller implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
 
         erstelleVerbindung();
+        loadLang("de");
 
         loginButton.setOnAction(e -> {
 
@@ -335,6 +336,7 @@ public class Controller implements Initializable
 
     public void loadLang(String lang)
     {
+        System.out.println("loadLang aufgerufen");
         locale = new Locale(lang);
 
         bundle = ResourceBundle.getBundle("chatFPAUebung/gui/client/loginMenu/startScene/lang", locale);
@@ -346,6 +348,11 @@ public class Controller implements Initializable
         labelTitle.setText(bundle.getString("labelTitle"));
         labelDesc1.setText(bundle.getString("labelDesc1"));
         labelDesc2.setText(bundle.getString("labelDesc2"));
+        loginButton.setText(bundle.getString("loginButton"));
+        registerButton.setText(bundle.getString("registerButton"));
+        loginButtonLogin.setText(bundle.getString("loginButtonLogin"));
+        registerButtonRegister.setText(bundle.getString("registerButtonRegister"));
+        System.out.println("Sprache geändert");
     }
 
     public ObjectOutputStream getOutToServer()

@@ -25,9 +25,9 @@
         </rowConstraints>
         <children>
             <Pane GridPane.rowIndex="1">
-                <Label fx:id="labelUsernameLogin" layoutX="50.0" layoutY="42.0" styleClass="BelowLabel" GridPane.rowIndex="1">USERNAME</Label>
+                <Label fx:id="labelUsernameLogin" layoutX="50.0" layoutY="42.0" styleClass="BelowLabel" GridPane.rowIndex="1" text="USERNAME"></Label>
                 <TextField fx:id="textFieldUsernameLogin" layoutX="50.0" layoutY="63.0" styleClass="TextFieldLogin" GridPane.rowIndex="2" />
-                <Label fx:id="labelPasswordLogin" layoutX="50.0" layoutY="162.0" styleClass="BelowLabel" GridPane.rowIndex="3">PASSWORD</Label>
+                <Label fx:id="labelPasswordLogin" layoutX="50.0" layoutY="162.0" styleClass="BelowLabel" GridPane.rowIndex="3" text="PASSWORD"></Label>
                 <TextField fx:id="textFieldPasswordLogin" layoutX="50.0" layoutY="183.0" styleClass="TextFieldLogin" GridPane.rowIndex="4" />
                 <Button fx:id="backButtonLogin" layoutX="300.0" layoutY="-15.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="BackButton">
                     <graphic>
@@ -40,7 +40,7 @@
                 </Button>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" styleClass="BottomPane" GridPane.rowIndex="2">
-                <Button fx:id="loginButtonLogin" layoutX="25.0" layoutY="25.0" prefWidth="300.0" styleClass="PaneButton">Login</Button>
+                <Button fx:id="loginButtonLogin" layoutX="25.0" layoutY="25.0" prefWidth="300.0" styleClass="PaneButton" text="Login"></Button>
             </Pane>
         </children>
 
@@ -60,9 +60,9 @@
         </rowConstraints>
         <children>
             <Pane GridPane.rowIndex="1">
-                <Label fx:id="labelUsernameRegister" layoutX="50.0" layoutY="42.0" styleClass="BelowLabel" GridPane.rowIndex="1">USERNAME</Label>
+                <Label fx:id="labelUsernameRegister" layoutX="50.0" layoutY="42.0" styleClass="BelowLabel" GridPane.rowIndex="1" text="USERNAME"></Label>
                 <TextField fx:id="textFieldUsernameRegister" layoutX="50.0" layoutY="63.0" styleClass="TextFieldLogin" GridPane.rowIndex="2" />
-                <Label fx:id="labelPasswordRegister" layoutX="50.0" layoutY="162.0" styleClass="BelowLabel" GridPane.rowIndex="3">PASSWORD</Label>
+                <Label fx:id="labelPasswordRegister" layoutX="50.0" layoutY="162.0" styleClass="BelowLabel" GridPane.rowIndex="3" text="PASSWORD"></Label>
                 <TextField fx:id="textFieldPasswordRegister" layoutX="50.0" layoutY="183.0" styleClass="TextFieldLogin" GridPane.rowIndex="4" />
                 <Button fx:id="backButtonRegister" layoutX="300.0" layoutY="-15.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="BackButton">
                     <graphic>
@@ -75,7 +75,7 @@
                 </Button>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" styleClass="BottomPane" GridPane.rowIndex="2">
-                <Button fx:id="registerButtonRegister" layoutX="25.0" layoutY="25.0" prefWidth="300.0" styleClass="PaneButton">Register</Button>
+                <Button fx:id="registerButtonRegister" layoutX="25.0" layoutY="25.0" prefWidth="300.0" styleClass="PaneButton" text="Register"></Button>
             </Pane>
         </children>
 
@@ -124,16 +124,16 @@
             </graphic>
         </Button>
       </FlowPane>
-       <Label fx:id="labelTitle" styleClass="TitleLabel" GridPane.rowIndex="1">FI2017 Chat</Label>
+       <Label fx:id="labelTitle" styleClass="TitleLabel" GridPane.rowIndex="1" text="FI2017 Chat"></Label>
       <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" spacing="20.0" GridPane.rowIndex="2">
          <children>
-             <Label fx:id="labelDesc1" styleClass="BelowLabel">Willkommen zum Chatprojekt der FI11</Label>
-             <Label fx:id="labelDesc2" styleClass="BelowLabel">Wähle nun, wie du fortfahren möchtest...</Label>
+             <Label fx:id="labelDesc1" styleClass="BelowLabel" text="Willkommen zum Chatprojekt der FI11"></Label>
+             <Label fx:id="labelDesc2" styleClass="BelowLabel" text="Wähle nun, wie du fortfahren möchtest..."></Label>
          </children>
       </VBox>
        <VBox alignment="CENTER" prefWidth="350.0" spacing="10.0" styleClass="BottomPane" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES">
-           <Button fx:id="loginButton" layoutX="100.0" layoutY="14.0" prefWidth="300" styleClass="PaneButton">Login</Button>
-           <Button fx:id="registerButton" layoutX="106.0" layoutY="66.0" prefWidth="300" styleClass="PaneButton">Register</Button>
+           <Button fx:id="loginButton" layoutX="100.0" layoutY="14.0" prefWidth="300" styleClass="PaneButton" text="Login"></Button>
+           <Button fx:id="registerButton" layoutX="106.0" layoutY="66.0" prefWidth="300" styleClass="PaneButton" text="Register"></Button>
        </VBox>
    </children>
 

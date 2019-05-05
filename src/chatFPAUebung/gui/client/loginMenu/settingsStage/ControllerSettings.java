@@ -17,6 +17,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -57,14 +59,23 @@ public class ControllerSettings implements Initializable {
     public Locale locale;
 
     Controller mainController;
+    FXMLLoader loader;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         themeInitialize();
+        loadLang("de");
         themeComboBox.getSelectionModel().selectFirst();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../startScene/sample.fxml"));
+        loader = new FXMLLoader(getClass().getResource("../startScene/sample.fxml"));
+        try
+        {
+            loader.load();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         mainController = loader.getController();
 
         closeButton.setOnAction(e -> {
@@ -150,12 +161,53 @@ public class ControllerSettings implements Initializable {
         btnLangDE.setOnAction(e -> {
             loadLang("de");
             mainController.loadLang("de");
+            writeLang("de");
         });
 
         btnLangEN.setOnAction(e -> {
             loadLang("en");
             mainController.loadLang("en");
+            writeLang("en");
         });
+    }
+
+    public String readLang()
+    {
+        String zeile = "";
+
+        try
+        {
+            Path path = Paths.get("chatFPAUebung/gui/client/loginMenu/startLang.txt");
+            BufferedReader reader = Files.newBufferedReader(path);
+
+            try
+            {
+                zeile = reader.readLine();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                reader.close();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return zeile;
+    }
+
+    public void writeLang(String lang)
+    {
+        Path path = Paths.get("chatFPAUebung/gui/client/loginMenu/startLang.txt");
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void themeInitialize()
@@ -177,5 +229,6 @@ public class ControllerSettings implements Initializable {
         labelUI.setText(bundle.getString("labelUI"));
         labelGeneral.setText(bundle.getString("labelGeneral"));
         labelLang.setText(bundle.getString("labelLang"));
+        confirmButton.setText(bundle.getString("confirmButton"));
     }
 }
