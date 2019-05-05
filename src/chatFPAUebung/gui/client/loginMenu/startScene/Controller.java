@@ -22,11 +22,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -81,7 +85,7 @@ public class Controller implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
 
         erstelleVerbindung();
-        loadLang("de");
+        loadLang(readLang());
 
         loginButton.setOnAction(e -> {
 
@@ -353,6 +357,35 @@ public class Controller implements Initializable
         loginButtonLogin.setText(bundle.getString("loginButtonLogin"));
         registerButtonRegister.setText(bundle.getString("registerButtonRegister"));
         System.out.println("Sprache geändert");
+    }
+
+    public String readLang()
+    {
+        String zeile = "";
+
+        try
+        {
+            Path path = Paths.get("src/chatFPAUebung/gui/client/loginMenu/startLang.txt");
+            BufferedReader reader = Files.newBufferedReader(path);
+
+            try
+            {
+                zeile = reader.readLine();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                reader.close();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return zeile;
     }
 
     public ObjectOutputStream getOutToServer()

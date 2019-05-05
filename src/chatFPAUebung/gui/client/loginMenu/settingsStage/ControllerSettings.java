@@ -65,7 +65,7 @@ public class ControllerSettings implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         themeInitialize();
-        loadLang("de");
+        loadLang(readLang());
         themeComboBox.getSelectionModel().selectFirst();
 
         loader = new FXMLLoader(getClass().getResource("../startScene/sample.fxml"));
@@ -177,7 +177,7 @@ public class ControllerSettings implements Initializable {
 
         try
         {
-            Path path = Paths.get("chatFPAUebung/gui/client/loginMenu/startLang.txt");
+            Path path = Paths.get("src/chatFPAUebung/gui/client/loginMenu/startLang.txt");
             BufferedReader reader = Files.newBufferedReader(path);
 
             try
@@ -202,10 +202,25 @@ public class ControllerSettings implements Initializable {
 
     public void writeLang(String lang)
     {
-        Path path = Paths.get("chatFPAUebung/gui/client/loginMenu/startLang.txt");
-        try {
+        try
+        {
+            Path path = Paths.get("src/chatFPAUebung/gui/client/loginMenu/startLang.txt");
             BufferedWriter writer = Files.newBufferedWriter(path);
-        } catch (IOException e) {
+
+            try
+            {
+                writer.write(lang);
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                writer.close();
+            }
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
