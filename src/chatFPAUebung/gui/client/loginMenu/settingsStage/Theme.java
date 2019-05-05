@@ -4,17 +4,19 @@ public class Theme
 {
 
     public String bezeichnung;
-    public String dateiname;
+    public String dateipfadLogin;
+    public String dateipfadClient;
 
     public Theme()
     {
 
     }
 
-    public Theme(String bezeichnung, String dateiname)
+    public Theme(String bezeichnung, String dateipfadLogin, String dateipfadClient)
     {
         this.bezeichnung = bezeichnung;
-        this.dateiname = dateiname;
+        this.dateipfadLogin = dateipfadLogin;
+        this.dateipfadClient = dateipfadClient;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class Theme
         return bezeichnung;
     }
 
-    public String getDateiname() {
-        return dateiname;
-    }
+    public String getDateipfadLogin() { return dateipfadLogin; }
+
+    public String getDateipfadClient() { return dateipfadClient; }
 }

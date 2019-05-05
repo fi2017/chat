@@ -6,7 +6,7 @@
 
 .MenuBar {
     /*-fx-background-color:  linear-gradient(to right, #5b5da5, #afb9e6);*/
-    -fx-background-color:  #202225;
+    -fx-background-color:  #5b5da5;
 }
 
 .MenuButton {
@@ -26,11 +26,11 @@
 }
 
 .SearchButton:hover{
-    -fx-background-color: #7289da;
+    -fx-background-color: #5b5da5;
 }
 
 .Friendlist {
-    -fx-background-color: #2f3136;
+    -fx-background-color: #FFFFFF59;
 }
 
 .WindowButton {
@@ -44,7 +44,7 @@
 
 .Chat {
     -fx-border-style: none;
-    -fx-background-color: #36393f;
+    -fx-background-color: Transparent;
 }
 
 .AddRoom {
@@ -92,7 +92,7 @@
 
 
 .MessageRecieved {
-    -fx-background-color: #7289da;
+    -fx-background-color: #5b5da5;
 }
 
 .MessageSent {

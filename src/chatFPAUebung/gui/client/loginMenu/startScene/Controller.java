@@ -172,7 +172,7 @@ public class Controller implements Initializable
                 stageSettings.setScene(new Scene(rootSettings));
                 stageSettings.setResizable(false);
                 stageSettings.initStyle(StageStyle.UNDECORATED);
-                stageSettings.setOpacity(0.95);
+                stageSettings.setOpacity(0.98);
                 stageSettings.getScene().getStylesheets().add("https://fonts.googleapis.com/css?family=Questrial");
                 stageSettings.show();
             }

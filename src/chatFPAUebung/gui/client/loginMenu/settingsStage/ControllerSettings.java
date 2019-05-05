@@ -64,7 +64,8 @@ public class ControllerSettings implements Initializable {
         themeInitialize();
         themeComboBox.getSelectionModel().selectFirst();
 
-        //mainController = FXMLLoader.load(getClass().getResource("../settingsStage/settings.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../startScene/sample.fxml"));
+        mainController = loader.getController();
 
         closeButton.setOnAction(e -> {
             ((Stage)closeButton.getScene().getWindow()).close();
@@ -121,15 +122,21 @@ public class ControllerSettings implements Initializable {
         confirmButton.setOnAction(e -> {
             Theme theme = (Theme)themeComboBox.getValue();
 
-            Path neu = Paths.get(theme.getDateiname());
-            neu = neu.toAbsolutePath();
-            System.out.println(neu);
-            Path original = Paths.get("src/chatFPAUebung/gui/client/loginMenu/stylesheet.css");
+            Path neu1 = Paths.get(theme.getDateipfadLogin());
+            Path neu2 = Paths.get(theme.getDateipfadClient());
+            neu1 = neu1.toAbsolutePath();
+            neu2 = neu2.toAbsolutePath();
+
+            Path original1 = Paths.get("src/chatFPAUebung/gui/client/loginMenu/stylesheet.css");
+            Path original2 = Paths.get("src/chatFPAUebung/gui/client/clientMain/Style.css");
 
             try
             {
                 Files.delete(Paths.get("src/chatFPAUebung/gui/client/loginMenu/stylesheet.css"));
-                Files.copy(neu, original);
+                Files.copy(neu1, original1);
+
+                Files.delete(Paths.get("src/chatFPAUebung/gui/client/clientMain/Style.css"));
+                Files.copy(neu2, original2);
             }
             catch (IOException ex) {
                 ex.printStackTrace();
@@ -153,8 +160,8 @@ public class ControllerSettings implements Initializable {
 
     private void themeInitialize()
     {
-        themeComboBox.getItems().add(new Theme("Dark Theme (Standard)", "src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/stylesheet.css"));
-        themeComboBox.getItems().add(new Theme("Light Theme", "src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/stylesheet.css"));
+        themeComboBox.getItems().add(new Theme("Dark Theme (Standard)", "src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/stylesheet.css", "src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/Style.css"));
+        themeComboBox.getItems().add(new Theme("Light Theme", "src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/stylesheet.css", "src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/Style.css"));
     }
 
     public void loadLang(String lang)

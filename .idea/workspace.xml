@@ -16,31 +16,12 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/ControllerSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="66" column="101" lean-forward="true" selection-start-line="66" selection-start-column="101" selection-end-line="66" selection-end-column="101" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/sample.fxml">
+        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="82" column="26" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2501">
-              <caret line="170" column="108" selection-start-line="170" selection-start-column="108" selection-end-line="170" selection-end-column="108" />
+            <state relative-caret-position="459">
+              <caret line="411" column="55" lean-forward="true" selection-start-line="411" selection-start-column="55" selection-end-line="411" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -49,42 +30,66 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/settings.fxml">
+        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="103" lean-forward="true" selection-start-line="103" selection-end-line="103" />
+            <state relative-caret-position="534">
+              <caret line="178" column="34" lean-forward="true" selection-start-line="178" selection-start-column="34" selection-end-line="178" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css">
+        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/ControllerSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="497">
+              <caret line="137" column="92" selection-start-line="137" selection-start-column="92" selection-end-line="137" selection-end-column="92" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/Theme.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
-              <caret line="60" column="34" lean-forward="true" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="34" />
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/lang_en.properties">
+        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/stylesheet.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+            <state relative-caret-position="408">
+              <caret line="42" column="26" lean-forward="true" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="33" />
             </state>
           </provider>
-          <provider editor-type-id="ResourceBundle" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/Style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="251">
+              <caret line="94" column="33" selection-start-line="94" selection-start-column="33" selection-end-line="94" selection-end-column="33" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/lang_de.properties">
+        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/clientGUI.fxml">
+          <provider editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="68">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
             </state>
           </provider>
-          <provider editor-type-id="ResourceBundle" />
         </entry>
       </file>
     </leaf>
@@ -139,8 +144,12 @@
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/settings.fxml" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/lang_en.properties" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/lang_de.properties" />
+        <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/stylesheet.css" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/Controller.java" />
+        <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/Theme.java" />
         <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/ControllerSettings.java" />
+        <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/clientGUI.fxml" />
+        <option value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/Style.css" />
       </list>
     </option>
   </component>
@@ -162,6 +171,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -203,6 +213,15 @@
               <item name="chatFPAUebung" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="clientMain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chatFPAUebung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="chatFPAUebung" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="loginMenu" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -233,8 +252,29 @@
               <item name="gui" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="loginMenu" type="462c0819:PsiDirectoryNode" />
-              <item name="startScene" type="462c0819:PsiDirectoryNode" />
-              <item name="Resource Bundle 'lang'" type="a6c14932:ResourceBundleNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chatFPAUebung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="chatFPAUebung" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="loginMenu" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="darktheme" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chatFPAUebung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="chatFPAUebung" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="loginMenu" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="lighttheme" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="chatFPAUebung" type="b2602c69:ProjectViewProjectNode" />
@@ -254,13 +294,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554671673942" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/chatFPAUebung" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/darktheme" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -268,6 +307,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GitHub_Clones\chat\src\chatFPAUebung\gui\client\loginMenu\themes\darktheme" />
+      <recent name="D:\GitHub_Clones\chat\src\chatFPAUebung\gui\client\loginMenu\themes\lighttheme" />
       <recent name="C:\Users\micha\OneDrive\Dokumente\GitHub\chat\src\chatFPAUebung" />
     </key>
   </component>
@@ -362,6 +403,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.LogRegControl" />
+      <item itemvalue="Application.Main (2)" />
+      <item itemvalue="Application.Main (3)" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.ServerControl" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -398,7 +446,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17004265" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1716418" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -407,7 +455,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27735645" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27735645" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -415,7 +463,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32690248" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3261105" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -454,6 +502,25 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout-to-restore>
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chatFPAUebung$Main__3_.ic" NAME="Main (3) Coverage Results" MODIFIED="1556465260282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -584,20 +651,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerGui.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -636,27 +689,10 @@
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/Info.java" />
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/Confirm.java" />
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/fxPopup/Custom.java" />
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="205" selection-start-line="205" selection-end-line="205" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/feature_LoginRegister/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="60" column="34" lean-forward="true" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -692,20 +728,96 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2501">
-          <caret line="170" column="108" selection-start-line="170" selection-start-column="108" selection-end-line="170" selection-end-column="108" />
+        <state relative-caret-position="459">
+          <caret line="60" column="34" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/server/ServerControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/Style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/Style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="102" column="52" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/startScene/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="178" column="34" lean-forward="true" selection-start-line="178" selection-start-column="34" selection-end-line="178" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/lighttheme/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="104" column="34" lean-forward="true" selection-start-line="104" selection-start-column="34" selection-end-line="104" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/Theme.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="42" column="26" lean-forward="true" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/settingsStage/ControllerSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="66" column="101" lean-forward="true" selection-start-line="66" selection-start-column="101" selection-end-line="66" selection-end-column="101" />
+        <state relative-caret-position="497">
+          <caret line="137" column="92" selection-start-line="137" selection-start-column="92" selection-end-line="137" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/clientGUI.fxml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/clientMain/ClientControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="411" column="55" lean-forward="true" selection-start-line="411" selection-start-column="55" selection-end-line="411" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/chatFPAUebung/gui/client/loginMenu/themes/darktheme/Style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="94" column="33" selection-start-line="94" selection-start-column="33" selection-end-line="94" selection-end-column="33" />
         </state>
       </provider>
     </entry>
