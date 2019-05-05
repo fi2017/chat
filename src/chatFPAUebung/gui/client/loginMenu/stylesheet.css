@@ -1,5 +1,5 @@
 .body {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #36393f;
     -fx-text-fill: #f6f7f7;
     -fx-padding: 0;
     -fx-font-family: 'Questrial', sans-serif;
@@ -23,64 +23,64 @@
 
 
 .TitleLabel {
-   -fx-text-fill: black;
+   -fx-text-fill: #f6f7f7;
    -fx-font-size: 45;
-   -fx-border-color: black;
+   -fx-border-color: #ffffff;
    -fx-border-radius: 30;
    -fx-padding: 10
 }
 
 .BelowLabel {
-   -fx-text-fill: black;
+   -fx-text-fill: #aeb1bf;
    -fx-font-size: 15;
 }
 
 .BottomPane {
-    -fx-background-color: #dddddd;
+    -fx-background-color: #2f3136;
 }
 
 .PaneButton {
-    -fx-background-color: #5b5da5;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #7289da;
+    -fx-text-fill: #f6f7f7;
     -fx-border-weight: 0;
     -fx-background-radius: 5;
     -fx-padding: 15;
 }
 
 .PaneButton:hover {
-    -fx-background-color: #484a84;
+    -fx-background-color: #677bc4;
 }
 
 .PaneButton:pressed {
-    -fx-background-color: #353763;
+    -fx-background-color: #4a588e;
 }
 
 /*LoginScene*/
 
 .TextFieldLogin {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #36393f;
     -fx-border-style: hidden hidden solid hidden;
     -fx-border-color: #aeb1bf;
-    -fx-text-fill: black;
+    -fx-text-fill: #f6f7f7;
 }
 
 .TextFieldLogin:hover{
-    -fx-background-color: #dddddd;
+    -fx-background-color: #2f3136;
 }
 
 .BackButton {
     -fx-padding: 10;
     -fx-background-radius: 5;
-    -fx-background-color: #5b5da5;
-    -fx-text-fill: black;
+    -fx-background-color: #7289da;
+    -fx-text-fill: #f6f7f7;
 }
 
 .BackButton:hover {
-    -fx-background-color: #484a84;
+    -fx-background-color: #677bc4;
 }
 
 .BackButton:pressed {
-    -fx-background-color: #353763;
+    -fx-background-color: #4a588e;
 }
 
 
@@ -89,7 +89,7 @@
 
 .leftSetting {
     -fx-padding: 20;
-    -fx-background-color: #5b5da5;
+    -fx-background-color: #7289da;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
     -fx-border-style: hidden;
@@ -97,30 +97,30 @@
 }
 
 .leftSetting:hover {
-    -fx-background-color: #484a84;
+    -fx-background-color: #677bc4;
     -fx-border-style: solid;
 }
 
 .leftSetting:pressed {
-    -fx-background-color: #353763;
+    -fx-background-color: #4a588e;
 }
 
 .SettingLabel {
-    -fx-text-fill: black;
+    -fx-text-fill: #aeb1bf;
 }
 
 .rightPane {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #36393f;
 }
 
 .rightLabel {
-    -fx-text-fill: black;
+    -fx-text-fill: #aeb1bf;
     -fx-font-size: 20;
 }
 
 .confirmButton {
     -fx-background-color: #7289da;
-        -fx-text-fill: black;
+        -fx-text-fill: #f6f7f7;
         -fx-border-weight: 0;
         -fx-background-radius: 5;
         -fx-padding: 5;

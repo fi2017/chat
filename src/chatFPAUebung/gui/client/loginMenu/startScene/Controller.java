@@ -340,7 +340,6 @@ public class Controller implements Initializable
 
     public void loadLang(String lang)
     {
-        System.out.println("loadLang aufgerufen");
         locale = new Locale(lang);
 
         bundle = ResourceBundle.getBundle("chatFPAUebung/gui/client/loginMenu/startScene/lang", locale);
@@ -356,7 +355,6 @@ public class Controller implements Initializable
         registerButton.setText(bundle.getString("registerButton"));
         loginButtonLogin.setText(bundle.getString("loginButtonLogin"));
         registerButtonRegister.setText(bundle.getString("registerButtonRegister"));
-        System.out.println("Sprache geändert");
     }
 
     public String readLang()

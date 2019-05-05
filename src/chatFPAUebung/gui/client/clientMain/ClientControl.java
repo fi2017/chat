@@ -1,10 +1,11 @@
 package chatFPAUebung.gui.client.clientMain;
 
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.rmi.activation.ActivationGroup_Stub;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -38,8 +39,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.w3c.dom.css.Rect;
 
-import java.io.File;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ClientControl implements Initializable
@@ -93,10 +94,15 @@ public class ClientControl implements Initializable
     private User marcel, julian, sebastian, katrin;
     private ArrayList<User> friends = new ArrayList<>();
 
+    private Locale locale;
+    private ResourceBundle bundle;
+
     //Anlegen der events und der einzelnen Komponenten der GUI
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        loadLang(readLang());
+
         //Anwendung in "startform" geben
         vBoxRoom.setSpacing(5);
         friendList.setSpacing(5);
@@ -956,6 +962,50 @@ public class ClientControl implements Initializable
     public void sendeNachrichtAnServer(Uebertragung uebertragung)
     {
         (new ClientWritingThread(uebertragung, getOutToServer())).run();
+    }
+
+    public void loadLang(String lang)
+    {
+        locale = new Locale(lang);
+
+        bundle = ResourceBundle.getBundle("chatFPAUebung/gui/client/loginMenu/startScene/lang", locale);
+
+        btnFriends.setText(bundle.getString("btnFriends"));
+        btnRoom.setText(bundle.getString("btnRoom"));
+        btnNewRoom.setText(bundle.getString("btnNewRoom"));
+        btnSettings.setText(bundle.getString("btnSettings"));
+        labelAddRoomName.setText(bundle.getString("labelAddRoomName"));
+        labelAddRoomPw.setText(bundle.getString("labelAddRoomPw"));
+        btnAddRoomCreate.setText(bundle.getString("btnAddRoomCreate"));
+    }
+
+    public String readLang()
+    {
+        String zeile = "";
+
+        try
+        {
+            Path path = Paths.get("src/chatFPAUebung/gui/client/loginMenu/startLang.txt");
+            BufferedReader reader = Files.newBufferedReader(path);
+
+            try
+            {
+                zeile = reader.readLine();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                reader.close();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return zeile;
     }
 
 
