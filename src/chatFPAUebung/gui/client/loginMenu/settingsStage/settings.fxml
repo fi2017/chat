@@ -88,9 +88,9 @@
             </VBox>
             <Pane fx:id="generalPane" prefHeight="200.0" prefWidth="200.0" styleClass="rightPane" translateX="610.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="labelLang" layoutX="38.0" layoutY="33.0" text="Sprachen:" styleClass="rightSetting"/>
-                  <Button fx:id="btnLangDE" layoutX="204.0" layoutY="26.0" mnemonicParsing="false" text="Deutsch" />
-                  <Button fx:id="btnLangEN" layoutX="315.0" layoutY="26.0" mnemonicParsing="false" text="English" />
+                  <Label fx:id="labelLang" layoutX="38.0" layoutY="33.0" text="Sprachen:" styleClass="rightLabel"/>
+                  <Button fx:id="btnLangDE" layoutX="204.0" layoutY="26.0" mnemonicParsing="false" text="Deutsch" styleClass="PaneButton"/>
+                  <Button fx:id="btnLangEN" layoutX="315.0" layoutY="26.0" mnemonicParsing="false" text="English" styleClass="PaneButton"/>
                </children></Pane>
             <Pane fx:id="uiPane" prefHeight="200.0" prefWidth="200.0" styleClass="rightPane" translateX="610.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <Label fx:id="labelTheme" layoutX="14.0" layoutY="37.0" styleClass="rightLabel" text="Theme:" />

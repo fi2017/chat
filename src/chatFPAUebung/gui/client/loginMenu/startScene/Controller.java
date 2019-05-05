@@ -27,6 +27,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable
@@ -72,6 +73,9 @@ public class Controller implements Initializable
     public Label labelTitle;
     public Label labelDesc1;
     public Label labelDesc2;
+
+    Locale locale;
+    ResourceBundle bundle;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -328,6 +332,21 @@ public class Controller implements Initializable
         return returnValue;
     }
 */
+
+    public void loadLang(String lang)
+    {
+        locale = new Locale(lang);
+
+        bundle = ResourceBundle.getBundle("chatFPAUebung/gui/client/loginMenu/startScene/lang", locale);
+
+        labelUsernameLogin.setText(bundle.getString("labelUsernameLogin"));
+        labelPasswordLogin.setText(bundle.getString("labelPasswordLogin"));
+        labelUsernameRegister.setText(bundle.getString("labelUsernameRegister"));
+        labelPasswordRegister.setText(bundle.getString("labelPasswordRegister"));
+        labelTitle.setText(bundle.getString("labelTitle"));
+        labelDesc1.setText(bundle.getString("labelDesc1"));
+        labelDesc2.setText(bundle.getString("labelDesc2"));
+    }
 
     public ObjectOutputStream getOutToServer()
     {

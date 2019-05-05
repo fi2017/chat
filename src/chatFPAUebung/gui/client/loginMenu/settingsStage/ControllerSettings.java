@@ -1,11 +1,13 @@
 package chatFPAUebung.gui.client.loginMenu.settingsStage;
 
+import chatFPAUebung.gui.client.loginMenu.startScene.Controller;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -49,15 +51,20 @@ public class ControllerSettings implements Initializable {
     public Label labelTheme;
     public Label labelUI;
     public Label labelGeneral;
+    public Label labelLang;
 
     public ResourceBundle bundle;
     public Locale locale;
+
+    Controller mainController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         themeInitialize();
         themeComboBox.getSelectionModel().selectFirst();
+
+        //mainController = FXMLLoader.load(getClass().getResource("../settingsStage/settings.fxml"));
 
         closeButton.setOnAction(e -> {
             ((Stage)closeButton.getScene().getWindow()).close();
@@ -135,10 +142,12 @@ public class ControllerSettings implements Initializable {
 
         btnLangDE.setOnAction(e -> {
             loadLang("de");
+            mainController.loadLang("de");
         });
 
         btnLangEN.setOnAction(e -> {
             loadLang("en");
+            mainController.loadLang("en");
         });
     }
 
@@ -152,7 +161,7 @@ public class ControllerSettings implements Initializable {
     {
         locale = new Locale(lang);
 
-        bundle = ResourceBundle.getBundle("chatFPAUebung/gui/client/loginMenu/settingsStage/lang", locale);
+        bundle = ResourceBundle.getBundle("chatFPAUebung/gui/client/loginMenu/startScene/lang", locale);
 
         labelNeustart.setText(bundle.getString("labelNeustart"));
         btnLangDE.setText(bundle.getString("btnLangDE"));
@@ -160,5 +169,6 @@ public class ControllerSettings implements Initializable {
         labelTheme.setText(bundle.getString("labelTheme"));
         labelUI.setText(bundle.getString("labelUI"));
         labelGeneral.setText(bundle.getString("labelGeneral"));
+        labelLang.setText(bundle.getString("labelLang"));
     }
 }
