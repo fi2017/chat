@@ -20,13 +20,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneBackground" maxHeight="700.0" maxWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #36393f;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.clientMain.ClientControl">
+<AnchorPane fx:id="paneBackground" maxHeight="700.0" maxWidth="1200.0" prefHeight="700.0" prefWidth="1200.0" styleClass="BackgroundPane" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatFPAUebung.gui.client.clientMain.ClientControl">
    <children>
       <AnchorPane fx:id="paneChat" layoutX="350.0" layoutY="50.0" prefHeight="650.0" prefWidth="850.0" styleClass="Chat">
          <children>
-            <TextField fx:id="txtFieldChat" layoutX="75.0" layoutY="605.0" maxHeight="40.0" maxWidth="500.0" prefHeight="40.0" prefWidth="500.0" style="-fx-background-radius: 100; -fx-border-style: none; -fx-background-color: #ffffff;" styleClass="ChatInput" />
+            <TextField fx:id="txtFieldChat" layoutX="75.0" layoutY="605.0" maxHeight="40.0" maxWidth="500.0" prefHeight="40.0" prefWidth="500.0" styleClass="ChatInput" />
             <ScrollPane hbarPolicy="NEVER" prefHeight="600.0" prefWidth="850.0" styleClass="Remove-Border" vbarPolicy="NEVER" vvalue="1.0" />
-            <Button fx:id="btnAttatchment" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="600.0" layoutY="602.0" maxHeight="47.0" maxWidth="47.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="47.0" style="-fx-background-color: #ffffff; -fx-background-radius: 100;" textAlignment="CENTER">
+            <Button fx:id="btnAttatchment" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="600.0" layoutY="602.0" maxHeight="47.0" maxWidth="47.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="47.0" styleClass="Attachment" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -264,6 +264,6 @@
    </children>
 
     <stylesheets>
-        <URL value="@style.css" />
+        <URL value="@Style.css" />
     </stylesheets>
 </AnchorPane>

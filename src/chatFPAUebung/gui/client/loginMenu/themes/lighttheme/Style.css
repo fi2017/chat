@@ -17,6 +17,10 @@
     -fx-cursor: hand;
 }
 
+.BackgroundPane {
+    -fx-background-color: #FFFFFF;
+}
+
 .Search {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 100;
@@ -26,7 +30,7 @@
 }
 
 .SearchButton:hover{
-    -fx-background-color: #5b5da5;
+    -fx-background-color: #E9E9E9;
 }
 
 .Friendlist {
@@ -88,8 +92,22 @@
 
 .ChatInput {
     -fx-font-size: 16px;
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 100;
+    -fx-border-style: none;
 }
 
+.Attachment {
+    -fx-font-size: 16px;
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 100;
+    -fx-border-style: none;
+    -fx-text-fill: #FFFFFF;
+}
+
+.Attachment:hover {
+    -fx-background-color: #E9E9E9;
+}
 
 .MessageRecieved {
     -fx-background-color: #5b5da5;

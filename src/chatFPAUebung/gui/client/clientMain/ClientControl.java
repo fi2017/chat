@@ -322,8 +322,8 @@ public class ClientControl implements Initializable
         b.setMinSize(350, 50);
         b.setPrefSize(350, 50);
         b.setMaxSize(350, 50);
-        b.getStyleClass().add("Room");
         b.getStyleClass().add("Font");
+        b.getStyleClass().add("Room");
         b.setAlignment(Pos.CENTER_LEFT);
         b.setText(c.getName());
         b.setLayoutX(50);
@@ -605,8 +605,8 @@ public class ClientControl implements Initializable
         b.setMinSize(295, 50);
         b.setPrefSize(295, 50);
         b.setMaxSize(295, 50);
-        b.getStyleClass().add("Room");
         b.getStyleClass().add("Font");
+        b.getStyleClass().add("Room");
         b.setText(user.getUsername());
         b.setLayoutX(50);
         b.setLayoutY(0);
