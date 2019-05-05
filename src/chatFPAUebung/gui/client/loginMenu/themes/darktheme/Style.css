@@ -17,16 +17,21 @@
     -fx-cursor: hand;
 }
 
+.BackgroundPane {
+    -fx-background-color: #36393f;
+}
+
+
 .Search {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #4b4d51;
     -fx-background-radius: 100;
     -fx-border-style: none;
     -fx-font-size: 16;
-    -fx-text-fill: #000000;
+    -fx-text-fill: #FFFFFF;
 }
 
 .SearchButton:hover{
-    -fx-background-color: #7289da;
+    -fx-background-color: #626467;
 }
 
 .Friendlist {
@@ -68,12 +73,13 @@
 }
 
 .Room {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #4b4d51;
     -fx-background-radius: 0;
+    -fx-text-fill: #FFFFFF;
 }
 
 .Room:hover {
-    -fx-background-color: #E9E9E9;
+    -fx-background-color: #626467;
 }
 
 .Remove-Border {
@@ -88,8 +94,23 @@
 
 .ChatInput {
     -fx-font-size: 16px;
+    -fx-background-color: #4b4d51;
+    -fx-background-radius: 100;
+    -fx-border-style: none;
+    -fx-text-fill: #FFFFFF;
 }
 
+.Attachment {
+    -fx-font-size: 16px;
+    -fx-background-color: #4b4d51;
+    -fx-background-radius: 100;
+    -fx-border-style: none;
+    -fx-text-fill: #FFFFFF;
+}
+
+.Attachment:hover {
+    -fx-background-color: #626467;
+}
 
 .MessageRecieved {
     -fx-background-color: #7289da;
