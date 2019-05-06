@@ -80,15 +80,9 @@ public class ClientControl implements Initializable
 
     private double xOffset;
     private double yOffset;
-    private DefaultListModel<Nachricht> listModel;
-    private Socket clientSocket;
-    private ObjectOutputStream outToServer;
-    private ObjectInputStream inFromServer;
-    private ClientReadingThread clientReadingThread;
     private ArrayList<Chatroom> chatrooms = new ArrayList<Chatroom>();
-    private ArrayList<DefaultListModel> listmodels = new ArrayList<DefaultListModel>();
 
-
+    //Temporäre Variablen
     private int i;
     private User sender;
     private User marcel, julian, sebastian, katrin;
@@ -106,8 +100,6 @@ public class ClientControl implements Initializable
         //Anwendung in "startform" geben
         vBoxRoom.setSpacing(5);
         friendList.setSpacing(5);
-        this.listModel = new DefaultListModel<Nachricht>();
-        listmodels.add(listModel);
         toggleNewRoom(1200, false);
         erstelleVerbindung();
         hideLists();
@@ -817,79 +809,29 @@ public class ClientControl implements Initializable
     }
 
 
-    //Erstellt Verbindung zum Server
-    public void erstelleVerbindung()
-    {
-        try
-        {
-            setClientSocket(new Socket("localhost", 8008));
-            setOutToServer(new ObjectOutputStream(getClientSocket().getOutputStream()));
-            setInFromServer(new ObjectInputStream(getClientSocket().getInputStream()));
 
-            setClientReadingThread(new ClientReadingThread(this));
-            getClientReadingThread().start();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
 
-        sendeNachrichtAnServer(new Uebertragung(1, 0,null));
-    }
+
+
+
+
 
     //Protokoll für das Empfangen von Nachrichten
     public void empfangeNachrichtVonServer(Object uebertragungObjekt)
     {
-        if(uebertragungObjekt instanceof Uebertragung)
+        if()
         {
-            Uebertragung uebertragung = (Uebertragung) uebertragungObjekt;
-
-            switch(uebertragung.getZweck())
+            switch()
             {
                 //Empfangen von allen bisherigen Nachrichten
                 case 1:
-                    if(uebertragung.getUebertragung() instanceof Nachricht[])
-                    {
-                        DefaultListModel aktuellesModel=listmodels.get(((Uebertragung) uebertragungObjekt).getZiel());
 
-                        if(((Nachricht[]) uebertragung.getUebertragung()).length != 0)
-                        {
-                            aktuellesModel.clear();
-
-                            for(Nachricht aktNachricht : (Nachricht[]) uebertragung.getUebertragung())
-                            {
-                                aktuellesModel.addElement(aktNachricht);
-                            }
-                        }
-                    }
                     break;
 
                 //Empfangen von neuen Nachrichten
                 case 2:
                     if(uebertragung.getUebertragung() instanceof Nachricht)
                     {
-/*
-                        DefaultListModel aktuellesModel=listmodels.get(((Uebertragung) uebertragungObjekt).getZiel());
-                        aktuellesModel.addElement(uebertragung.getUebertragung());
-*/
-
-                        //User user = new User();
-                        //user.setUsername("Michael");
-                        //user.setId(1);
-                        /*
-                        if(((Nachricht) uebertragung.getUebertragung()).getSender() != user)
-                        {
-                            createRecievedMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
-                        }
-                        else
-                        {
-                            createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht());
-                        }
-                        */
 
                         createSentMessage(((Nachricht) uebertragung.getUebertragung()).getNachricht(), sender, getChatroomById(uebertragung.getZiel()));
                     }
@@ -898,12 +840,11 @@ public class ClientControl implements Initializable
 
                 //Schließen der ListModels wenn Verbindung durchtrennt
                 case 3:
-                    sendeNachrichtAnServer(new Uebertragung(0,null));
+
                     break;
 
                 //Hinzufügen eines neu erstellten Chatrooms in die ClientGui
                 case 4:
-                    chatrooms.add((Chatroom) uebertragung.getUebertragung());
 
                 default:
                     break;
@@ -920,48 +861,6 @@ public class ClientControl implements Initializable
                 chat = c;
         }
         return chat;
-    }
-
-    //Sende Nachricht an einen Chatroom (Benötigen ID des aktuell benutzen Chatrooms)
-    public void sendeNachricht(int i) //Methode für ChatroomGUI
-    {
-        if(txtFieldChat.getText() != null)
-        {
-            //2 normale senden der Nachrichten
-            sendeNachrichtAnServer(new Uebertragung(2, i, new Nachricht(txtFieldChat.getText(), LocalDateTime.now())));
-        }
-    }
-
-
-    //Chatrooms
-    public void erstelleChatroom(String name, int teilnehmerAnzahl, String passwort)
-    {
-        Chatroom chat = new Chatroom(name, teilnehmerAnzahl);
-        if(passwort != null)
-        {
-            chat.setPasswort(passwort);
-            try
-            {
-/*                DefaultListModel neuesListModel = new DefaultListModel();
-                chat.setChatmodel(neuesListModel);
-                Uebertragung neuerchatroom = new Uebertragung(4, chat);
-                listmodels.add(neuesListModel);
-                outToServer.writeObject(neuerchatroom);
-                outToServer.flush();*/
-                chatrooms.add(chat);
-                createRoom(chat);
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    //Chatrooms Ende
-    public void sendeNachrichtAnServer(Uebertragung uebertragung)
-    {
-        (new ClientWritingThread(uebertragung, getOutToServer())).run();
     }
 
     public void loadLang(String lang)
@@ -1009,74 +908,5 @@ public class ClientControl implements Initializable
     }
 
 
-    // Getter und Setter
-    public Socket getClientSocket()
-    {
-        return clientSocket;
-    }
-
-    public ObjectOutputStream getOutToServer()
-    {
-        return outToServer;
-    }
-
-    public ObjectInputStream getInFromServer()
-    {
-        return inFromServer;
-    }
-
-    public void setClientSocket(Socket clientSocket)
-    {
-        this.clientSocket = clientSocket;
-    }
-
-    public void setOutToServer(ObjectOutputStream outToServer)
-    {
-        this.outToServer = outToServer;
-    }
-
-    public void setInFromServer(ObjectInputStream inFromServer)
-    {
-        this.inFromServer = inFromServer;
-    }
-
-    public ClientReadingThread getClientReadingThread()
-    {
-        return clientReadingThread;
-    }
-
-    public void setClientReadingThread(ClientReadingThread clientReadingThread)
-    {
-        this.clientReadingThread = clientReadingThread;
-    }
-
-    public DefaultListModel<Nachricht> getListModel()
-    {
-        return this.listModel;
-    }
-
-    public void setListModel(DefaultListModel aktuellesModel)
-    {
-        this.listModel=aktuellesModel;
-    }
-
-    public ArrayList<Chatroom> getChatrooms()
-    {
-        return chatrooms;
-    }
-
-    public void setChatrooms(ArrayList<Chatroom> chatrooms)
-    {
-        this.chatrooms = chatrooms;
-    }
-
-    public ArrayList<DefaultListModel> getListmodels()
-    {
-        return listmodels;
-    }
-
-    public void setListmodels(ArrayList<DefaultListModel> listmodels)
-    {
-        this.listmodels = listmodels;
-    }
+    
 }
